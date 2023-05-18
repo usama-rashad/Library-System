@@ -1,0 +1,15 @@
+.searchbarMain {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+  border: 1px solid lightgray;
+  border-radius: 25px;
+  height: 28px;
+  overflow: hidden;
+  input {
+    border: none;
+    margin-left: 10px;
+  }
+}
