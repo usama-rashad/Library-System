@@ -1,0 +1,50 @@
+.homepageSignupMain {
+  width: 300px;
+  height: 130px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 5px;
+    width: 80%;
+
+    .emailInput {
+      height: 20px;
+      width: 80%;
+      border: none;
+      border-radius: 2px;
+    }
+
+    .btn {
+      width: 100px;
+      height: 30px;
+      color: white;
+      background-color: blueviolet;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+
+      &:hover {
+        background-color: blueviolet;
+        box-shadow: 2px 2px 4px rgb(178, 97, 255);
+      }
+    }
+  }
+  .blur {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+}

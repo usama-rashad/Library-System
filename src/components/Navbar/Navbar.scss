@@ -1,45 +1,67 @@
 .navbarMain {
-  height: 80px;
   width: 100%;
-  background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
   z-index: 10;
+  position: relative;
 
-  .left {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    column-gap: 5px;
-    height: 100%;
-    .buttons {
-      width: 80%;
-      height: 30px;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-items: center;
-      column-gap: 5px;
-    }
+  .searchBarOutline {
+    position: absolute;
+    height: 150px;
+    width: 250px;
+    top: calc(80x - 1px);
+    right: calc(5px + 80px + 5px - 2px);
+    background-color: white;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px -20px, rgba(0, 0, 0, 0.25) 0px 6px 6px;
+    z-index: 10;
+    cursor: pointer;
+    transition: height 500ms ease;
   }
-  .right {
-    flex: 1;
+
+  .navigation {
+    height: 52px;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    margin-right: 5px;
-    .container {
+    align-content: center;
+    justify-content: center;
+    .left {
+      flex: 3;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       column-gap: 5px;
+      height: 100%;
+      .buttons {
+        width: 90%;
+        height: 30px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-items: center;
+        column-gap: 5px;
+      }
+    }
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      margin-right: 5px;
+      .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        column-gap: 5px;
+        width: fit-content;
+      }
     }
   }
+}
+
+@media all and (min-width: 640px) {
 }

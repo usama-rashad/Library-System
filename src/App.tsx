@@ -3,6 +3,7 @@ import viteLogo from "/vite.svg";
 import "./App.scss";
 import Navbar from "./components/Navbar/Navbar";
 import Title from "./components/Title/Title";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /*
 
@@ -16,13 +17,29 @@ Pages :
 
 */
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <div className="appMain">
+        <Navbar />
+        <Title />
+      </div>
+    ),
+  },
+  {
+    path: "/searchResults",
+    element: (
+      <div className="appMain">
+        <Navbar />
+        <Title />
+      </div>
+    ),
+  },
+]);
+
 function App() {
-  return (
-    <div className="appMain">
-      <Navbar />
-      <Title />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
