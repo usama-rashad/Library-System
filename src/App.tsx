@@ -4,6 +4,8 @@ import "./App.scss";
 import Navbar from "./components/Navbar/Navbar";
 import Title from "./components/Title/Title";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Home from "./Pages/Home/Home";
+import SearchResults from "./Pages/SearchResults/SearchResults";
 
 /*
 
@@ -20,21 +22,11 @@ Pages :
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <div className="appMain">
-        <Navbar />
-        <Title />
-      </div>
-    ),
+    element: <Home />,
   },
   {
     path: "/searchResults",
-    element: (
-      <div className="appMain">
-        <Navbar />
-        <Title />
-      </div>
-    ),
+    element: <SearchResults />,
   },
 ]);
 
