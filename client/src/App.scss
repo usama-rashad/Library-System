@@ -1,0 +1,65 @@
+@import "./colors.scss";
+
+.mainApp {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .loginForm {
+    position: absolute;
+    top: 150px;
+    z-index: 200;
+    &.disable {
+      display: none;
+    }
+  }
+
+  .top {
+    width: 100%;
+    flex: 1.5;
+    max-height: 200px;
+    background-color: white;
+    border-bottom: 4px solid $rootColor;
+  }
+
+  .bottom {
+    width: 100%;
+    flex: 10;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+
+    .searchBox {
+      margin-top: 10px;
+      z-index: 100;
+      position: relative;
+      height: 100px;
+      width: 100%;
+      background-color: transparent;
+    }
+    .dailyMessage {
+      z-index: 10;
+      position: relative;
+      height: 150px;
+      width: 100%;
+      background-color: transparent;
+      align-self: center;
+      user-select: none;
+    }
+    .backgroundImage {
+      top: -150px;
+      position: absolute;
+      height: auto;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    &.looseFocus {
+      pointer-events: none;
+      filter: blur(2px);
+    }
+  }
+}
