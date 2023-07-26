@@ -1,14 +1,44 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.scss";
 import { Provider } from "react-redux";
-import AuthStore from "./Store/authStore.js";
+import AuthStore from "./stores/authStore.js";
+import { createBrowserRouter, RouterProvider, Route, Link } from "react-router-dom";
+
+// Pages
+import App from "./pages/Home/App.jsx";
+import SearchResults from "./components/SearchResults/SearchResults";
+import BooksPage from "./pages/BooksPage/BooksPage";
+import Contact from "./pages/Contact/Contact";
+import AboutUs from "./pages/AboutUs/AboutUs";
+
+const browseRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/searchresults",
+    element: <SearchResults />,
+  },
+  {
+    path: "/books",
+    element: <BooksPage />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+  {
+    path: "/aboutus",
+    element: <AboutUs />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={AuthStore}>
-      <App />
+      <RouterProvider router={browseRouter} />
     </Provider>
   </React.StrictMode>
 );

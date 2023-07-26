@@ -1,4 +1,4 @@
-import "./LoginForm.scss";
+import "./SignupForm.scss";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { close } from "../../reducers/authReducer";
@@ -7,16 +7,16 @@ import { close } from "../../reducers/authReducer";
 import Button from "../Button/Button";
 
 // Icons
-import LoginIcon from "./../../assets/right-to-bracket-solid.svg";
+import SignupIcon from "./../../assets/address-card-regular.svg";
 
-function LoginForm({ errorMessage }) {
+function SignupForm({ errorMessage = "" }) {
   const dispatch = useDispatch();
 
   const closeButtonAction = () => {
     dispatch(close());
   };
   return (
-    <div className="mainLoginForm">
+    <div className="mainSignupForm">
       <div className="whiteTriangle">
         <div className="closeIconDiv" onClick={closeButtonAction}>
           <p>x</p>
@@ -26,28 +26,34 @@ function LoginForm({ errorMessage }) {
       <div className="formOutline">
         <div className="form">
           <div className="section1">
-            <p className="loginTitle">Login</p>
-            <img src={LoginIcon} className="loginIcon" />
+            <p className="signupTitle">Sign up</p>
+            <img src={SignupIcon} className="signupIcon" />
           </div>
           <div className="section2">
+            <div className="names">
+              <div className="firstNameBox">
+                <p className="label">First name:</p>
+                <input className="input" type="text" />
+              </div>
+              <div className="lastNameBox">
+                <p className="label">Last name:</p>
+                <input className="input" type="text" />
+              </div>
+            </div>
             <p className="label">E-mail:</p>
             <input className="input" />
             <p className="label">Password:</p>
             <input className="input" type="password" />
-            <div className="option">
-              <p className="label">Remember me</p>
-              <input type="checkbox" className="input" />
-            </div>
+            <p className="label">Re-enter password:</p>
+            <input className="input" type="password" />
           </div>
           <div className="section3">
             <Button height={"30px"} width={"80px"}>
-              Login
+              Sign up
             </Button>
-            <div className="forgotPassword">
-              <p>Forgot password? Click</p>
-              <a href="/forgotPassword">here</a>
+            <div className="errorMessage">
+              <p>{errorMessage ? errorMessage : ""}</p>
             </div>
-            <p className="errorMessage">{errorMessage ? errorMessage : ""}</p>
           </div>
         </div>
       </div>
@@ -55,4 +61,4 @@ function LoginForm({ errorMessage }) {
   );
 }
 
-export default LoginForm;
+export default SignupForm;

@@ -1,4 +1,5 @@
 @import "./../../colors.scss";
+$width: 300px;
 
 .mainNavbar {
   width: 100%;
@@ -7,6 +8,19 @@
   flex-direction: row;
   align-content: center;
   justify-items: center;
+  overflow: hidden;
+
+  .loginForm,
+  .signupForm {
+    position: absolute;
+    top: 150px;
+    left: calc(50% - $width/2);
+    width: $width;
+    z-index: 200;
+    &.disable {
+      display: none;
+    }
+  }
   .left {
     flex: 2;
     height: 100%;
@@ -50,8 +64,10 @@
     flex: 2;
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    column-gap: 5px;
+    padding-right: 10px;
   }
 }

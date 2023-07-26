@@ -1,4 +1,4 @@
-@import "./colors.scss";
+@import "./../../colors.scss";
 
 .mainApp {
   height: 100vh;
@@ -7,15 +7,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  .loginForm {
-    position: absolute;
-    top: 150px;
-    z-index: 200;
-    &.disable {
-      display: none;
-    }
-  }
 
   .top {
     width: 100%;

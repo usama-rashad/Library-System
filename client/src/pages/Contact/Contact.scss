@@ -1,0 +1,95 @@
+@import "./../../colors.scss";
+
+.mainContact {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .contactsTop {
+    flex: 1.5;
+    width: 100%;
+    border-bottom: 4px solid $rootColor;
+    margin-bottom: 10px;
+  }
+  .contactsBottom {
+    flex: 10;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    row-gap: 30px;
+
+    &.looseFocus {
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .left,
+    .right {
+      background-color: white;
+      height: 100%;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      row-gap: 50px;
+      .title {
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .peopleGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 100px);
+        grid-template-rows: repeat(2, 100px);
+        row-gap: 100px;
+        column-gap: 100px;
+        align-self: center;
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 90%;
+      height: 100%;
+      row-gap: 10px;
+
+      .form {
+        background-color: white;
+        height: min-content;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        .title {
+          align-self: center;
+        }
+        .fieldName {
+          font-size: 16px;
+          font-weight: bold;
+          margin: 0px;
+          align-self: flex-start;
+        }
+        input {
+          width: 100%;
+          box-sizing: border-box;
+        }
+        .messageInput {
+          min-height: 30px;
+          height: 100px;
+          min-width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+}

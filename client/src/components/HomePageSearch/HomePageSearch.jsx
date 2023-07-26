@@ -4,19 +4,15 @@ import Button from "./../Button/Button";
 import { useDispatch } from "react-redux";
 import { signup } from "../../Reducers/authReducer";
 
+// Icons
+
+// Components
+import SearchBar from "./../SearchBar/SearchBar";
+
 function HomePageSearch() {
-  const dispatch = useDispatch();
-  const signupAction = () => {
-    dispatch(signup());
-  };
   return (
     <div className="mainHomePageSearch">
-      <div className="search">
-        <input placeholder="Search..." className="searchText" />
-      </div>
-      <Button width={"80px"} height={"30px"} clickAction={signupAction}>
-        Sign up
-      </Button>
+      <SearchBar />
     </div>
   );
 }

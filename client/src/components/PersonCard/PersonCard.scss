@@ -1,0 +1,38 @@
+$goldenRatio: 1.618;
+
+.mainPersonCard {
+  user-select: none;
+  height: 100px;
+  width: calc(100px / $goldenRatio);
+  transition: scale 50ms ease-in;
+
+  &:hover {
+    scale: 1.05;
+  }
+
+  .inner {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      border-radius: 50%;
+    }
+    p {
+      margin: 0px;
+      user-select: none;
+    }
+    :nth-child(2) {
+      font-size: 1rem;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    :nth-child(3) {
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+  }
+}

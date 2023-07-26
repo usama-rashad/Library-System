@@ -1,10 +1,10 @@
 @import "./../../colors.scss";
-$height: 400px;
+$height: 450px;
 $width: 300px;
 $horizontalGap: 50px;
 $verticalGap: calc(50px * $height/$width);
 
-.mainLoginForm {
+.mainSignupForm {
   height: $height;
   width: $width;
   display: flex;
@@ -40,12 +40,12 @@ $verticalGap: calc(50px * $height/$width);
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        .loginIcon {
+        .signupIcon {
           padding-right: 10px;
           width: 32px;
           height: 32px;
         }
-        .loginTitle {
+        .signupTitle {
           padding-left: 10px;
           font-size: 26px;
           font-weight: bold;
@@ -54,12 +54,33 @@ $verticalGap: calc(50px * $height/$width);
       .section2 {
         width: 90%;
         flex: 5;
+        // margin-left: 10px;
+        // margin-right: 10px;
         background-color: white;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        justify-content: center;
+        justify-content: flex-start;
         row-gap: 5px;
+        .names {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          column-gap: 5px;
+          .firstNameBox {
+            flex: 1;
+            .input {
+              width: 100%;
+            }
+          }
+          .lastNameBox {
+            flex: 1;
+            .input {
+              width: 100%;
+            }
+          }
+        }
         .label {
           white-space: no-wrap;
           font-size: 14px;
@@ -92,8 +113,7 @@ $verticalGap: calc(50px * $height/$width);
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        row-gap: 3px;
-        .forgotPassword {
+        .errorMessage {
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -102,19 +122,10 @@ $verticalGap: calc(50px * $height/$width);
           padding: 0px;
           p {
             font-size: 14px;
+            color: red;
             margin: 0px;
+            font-weight: bolder;
           }
-          a {
-            font-size: 14px;
-            color: blue;
-          }
-        }
-        .errorMessage {
-          font-size: 14px;
-          color: red;
-          margin: 0px;
-          font-weight: bolder;
-          padding-bottom: 5px;
         }
       }
     }

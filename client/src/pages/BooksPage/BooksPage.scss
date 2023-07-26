@@ -1,0 +1,50 @@
+@import "./../../colors.scss";
+
+.mainBooksPage {
+  height: 120vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .booksTop {
+    flex: 1.67;
+    width: 100%;
+    border-bottom: 4px solid $rootColor;
+    margin-bottom: 10px;
+  }
+  .booksMiddle {
+    position: relative;
+    flex: 1.5;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .booksBottom {
+    flex: 12;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 30px;
+
+    &.looseFocus {
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .carousel {
+      width: 100%;
+      flex: 1;
+      .title {
+        font-weight: bold;
+        font-size: 22px;
+        margin-top: 5px;
+      }
+    }
+  }
+}
