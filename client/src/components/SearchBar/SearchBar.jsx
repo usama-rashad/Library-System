@@ -1,6 +1,9 @@
 import "./SearchBar.scss";
 import React, { useEffect, useState } from "react";
 
+//Components
+import SearchBarItem from "./../SearchBarItem/SearchBarItem";
+
 import SearchIcom from "./../../assets/magnifying-glass-solid.svg";
 
 function SearchBar() {
@@ -22,7 +25,12 @@ function SearchBar() {
         <img tabIndex={0} src={SearchIcom} width={"24px"} height={"24px"} />
       </div>
       <div className={`searchResults ${showResults ? "show" : ""}`}>
-        <p></p>
+        <SearchBarItem itemName={"Programming with Usama"} boldCount={5} />
+        <SearchBarItem itemName={"Baking with chocolate"} boldCount={5} />
+        <SearchBarItem itemName={"Private pilot license"} boldCount={6} />
+        <SearchBarItem itemName={"C++ programming"} boldCount={3} />
+        <SearchBarItem itemName={"Turbines and generators"} boldCount={4} />
+        <SearchBarItem itemName={"FAA regulations Part VIII"} boldCount={1} />
       </div>
     </div>
   );

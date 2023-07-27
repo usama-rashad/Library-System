@@ -29,7 +29,7 @@ function AboutUs() {
             foster a love for lifelong learning. Whether you're a student, a researcher, or simply a curious mind, we invite you to embark on a journey of exploration and discovery
             with us. Join our vibrant community and let's explore the endless world of ideas together.
           </p>
-          <p className="callToAction">Sign up today &#128070;</p>
+          <p className="callToAction">&#128070; Sign up today &#128070;</p>
         </div>
       </div>
     </div>

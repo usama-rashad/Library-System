@@ -52,6 +52,7 @@ const deleteUserController = async (req, res, next) => {
 const logoutController = async (req, res, next) => {
   // Check if user exists in user DB and log him out. Reset a loginStatus flag in the DB
   let { username } = req.body;
+  console.log(req.body);
   if (!username || username === "") {
     return res.status(404).json({ message: "Username must be provided." });
   }
@@ -61,6 +62,7 @@ const logoutController = async (req, res, next) => {
     // Check if the password matches
     existingUser.isLoggedIn = false;
     await existingUser.save();
+    console.log("Logout success");
     return res.status(200).json({ message: "Logout successful." });
   } catch (error) {
     return res.status(404).json({ message: "Logout error.", error: error });
@@ -69,13 +71,17 @@ const logoutController = async (req, res, next) => {
 
 const loginController = async (req, res, next) => {
   // Check if user exists in user DB and log him in if the password is correct. Set a loginStatus flag in the DB
-  let { username, password } = req.body;
+  let { username, password, rememberFlag } = req.body;
+  console.log(req.body);
   if (!username || !password || username === "" || password === "") {
     return res.status(404).json({ message: "Username and/or password must be entered." });
   }
   // Find user
   try {
     let existingUser = await usersModel.findOne({ username: username });
+    if (!existingUser) {
+      throw "Username not found";
+    }
     // Check if the password matches
     let comparisonResult = await bcrypt.compare(password, existingUser.password);
     if (comparisonResult) {

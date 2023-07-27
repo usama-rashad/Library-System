@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import { Provider } from "react-redux";
-import AuthStore from "./stores/authStore.js";
+import rootStore from "./stores/rootStore.js";
 import { createBrowserRouter, RouterProvider, Route, Link } from "react-router-dom";
 
 // Pages
@@ -37,7 +37,7 @@ const browseRouter = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={AuthStore}>
+    <Provider store={rootStore}>
       <RouterProvider router={browseRouter} />
     </Provider>
   </React.StrictMode>

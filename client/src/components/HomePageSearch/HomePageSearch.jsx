@@ -2,7 +2,7 @@ import "./HomePageSearch.scss";
 import React from "react";
 import Button from "./../Button/Button";
 import { useDispatch } from "react-redux";
-import { signup } from "../../Reducers/authReducer";
+import { signup } from "../../reducers/loginSignupReducer";
 
 // Icons
 

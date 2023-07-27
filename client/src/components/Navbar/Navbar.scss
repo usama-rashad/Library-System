@@ -69,5 +69,16 @@ $width: 300px;
     justify-content: center;
     column-gap: 5px;
     padding-right: 10px;
+    .loggedOutState,
+    .loggedInState {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      column-gap: 5px;
+      padding-right: 10px;
+    }
   }
 }

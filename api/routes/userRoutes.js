@@ -14,9 +14,9 @@ const signupRoute = router.put("/signup", signupController);
 
 const deleteUserRoute = router.put("/delete", deleteUserController);
 
-const logoutRoute = router.put("/logout", logoutController);
+const logoutRoute = router.post("/logout", logoutController);
 
-const loginRoute = router.put("/login", loginController);
+const loginRoute = router.post("/login", loginController);
 
 const loginSystemStatusRoute = router.get("/status", loginSystemStatusController);
 

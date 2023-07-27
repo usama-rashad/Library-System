@@ -1,7 +1,7 @@
 import "./SignupForm.scss";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { close } from "../../reducers/authReducer";
+import { close } from "../../reducers/loginSignupReducer";
 
 // Components
 import Button from "../Button/Button";

@@ -1,3 +1,6 @@
-const backEndPort = 4001;
+const USERS_API = "/api/users";
+const BOOKS_API = "/api/books";
+const backEndPort = 4020;
+const backEndRoot = "http://localhost";
 
-export const API_Login_Endpoint = `http://localhost:${backEndPort}/api/users/login`;
+export { backEndPort, backEndRoot, USERS_API, BOOKS_API };

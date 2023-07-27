@@ -93,6 +93,7 @@ $verticalGap: calc(50px * $height/$width);
         align-items: center;
         justify-content: center;
         row-gap: 3px;
+        padding-top: 3px;
         .forgotPassword {
           display: flex;
           flex-direction: row;
@@ -114,7 +115,16 @@ $verticalGap: calc(50px * $height/$width);
           color: red;
           margin: 0px;
           font-weight: bolder;
-          padding-bottom: 5px;
+          padding: 5px;
+          height: 42px;
+        }
+        .successMessage {
+          font-size: 14px;
+          color: green;
+          margin: 0px;
+          font-weight: bolder;
+          padding: 5px;
+          height: 42px;
         }
       }
     }

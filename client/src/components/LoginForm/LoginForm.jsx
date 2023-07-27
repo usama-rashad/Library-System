@@ -1,7 +1,14 @@
 import "./LoginForm.scss";
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { useDispatch } from "react-redux";
-import { close } from "../../reducers/authReducer";
+
+// Constants
+import { backEndPort, backEndRoot, USERS_API } from "../../contants.js";
+
+// Reducers
+import { close } from "../../reducers/loginSignupReducer";
+import { loggedIn } from "../../reducers/authReducer";
 
 // Components
 import Button from "../Button/Button";
@@ -10,11 +17,35 @@ import Button from "../Button/Button";
 import LoginIcon from "./../../assets/right-to-bracket-solid.svg";
 
 function LoginForm({ errorMessage }) {
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState({});
+  const [success, setSuccess] = useState(" ");
+  const [rememberFlag, setRememberFlag] = useState("");
 
+  const dispatch = useDispatch();
   const closeButtonAction = () => {
     dispatch(close());
   };
+
+  // Login request
+  const loginRequest = async () => {
+    console.log(`${backEndRoot}:${backEndPort}`);
+    let loginResponse = await axios
+      .post(`${backEndRoot}:${backEndPort}${USERS_API}/login`, { username: username, password: password, rememberFlag: rememberFlag })
+      .then((result) => {
+        setError({});
+        setSuccess(result.data.message);
+        dispatch(loggedIn({ username: username, userid: "123" }));
+        dispatch(close());
+      })
+      .catch((failure) => {
+        let { message, error } = failure.response.data;
+        setError({ message, error });
+        setSuccess("");
+      });
+  };
+
   return (
     <div className="mainLoginForm">
       <div className="whiteTriangle">
@@ -31,23 +62,41 @@ function LoginForm({ errorMessage }) {
           </div>
           <div className="section2">
             <p className="label">E-mail:</p>
-            <input className="input" />
+            <input
+              className="input"
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
             <p className="label">Password:</p>
-            <input className="input" type="password" />
+            <input
+              className="input"
+              type="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
             <div className="option">
               <p className="label">Remember me</p>
-              <input type="checkbox" className="input" />
+              <input
+                type="checkbox"
+                className="input"
+                onChange={(e) => {
+                  setRememberFlag(e.target.value);
+                }}
+              />
             </div>
           </div>
           <div className="section3">
-            <Button height={"30px"} width={"80px"}>
+            <Button height={"30px"} width={"80px"} clickAction={loginRequest}>
               Login
             </Button>
             <div className="forgotPassword">
               <p>Forgot password? Click</p>
               <a href="/forgotPassword">here</a>
             </div>
-            <p className="errorMessage">{errorMessage ? errorMessage : ""}</p>
+            {error.message && <p className="errorMessage">{error.message ? error.message : ""}</p>}
+            {success && <p className="successMessage">{success ? success : ""}</p>}
           </div>
         </div>
       </div>
