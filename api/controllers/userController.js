@@ -5,6 +5,21 @@ import jwt from "jsonwebtoken";
 import { usersModel } from "./../models/users.model.js";
 import { isDBConnectionOK } from "./../db/db.js";
 
+// Helpers
+const createAccessToken = (username) => {
+  return jwt.sign({ username: username, createdTime: new Date() }, process.env.JWT_ACCESSTOKEN_PRIVATEKEY, {
+    expiresIn: process.env.ACCESS_TOKEN_VALIDITY,
+    algorithm: "HS256",
+  });
+};
+
+const createRefreshToken = (username) => {
+  return jwt.sign({ username: username, createdTime: new Date() }, process.env.JWT_REFRESHTOKEN_PRIVATEKEY, {
+    expiresIn: process.env.REFRESH_TOKEN_VALIDITY,
+    algorithm: "HS256",
+  });
+};
+
 const signupController = async (req, res, next) => {
   let { username, password, email } = req.body;
   // Check if the username already exists
@@ -51,11 +66,14 @@ const deleteUserController = async (req, res, next) => {
 
 const logoutController = async (req, res, next) => {
   // Check if user exists in user DB and log him out. Reset a loginStatus flag in the DB
-  let { username } = req.body;
-  console.log(req.body);
-  if (!username || username === "") {
-    return res.status(404).json({ message: "Username must be provided." });
+  let cookies = req.cookies;
+  let ML_accessTokenCookie = cookies["ML_accessToken"];
+  let ML_refreshTokenCookie = cookies["ML_refreshToken"];
+
+  if (!ML_refreshTokenCookie) {
+    return res.status(404).json({ message: "Login session invalid." });
   }
+  let { username } = jwt.decode(ML_refreshTokenCookie, { json: true });
   // Find user
   try {
     let existingUser = await usersModel.findOne({ username: username });
@@ -63,6 +81,8 @@ const logoutController = async (req, res, next) => {
     existingUser.isLoggedIn = false;
     await existingUser.save();
     console.log("Logout success");
+    res.clearCookie("ML_accessToken");
+    res.clearCookie("ML_refreshToken");
     return res.status(200).json({ message: "Logout successful." });
   } catch (error) {
     return res.status(404).json({ message: "Logout error.", error: error });
@@ -72,7 +92,7 @@ const logoutController = async (req, res, next) => {
 const loginController = async (req, res, next) => {
   // Check if user exists in user DB and log him in if the password is correct. Set a loginStatus flag in the DB
   let { username, password, rememberFlag } = req.body;
-  console.log(req.body);
+  console.log("Login request with " + JSON.stringify(req.body));
   if (!username || !password || username === "" || password === "") {
     return res.status(404).json({ message: "Username and/or password must be entered." });
   }
@@ -80,7 +100,7 @@ const loginController = async (req, res, next) => {
   try {
     let existingUser = await usersModel.findOne({ username: username });
     if (!existingUser) {
-      throw "Username not found";
+      return res.status(404).json({ message: "Username and/or password is incorrect." });
     }
     // Check if the password matches
     let comparisonResult = await bcrypt.compare(password, existingUser.password);
@@ -89,17 +109,15 @@ const loginController = async (req, res, next) => {
       existingUser.isLoggedIn = true;
       await existingUser.save();
       // Create an access token and a refresh token for the user to access resources.
-      let accessToken = jwt.sign({ username: username, createdTime: new Date() }, process.env.JWT_ACCESSTOKEN_PRIVATEKEY, {
-        expiresIn: "1m",
-        algorithm: "HS256",
-      });
-      let refreshtoken = jwt.sign({ username: username, createdTime: new Date() }, process.env.JWT_REFRESHTOKEN_PRIVATEKEY, {
-        expiresIn: "30d",
-        algorithm: "HS256",
-      });
-      res.cookie("MTL_accessToken", accessToken);
-      res.cookie("MTL_refreshToken", refreshtoken);
-      return res.status(200).json({ message: "Login successful." });
+      let accessToken = createAccessToken(username);
+      let refreshtoken = createRefreshToken(username);
+
+      // If remember me flag is set then return access and refresh tokens
+      if (rememberFlag === true) {
+        res.cookie("ML_accessToken", accessToken, { httpOnly: true, maxAge: 30 * 1000 }); // 30 seconds
+        res.cookie("ML_refreshToken", refreshtoken, { httpOnly: true, maxAge: 30 * 24 * 3600 * 1000 }); // 30 days
+      }
+      res.status(200).json({ message: "Login successful" }).send();
     } else {
       return res.status(404).json({ message: "Username and/or password is incorrect." });
     }
@@ -108,11 +126,64 @@ const loginController = async (req, res, next) => {
   }
 };
 
+const checkLoginController = async (req, res, next) => {
+  let cookies = req.cookies;
+  let ML_accessToken = cookies["ML_accessToken"];
+  let ML_refreshToken = cookies["ML_refreshToken"];
+
+  // Check the validity of the refresh token
+  // Create a new refresh token if not valid
+  let isRefreshTokenValid = false;
+  let decodedUsername = "";
+  jwt.verify(ML_refreshToken, process.env.JWT_REFRESHTOKEN_PRIVATEKEY, function (error, decode) {
+    console.log("Decoded refresh token " + JSON.stringify(decode));
+    if (decode) {
+      isRefreshTokenValid = true;
+      let { username } = decode;
+      decodedUsername = username;
+    } else {
+    }
+  });
+  if (!isRefreshTokenValid) {
+    return res.status(404).json({ message: "Re-Login unsuccessful" });
+  }
+
+  // Check the validity of the access token
+  // Create a new access token if not valid
+  let isAccessTokenValid = false;
+  let newAccessToken = "";
+  jwt.verify(ML_accessToken, process.env.JWT_ACCESSTOKEN_PRIVATEKEY, function (error, decode) {
+    console.log("Decoded access token " + JSON.stringify(decode));
+
+    if (decode) {
+      isAccessTokenValid = true;
+    } else {
+      newAccessToken = createAccessToken(decodedUsername);
+      res.cookie("ML_accessToken", newAccessToken, { httpOnly: true, maxAge: 30 * 1000 });
+    }
+  });
+
+  // Check the user status in the DB
+  try {
+    let existingUser = await usersModel.findOne({ username: decodedUsername });
+    if (!existingUser) {
+      return res.status(404).json({ message: "Re-Login unsuccessful" });
+    }
+    if (existingUser.isLoggedIn) {
+      return res.status(200).json({ message: "Re-Login successful", username: decodedUsername }).send();
+    } else {
+      return res.status(404).json({ message: "Re-Login unsuccessful" });
+    }
+  } catch (error) {
+    return res.status(404).json({ message: "Re-Login unsuccessful", error: error });
+  }
+};
+
 const loginSystemStatusController = (req, res, next) => {
   return res.status(200).json({ message: "Login system status check.", status: isDBConnectionOK });
 };
 
-const loginCreateAccessToken = (req, res, next) => {
+const loginCreateAccessTokenController = (req, res, next) => {
   let decodedToken;
   let authHeader = req.headers?.authorization;
   if (!authHeader) {
@@ -134,4 +205,4 @@ const loginCreateAccessToken = (req, res, next) => {
   });
 };
 
-export { signupController, deleteUserController, loginController, logoutController, loginSystemStatusController, loginCreateAccessToken };
+export { signupController, deleteUserController, loginController, checkLoginController, logoutController, loginSystemStatusController, loginCreateAccessTokenController };

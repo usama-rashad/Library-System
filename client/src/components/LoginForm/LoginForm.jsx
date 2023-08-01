@@ -32,11 +32,11 @@ function LoginForm({ errorMessage }) {
   const loginRequest = async () => {
     console.log(`${backEndRoot}:${backEndPort}`);
     let loginResponse = await axios
-      .post(`${backEndRoot}:${backEndPort}${USERS_API}/login`, { username: username, password: password, rememberFlag: rememberFlag })
+      .post(`${backEndRoot}:${backEndPort}${USERS_API}/login`, { username: username, password: password, rememberFlag: rememberFlag }, { withCredentials: true, timeout: 1000 })
       .then((result) => {
         setError({});
         setSuccess(result.data.message);
-        dispatch(loggedIn({ username: username, userid: "123" }));
+        dispatch(loggedIn({ username: username }));
         dispatch(close());
       })
       .catch((failure) => {
@@ -61,7 +61,7 @@ function LoginForm({ errorMessage }) {
             <img src={LoginIcon} className="loginIcon" />
           </div>
           <div className="section2">
-            <p className="label">E-mail:</p>
+            <p className="label">Username</p>
             <input
               className="input"
               onChange={(e) => {
@@ -82,7 +82,7 @@ function LoginForm({ errorMessage }) {
                 type="checkbox"
                 className="input"
                 onChange={(e) => {
-                  setRememberFlag(e.target.value);
+                  setRememberFlag(e.target.checked);
                 }}
               />
             </div>

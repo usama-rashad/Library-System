@@ -1,7 +1,11 @@
 import "./Navbar.scss";
 
+import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+
+// Constants
+import { backEndPort, backEndRoot, USERS_API } from "../../contants.js";
 
 // Images
 import LibraryIcon from "./../../assets/LibraryIcon.png";
@@ -19,13 +23,12 @@ import { login, signup } from "../../reducers/loginSignupReducer";
 import useAuthBlurState from "../../hooks/useAuthBlurState.js";
 import useLoginState from "./../../hooks/useLoginState.js";
 
+// Reducers
+import { loggedOut, loggedIn } from "../../reducers/authReducer";
+
 function Navbar() {
   const { authState, blurText } = useAuthBlurState();
   const { username, thumbnail, isLoggedIn } = useLoginState();
-
-  useEffect(() => {
-    console.log("Login state : " + isLoggedIn);
-  }, [isLoggedIn]);
 
   const dispatch = useDispatch();
   const signupAction = () => {
@@ -33,6 +36,24 @@ function Navbar() {
   };
   const loginButtonAction = () => {
     dispatch(login());
+  };
+  // Effects
+  React.useEffect(() => {
+    setTimeout(() => {
+      autoLogin();
+    }, 1000);
+  }, []);
+
+  const autoLogin = () => {
+    let response = axios
+      .post(`${backEndRoot}:${backEndPort}${USERS_API}/checkLogin`, {}, { withCredentials: true, timeout: 1000 })
+      .then((result) => {
+        let username = result.data.username;
+        dispatch(loggedIn({ username: username }));
+      })
+      .catch((error) => {
+        console.log("Login failed " + error);
+      });
   };
 
   return (

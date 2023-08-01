@@ -1,0 +1,89 @@
+<mxfile host="Electron" modified="2023-07-29T19:04:53.550Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="Ctkz0ys0An7sW-bsB1_l" version="21.6.5" type="device">
+  <diagram name="Login" id="9dKEPue6r0zhRK-eV9Sc">
+    <mxGraphModel dx="864" dy="566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hCx2Kih4b7wP7Ah9PuAG-1" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;fontSize=16;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="110" y="120" width="20" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-1" value="Client browser" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-2" value="Server" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=16;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="270" y="120" width="100" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-6" value="Login request&lt;br&gt;{username,password}" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="119.5" y="448" as="sourcePoint" />
+            <mxPoint x="319.5" y="448" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200" y="448" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-8" value="Failed login and no cookie" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1">
+          <mxGeometry x="-0.005" width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="548" as="sourcePoint" />
+            <mxPoint x="120" y="548" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200.5" y="548" />
+            </Array>
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-9" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=16;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="80" y="498" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-10" value="Login and set cookie" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1">
+          <mxGeometry x="-0.005" width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="478" as="sourcePoint" />
+            <mxPoint x="120" y="478" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200.5" y="478" />
+            </Array>
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-11" value="Check valid login cookie" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="119.5" y="200" as="sourcePoint" />
+            <mxPoint x="319.5" y="200" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-12" value="Cookie invalid and stay logged out" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1">
+          <mxGeometry x="-0.005" width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="300" as="sourcePoint" />
+            <mxPoint x="120" y="300" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200.5" y="300" />
+            </Array>
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-13" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="71" y="210" width="299" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-15" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;[login valid]&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="220" y="210" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-18" value="Cookie valid and login" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1">
+          <mxGeometry x="-0.005" width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="270" as="sourcePoint" />
+            <mxPoint x="120" y="270" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200.5" y="270" />
+            </Array>
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_PHR4ipXSt_B2otWiAg2-19" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="71" y="388" width="300" height="202" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -6,7 +6,15 @@ import bcrypt from "bcrypt";
 import { basicAuth_MW } from "../middleware/auth/verifyUser.js";
 
 // Controllers
-import { signupController, loginController, logoutController, loginSystemStatusController, deleteUserController, loginCreateAccessToken } from "../controllers/userController.js";
+import {
+  signupController,
+  loginController,
+  checkLoginController,
+  logoutController,
+  loginSystemStatusController,
+  deleteUserController,
+  loginCreateAccessTokenController,
+} from "../controllers/userController.js";
 
 const router = express.Router();
 
@@ -18,8 +26,10 @@ const logoutRoute = router.post("/logout", logoutController);
 
 const loginRoute = router.post("/login", loginController);
 
+const checkLoginRoute = router.post("/checkLogin", checkLoginController);
+
 const loginSystemStatusRoute = router.get("/status", loginSystemStatusController);
 
-const loginCreateAccessTokenRoute = router.get("/createNewAccessToken", loginCreateAccessToken);
+const loginCreateAccessTokenRoute = router.get("/createNewAccessToken", loginCreateAccessTokenController);
 
-export { loginRoute, logoutRoute, signupRoute, deleteUserRoute, loginSystemStatusRoute, loginCreateAccessTokenRoute };
+export { loginRoute, checkLoginRoute, logoutRoute, signupRoute, deleteUserRoute, loginSystemStatusRoute, loginCreateAccessTokenRoute };

@@ -1,6 +1,7 @@
 import env from "dotenv";
 import cors from "cors";
 import express from "express";
+import cookieParser from "cookie-parser";
 
 // Route imports
 import { loginRoute, loginSystemStatusRoute, logoutRoute, signupRoute, deleteUserRoute, loginCreateAccessTokenRoute } from "./routes/userRoutes.js";
@@ -21,8 +22,9 @@ env.config();
 
 const app = express();
 
-// CORS and JSON parser
-app.use(cors());
+// CORS and JSON parser, Cookie parser
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: "http://localhost:4000" })); // Port of the client app
 app.use(express.json());
 
 // Routes

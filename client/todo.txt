@@ -1,0 +1,1 @@
+1) Need to remove the auto login from the LoginState component to the Navbar component

@@ -1,5 +1,7 @@
 import "./LoginState.scss";
 import React from "react";
+import axios from "axios";
+
 import { useDispatch, useSelector } from "react-redux";
 
 // Constants
@@ -8,23 +10,27 @@ import { backEndPort, backEndRoot, USERS_API } from "../../contants.js";
 // Hooks
 import useLoginState from "./../../hooks/useLoginState.js";
 
+// Reducers
+import { loggedOut, loggedIn } from "../../reducers/authReducer";
+
 // Components
 import Button from "./../Button/Button";
-import axios from "axios";
 
 function LoginState() {
+  // States
   const { username, thumbnail, isLoggedIn } = useLoginState();
+
+  // Reducers
   const dispatch = useDispatch();
 
-  const logoutButtonAction = async () => {
-    let logoutResponse = await axios
-      .post(`${backEndRoot}:${backEndPort}${USERS_API}/logout`, { username: username })
-      .then((success) => {
+  const logoutAction = () => {
+    let response = axios
+      .post(`${backEndRoot}:${backEndPort}${USERS_API}/logout`, {}, { withCredentials: true, timeout: 1000 })
+      .then((result) => {
         dispatch(loggedOut());
-        console.log(success.data.message);
       })
-      .catch((failure) => {
-        console.log(JSON.stringify(failure));
+      .catch((error) => {
+        dispatch(loggedOut());
       });
   };
 
@@ -35,7 +41,7 @@ function LoginState() {
         <p className="statusName">{username}</p>
       </div>
       <div className="button">
-        <Button clickAction={logoutButtonAction}>Logout</Button>
+        <Button clickAction={logoutAction}>Logout</Button>
       </div>
     </div>
   );
