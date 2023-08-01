@@ -117,7 +117,7 @@ const loginController = async (req, res, next) => {
         res.cookie("ML_accessToken", accessToken, { httpOnly: true, maxAge: 30 * 1000 }); // 30 seconds
         res.cookie("ML_refreshToken", refreshtoken, { httpOnly: true, maxAge: 30 * 24 * 3600 * 1000 }); // 30 days
       }
-      res.status(200).json({ message: "Login successful" }).send();
+      res.status(200).json({ message: "Login successful", isAdmin: existingUser.isAdmin }).send();
     } else {
       return res.status(404).json({ message: "Username and/or password is incorrect." });
     }
@@ -170,7 +170,7 @@ const checkLoginController = async (req, res, next) => {
       return res.status(404).json({ message: "Re-Login unsuccessful" });
     }
     if (existingUser.isLoggedIn) {
-      return res.status(200).json({ message: "Re-Login successful", username: decodedUsername }).send();
+      return res.status(200).json({ message: "Re-Login successful", username: decodedUsername, isAdmin: existingUser.isAdmin }).send();
     } else {
       return res.status(404).json({ message: "Re-Login unsuccessful" });
     }

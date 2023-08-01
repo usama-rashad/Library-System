@@ -34,9 +34,10 @@ function LoginForm({ errorMessage }) {
     let loginResponse = await axios
       .post(`${backEndRoot}:${backEndPort}${USERS_API}/login`, { username: username, password: password, rememberFlag: rememberFlag }, { withCredentials: true, timeout: 1000 })
       .then((result) => {
+        console.log("Admin flag " + result.data.isAdmin);
         setError({});
         setSuccess(result.data.message);
-        dispatch(loggedIn({ username: username }));
+        dispatch(loggedIn({ username: username, isAdmin: result.data.isAdmin }));
         dispatch(close());
       })
       .catch((failure) => {
