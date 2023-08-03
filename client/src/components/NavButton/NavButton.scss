@@ -1,7 +1,7 @@
 @import "./../../colors.scss";
 
 .mainNavButton {
-  width: 80px;
+  width: min-content;
   height: 30px;
   display: flex;
   flex-direction: column;
@@ -41,6 +41,7 @@
         transition: color 100ms ease-in;
         user-select: none;
         text-decoration: none;
+        white-space: nowrap;
 
         &:hover {
           color: rgba(236, 63, 1, 0.87);

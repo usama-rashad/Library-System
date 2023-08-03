@@ -82,6 +82,7 @@ const addNewBookController = async (req, res, next) => {
   newBook.author = author;
   newBook.ISBN = ISBN;
   newBook.quantity = quantity;
+  newBook.addDate = new Date();
   // List of books in the inventory
   newBook.details = details;
   try {
@@ -171,6 +172,7 @@ const issueBookController = async (req, res, next) => {
       book.isIssued = true;
       book.issuedTo = issuedTo;
       book.issueDate = new Date();
+      book.issueCout = book.issueCout + 1;
       book.save();
       return res.status(404).json({ message: `Book successfully issued to ${issuedTo}.` });
     } else {

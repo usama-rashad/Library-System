@@ -1,0 +1,21 @@
+@import "./../../colors.scss";
+
+.mainDashboard {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .dashboardTop {
+    flex: 1.5;
+    width: 100%;
+    background-color: white;
+    border-bottom: 4px solid $rootColor;
+  }
+  .dashboardBottom {
+    flex: 10;
+    width: 100%;
+    background-color: bisque;
+  }
+}

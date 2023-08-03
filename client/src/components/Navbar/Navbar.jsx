@@ -28,7 +28,7 @@ import { loggedOut, loggedIn } from "../../reducers/authReducer";
 
 function Navbar() {
   const { authState, blurText } = useAuthBlurState();
-  const { username, thumbnail, isLoggedIn } = useLoginState();
+  const { username, thumbnail, isLoggedIn, isAdmin } = useLoginState();
 
   const dispatch = useDispatch();
   const signupAction = () => {
@@ -78,6 +78,7 @@ function Navbar() {
       </div>
       <div className="middle">
         <NavButton linkTo={"/"}>Home</NavButton>
+        {isAdmin && <NavButton linkTo={"/dashboard"}>Dashboard</NavButton>}
         <NavButton linkTo={"/books"}>Books</NavButton>
         <NavButton linkTo={"/contact"}>Contact</NavButton>
         <NavButton linkTo={"/aboutus"}>About us</NavButton>

@@ -5,7 +5,9 @@ const booksSchema = new mongoose.Schema({
   title: String,
   author: String,
   quantity: Number,
+  issueCout: Number,
   thumbnail: String,
+  addDate: Date,
   additionalImages: [String],
   details: [], // type {serialNumber: Number, aisle: String, shelf: String}
   issueList: [], // userID: String, issueDate: Date, isIssued: Boolean
