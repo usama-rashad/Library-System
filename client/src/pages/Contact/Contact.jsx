@@ -2,9 +2,9 @@ import "./Contact.scss";
 import React, { useEffect } from "react";
 
 // Components
-import Navbar from "../../components/Navbar/Navbar";
-import PersonCard from "../../components/PersonCard/PersonCard";
-import Button from "../../components/Button/Button";
+import Navbar from "../../components/UI/Navbar/Navbar";
+import PersonCard from "../../components/UI/PersonCard/PersonCard";
+import Button from "../../components/UI/Button/Button";
 
 // Hooks
 import useAuthBlurState from "../../hooks/useAuthBlurState.js";

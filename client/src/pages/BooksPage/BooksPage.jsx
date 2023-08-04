@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 // Components
-import Navbar from "../../components/Navbar/Navbar";
-import BookCarousel from "../../components/BookCarousel/BookCarousel";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import Navbar from "../../components/UI/Navbar/Navbar";
+import BookCarousel from "../../components/UI/BookCarousel/BookCarousel";
+import SearchBar from "../../components/UI/SearchBar/SearchBar";
 
 // Hooks
 import useAuthBlurState from "../../hooks/useAuthBlurState";

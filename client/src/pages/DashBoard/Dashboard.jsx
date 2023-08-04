@@ -3,8 +3,8 @@ import "./Dashboard.scss";
 import React from "react";
 
 // Components
-import Navbar from "../../components/Navbar/Navbar";
-import DashboardInterface from "../../components/DashboardInterface/DashboardInterface";
+import Navbar from "../../components/UI/Navbar/Navbar";
+import DashboardInterface from "../../components/Dashboards/DashboardInterface/DashboardInterface";
 
 function Dashboard() {
   return (

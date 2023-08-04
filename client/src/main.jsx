@@ -10,7 +10,7 @@ import BrowserNavigate from "./utility/BrowserNavigate";
 
 // Pages
 import App from "./pages/Home/App.jsx";
-import SearchResults from "./components/SearchResults/SearchResults";
+import SearchResults from "./components/UI/SearchResults/SearchResults";
 import BooksPage from "./pages/BooksPage/BooksPage";
 import Contact from "./pages/Contact/Contact";
 import AboutUs from "./pages/AboutUs/AboutUs";

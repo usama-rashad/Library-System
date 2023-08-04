@@ -5,7 +5,7 @@ import useAuthBlurState from "../../hooks/useAuthBlurState.js";
 import backgroundImage from "./../../assets/library.png";
 
 // Components
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/UI/Navbar/Navbar";
 
 function AboutUs() {
   const { authState, blurText } = useAuthBlurState();

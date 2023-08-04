@@ -2,12 +2,10 @@ import "./App.scss";
 import React, { useEffect, useState } from "react";
 
 // Components
-import Navbar from "../../components/Navbar/Navbar";
-import LoginForm from "../../components/LoginForm/LoginForm";
-import SignupForm from "../../components/SignUpForm/SignupForm";
+import Navbar from "../../components/UI/Navbar/Navbar";
 
-import HomePageSearch from "../../components/HomePageSearch/HomePageSearch";
-import HomePageDailyMessage from "../../components/HomePageDailyMessage/HomePageDailyMessage";
+import HomePageSearch from "../../components/UI/HomePageSearch/HomePageSearch";
+import HomePageDailyMessage from "../../components/UI/HomePageDailyMessage/HomePageDailyMessage";
 
 // Hooks
 import useAuthBlurState from "../../hooks/useAuthBlurState.js";
