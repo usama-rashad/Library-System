@@ -3,10 +3,19 @@ import "./CollapsableMenu.scss";
 // Icons
 import ChevronRight from "../../../assets/chevron-right-solid.svg";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-function CollapsableMenu({ title = "Default", menuItems = ["Default"] }) {
+// Hooks
+import useDashboardInterfaceState from "./../../../hooks/useDashboardInterfaceState";
+
+function CollapsableMenu({ title = "Default", menuItems = ["Default"], menuActions = [], highLightIndex = [] }) {
   const [menuState, setMenuState] = useState("close");
+  const { dashboardType } = useDashboardInterfaceState();
+
+  useEffect(() => {
+    console.log(dashboardType);
+  }, [dashboardType]);
 
   const toggleMenuState = () => {
     setMenuState((prev) => (prev === "open" ? "close" : "open"));
@@ -19,7 +28,15 @@ function CollapsableMenu({ title = "Default", menuItems = ["Default"] }) {
       </div>
       <div className={`menuItems ${menuState}`}>
         {menuItems.map((item, index) => {
-          return <p key={index}>{item}</p>;
+          return (
+            <p
+              key={index}
+              onClick={menuActions[index]}
+              className={highLightIndex[index] === dashboardType ? "selected" : ""}
+            >
+              {item}
+            </p>
+          );
         })}
       </div>
     </div>

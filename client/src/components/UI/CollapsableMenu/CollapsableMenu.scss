@@ -55,14 +55,25 @@
     height: 100px;
     transition: height 300ms;
     overflow: hidden;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: left;
     p {
       font-size: 0.8rem;
+      margin: 10px;
       font-weight: 500;
       color: black;
       padding-left: 5px;
       cursor: pointer;
       user-select: none;
+      transition: font-size 100ms ease;
       &:hover {
+        color: $rootColor;
+        font-weight: bolder;
+        font-size: 0.9rem;
+      }
+      &.selected {
         color: $rootColor;
         font-weight: bolder;
       }
