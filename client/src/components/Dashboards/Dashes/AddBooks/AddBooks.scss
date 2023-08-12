@@ -52,7 +52,7 @@
             button {
               height: 25px;
               width: 27px;
-              transition: font-weight 100ms ease;
+              transition: font-weight 100ms ease, border 300ms ease;
               &:hover {
                 color: $rootColor;
                 border: 2px solid $rootColor;
@@ -69,6 +69,7 @@
           height: 100%;
           width: 100%;
           .charCount {
+            text-align: right;
             font-size: 12px;
             font-weight: 500;
             font-style: italic;
