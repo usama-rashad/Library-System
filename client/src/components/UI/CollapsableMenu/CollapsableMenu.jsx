@@ -13,10 +13,6 @@ function CollapsableMenu({ title = "Default", menuItems = ["Default"], menuActio
   const [menuState, setMenuState] = useState("close");
   const { dashboardType } = useDashboardInterfaceState();
 
-  useEffect(() => {
-    console.log(dashboardType);
-  }, [dashboardType]);
-
   const toggleMenuState = () => {
     setMenuState((prev) => (prev === "open" ? "close" : "open"));
   };

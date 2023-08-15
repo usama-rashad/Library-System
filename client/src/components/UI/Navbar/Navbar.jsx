@@ -87,10 +87,10 @@ function Navbar() {
         {!isLoggedIn && (
           <div className="loggedOutState">
             <Button width={"80px"} height={"30px"} clickAction={loginButtonAction}>
-              Login
+              <p>Login</p>
             </Button>
             <Button width={"80px"} height={"30px"} clickAction={signupAction}>
-              Sign up
+              <p>Sign up</p>
             </Button>
           </div>
         )}

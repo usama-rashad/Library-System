@@ -68,6 +68,7 @@ const addBookImageController = async (req, res, next) => {
 
 const addNewBookController = async (req, res, next) => {
   let { title, author, ISBN, details, quantity } = req.body;
+  console.log("New book requested with data : " + JSON.stringify(req.body));
   if (!title || !author || !ISBN || !details || !quantity) {
     return res.status(404).json({ message: `Missing information.` });
   }
@@ -237,7 +238,13 @@ const searchBookController = async (req, res, next) => {
     });
 };
 
+const testBookController = async (req, res, next) => {
+  console.log("Test called");
+  return res.status(200).json({ message: "Book test is OK" });
+};
+
 export {
+  testBookController,
   addNewBookController,
   updateBookThumbnailController,
   addBookImageController,

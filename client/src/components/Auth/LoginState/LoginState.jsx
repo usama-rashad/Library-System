@@ -42,7 +42,9 @@ function LoginState() {
         {isAdmin && <p className="adminStatus">Administrator</p>}
       </div>
       <div className="button">
-        <Button clickAction={logoutAction}>Logout</Button>
+        <Button clickAction={logoutAction}>
+          <p>Logout</p>
+        </Button>
       </div>
     </div>
   );

@@ -1,0 +1,36 @@
+@import "../../../../colors.scss";
+
+$spinnerHeight: 20px;
+$spinnerWidth: 20px;
+
+.mainSpinner {
+  height: $spinnerHeight;
+  width: $spinnerWidth;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3px;
+  .outerCircle {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 3px dashed white;
+    stroke-dasharray: 1 5;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    animation: rotation 1s alternate 0s infinite;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}

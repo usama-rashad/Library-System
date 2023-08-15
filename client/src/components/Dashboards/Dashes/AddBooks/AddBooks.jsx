@@ -1,16 +1,20 @@
 import "./AddBooks.scss";
 
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addBookRequest, reset } from "./../../../../reducers/addBookReducer";
+
+// Hooks
+import useAddBookState from "./../../../../hooks/useAddBookState";
 
 //Components
 import Button from "./../../../UI/Button/Button";
 import InputField from "./../../../UI/Form/InputField/InputField";
-
-// Utility
-import { isAlphabetsOnly, isDigitsOnly } from "../../../../utility/InputValidation";
+import Spinner from "./../../../UI/Animations/Spinner/Spinner";
 
 function AddBooks() {
   const charLimit = 200;
+  const { success, fail, pending, message, state } = useAddBookState();
   const [charCount, setCharCount] = useState(0);
   const [colorState, setColorState] = useState("");
   const [addBookFormData, setAddBookFormData] = useState({
@@ -20,6 +24,8 @@ function AddBooks() {
     Quantity: 0,
     Details: "",
   });
+
+  const dispatch = useDispatch();
 
   const setBookQuantity = (input) => {
     setAddBookFormData({ ...addBookFormData, Quantity: input });
@@ -37,7 +43,6 @@ function AddBooks() {
     }
   };
   const updateISBN = (input) => {
-    let pass = isDigitsOnly(input);
     setAddBookFormData({ ...addBookFormData, ISBN: input });
   };
   const updateTitle = (input) => {
@@ -49,11 +54,20 @@ function AddBooks() {
 
   // BUTTON ACTIONS
   const clearButtonAction = () => {
-    setDetails("");
+    console.log("Clear all the fields.");
+    setAddBookFormData({
+      ...addBookFormData,
+      ISBN: "", // Store the ISBN as 13 digits. No hyphen.
+      Title: "",
+      Author: "",
+      Quantity: 0,
+      Details: "",
+    });
+    dispatch(reset());
   };
-
-  const diagnoseMessage = (input) => {
-    console.log("Input message is " + input);
+  const addBookAction = () => {
+    dispatch(addBookRequest(addBookFormData)).then((result) => {});
+    console.log("Dispatch add new book action.");
   };
 
   return (
@@ -62,56 +76,38 @@ function AddBooks() {
         <p className="dashTitle">Add a new book</p>
         <div className="fieldGrid">
           <div className="col1">
-            <div className="field">
-              <p>ISBN-13</p>
-              <input
-                placeholder="Enter ISBN..."
-                type="text"
-                value={addBookFormData.ISBN}
-                onChange={(e) => updateISBN(e.target.value)}
-              />
-            </div>
-            <div className="field">
-              <p>Title</p>
-              <input
-                placeholder="Enter title..."
-                type="text"
-                value={addBookFormData.Title}
-                onChange={(e) => updateTitle(e.target.value)}
-              />
-            </div>
-            <div className="field">
-              <p>Author</p>
-              <input
-                placeholder="Enter Author name..."
-                type="text"
-                value={addBookFormData.Author}
-                onChange={(e) => updateAuthor(e.target.value)}
-              />
-            </div>
-            <div className="field">
-              <p>Quantity</p>
-              <input
-                placeholder="Enter quantity..."
-                type="number"
-                value={addBookFormData.Quantity}
-                onChange={(e) => setBookQuantity(parseInt(e.target.value))}
-              />
-              <div className="quickSelect">
-                <button onClick={() => setBookQuantity(1)}>1</button>
-                <button onClick={() => setBookQuantity(2)}>2</button>
-                <button onClick={() => setBookQuantity(3)}>3</button>
-                <button onClick={() => setBookQuantity(4)}>4</button>
-                <button onClick={() => setBookQuantity(5)}>5</button>
-                <button onClick={() => setBookQuantity(6)}>6</button>
-              </div>
-            </div>
             <InputField
-              label="Dimensions"
-              placeholder={"Enter dimensions..."}
+              label="ISBN"
+              placeholder={"Enter ISBN-13"}
+              type={"number"}
+              validationHint={"Can only be digits."}
+              source={addBookFormData.ISBN}
+              updateValue={(e) => updateISBN(e)}
+            />
+            <InputField
+              label="Title"
+              placeholder={"Enter title"}
+              type={"any"}
+              validationHint={""}
+              source={addBookFormData.Title}
+              updateValue={(e) => updateTitle(e)}
+            />
+            <InputField
+              label="Author"
+              placeholder={"Enter author name"}
               type={"text"}
-              validationHint={"Can only be letters."}
-              updateValue={(e) => diagnoseMessage(e)}
+              validationHint={"Can only be letters"}
+              source={addBookFormData.Author}
+              updateValue={(e) => updateAuthor(e)}
+            />
+            <InputField
+              label="Quantity"
+              placeholder={"Enter quantity"}
+              type={"number"}
+              validationHint={"Can only be digits"}
+              source={addBookFormData.Quantity}
+              updateValue={(e) => setBookQuantity(e)}
+              enableQuickSelect={true}
             />
           </div>
           <div className="col2">
@@ -127,9 +123,17 @@ function AddBooks() {
             </div>
           </div>
         </div>
-        <div className="buttons">
-          <Button>Add</Button>
-          <Button>Clear</Button>
+        <div className="bottom">
+          <div className="buttons">
+            <Button clickAction={() => addBookAction()}>
+              <p>Add</p>
+              {pending && <Spinner />}
+            </Button>
+            <Button clickAction={() => clearButtonAction()}>
+              <p>Clear</p>
+            </Button>
+          </div>
+          {message && <p className={`message ${state}`}>{message}</p>}
         </div>
       </div>
     </div>

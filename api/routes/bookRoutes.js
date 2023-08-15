@@ -44,12 +44,18 @@ import {
   issueBookController,
   returnBookController,
   searchBookController,
+  testBookController,
 } from "./../controllers/bookController.js";
 
+const bookTestRoute = router.put("/testBook", testBookController);
 const addNewBookRoute = router.put("/addNew", verifyUser_MW, addNewBookController);
 const addBookImageRoute = router.put("/addImage", verifyUser_MW, upload.single("bookImage"), addBookImageController);
 const deleteBookImageRoute = router.put("/deleteImage", verifyUser_MW, deleteImageController);
-const updateBookThumbnailRoute = router.put("/updateThumbnail", upload.single("thumbnail"), updateBookThumbnailController);
+const updateBookThumbnailRoute = router.put(
+  "/updateThumbnail",
+  upload.single("thumbnail"),
+  updateBookThumbnailController
+);
 const findBookByISBNRoute = router.get("/findByISBN", verifyUser_MW, findBookByISBNController);
 const deleteBookByISBNRoute = router.delete("/deleteByISBN", verifyUser_MW, deleteBookByISBNController);
 const updateBookRoute = router.put("/updateBookInfo", verifyUser_MW, updateBookInfoController);
@@ -58,6 +64,7 @@ const returnBookRoute = router.put("/returnBook", verifyUser_MW, returnBookContr
 const searchBookRoute = router.get("/searchBookByName", searchBookController);
 
 export {
+  bookTestRoute,
   addNewBookRoute,
   addBookImageRoute,
   deleteBookImageRoute,

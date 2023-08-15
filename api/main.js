@@ -4,8 +4,16 @@ import express from "express";
 import cookieParser from "cookie-parser";
 
 // Route imports
-import { loginRoute, loginSystemStatusRoute, logoutRoute, signupRoute, deleteUserRoute, loginCreateAccessTokenRoute } from "./routes/userRoutes.js";
 import {
+  loginRoute,
+  loginSystemStatusRoute,
+  logoutRoute,
+  signupRoute,
+  deleteUserRoute,
+  loginCreateAccessTokenRoute,
+} from "./routes/userRoutes.js";
+import {
+  bookTestRoute,
   addNewBookRoute,
   addBookImageRoute,
   deleteBookImageRoute,
@@ -39,6 +47,7 @@ app.use(USERS_API, loginSystemStatusRoute);
 app.use(USERS_API, loginCreateAccessTokenRoute);
 
 // Books
+app.use(BOOKS_API, bookTestRoute);
 app.use(BOOKS_API, addNewBookRoute);
 app.use(BOOKS_API, addBookImageRoute);
 app.use(BOOKS_API, updateBookThumbnailRoute);
