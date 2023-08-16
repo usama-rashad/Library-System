@@ -32,7 +32,7 @@ const app = express();
 
 // CORS and JSON parser, Cookie parser
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "http://localhost:4000" })); // Port of the client app
+app.use(cors({ credentials: true, origin: ["http://localhost:4000", "http://localhost:3000"] })); // Port of the client app
 app.use(express.json());
 
 // Routes

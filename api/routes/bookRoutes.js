@@ -47,7 +47,7 @@ import {
   testBookController,
 } from "./../controllers/bookController.js";
 
-const bookTestRoute = router.put("/testBook", testBookController);
+const bookTestRoute = router.get("/testBook", testBookController);
 const addNewBookRoute = router.put("/addNew", verifyUser_MW, addNewBookController);
 const addBookImageRoute = router.put("/addImage", verifyUser_MW, upload.single("bookImage"), addBookImageController);
 const deleteBookImageRoute = router.put("/deleteImage", verifyUser_MW, deleteImageController);

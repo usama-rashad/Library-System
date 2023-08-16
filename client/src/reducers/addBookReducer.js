@@ -1,24 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { BOOKS_API, backEndRoot, backEndPort } from "./../contants.js";
 import axios from "axios";
 
 const initialState = { success: false, fail: false, pending: false, message: "", state: "" };
 
-export const addBookRequest = createAsyncThunk("books/addNew", async (bookData) => {
-  const response = await axios.put(`${backEndRoot}:${backEndPort}${BOOKS_API}/testBook`, {
-    // title,
-    // author,
-    // ISBN,
-    // details,
-    // quantity,
-    // details,
-    output: bookData,
-  });
-  console.log(response.data);
-  return response.data;
-});
+const addBookAsyncThunk = createAsyncThunk(
+  "addNewBook",
+  async ({ username, bookData }, { rejectWithValue, fulfillWithValue }) => {
+    let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/testBook`;
+
+    let response = await axios.get(url); // , { username: username, ...bookData }
+    return response;
+  }
+);
 
 const addBookSlice = createSlice({
-  name: "addNewBook",
+  name: "books",
   initialState: initialState,
   reducers: {
     reset(state, action) {
@@ -28,23 +25,26 @@ const addBookSlice = createSlice({
       state.message = "";
       state.state = "";
     },
+    clearMessage(state, action) {
+      state.message = "";
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(addBookRequest.pending, (state, action) => {
+    builder.addCase(addBookAsyncThunk.pending, (state, action) => {
       state.pending = true;
       state.success = false;
       state.fail = false;
       state.message = "Wait...";
       state.state = "";
     }),
-      builder.addCase(addBookRequest.fulfilled, (state, action) => {
+      builder.addCase(addBookAsyncThunk.fulfilled, (state, action) => {
         state.pending = false;
         state.success = true;
         state.fail = false;
-        state.message = "Successfully added a new book.";
+        state.message = "Successfully added a new book. System response : " + JSON.stringify(action.payload);
         state.state = "success";
       }),
-      builder.addCase(addBookRequest.rejected, (state, action) => {
+      builder.addCase(addBookAsyncThunk.rejected, (state, action) => {
         state.pending = false;
         state.success = false;
         state.fail = true;
@@ -55,4 +55,5 @@ const addBookSlice = createSlice({
 });
 
 export const addBookReducer = addBookSlice.reducer;
-export const { reset } = addBookSlice.actions;
+export const { reset, clearMessage } = addBookSlice.actions;
+export { addBookAsyncThunk };

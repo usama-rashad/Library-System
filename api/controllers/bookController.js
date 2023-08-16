@@ -70,7 +70,7 @@ const addNewBookController = async (req, res, next) => {
   let { title, author, ISBN, details, quantity } = req.body;
   console.log("New book requested with data : " + JSON.stringify(req.body));
   if (!title || !author || !ISBN || !details || !quantity) {
-    return res.status(404).json({ message: `Missing information.` });
+    return res.status(404).json({ message: "Missing information" });
   }
   // Find a previous book and compare ISBNs
   let existingBook = await booksModel.findOne({ ISBN: ISBN });

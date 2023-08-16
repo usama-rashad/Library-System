@@ -2,7 +2,9 @@ import "./AddBooks.scss";
 
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addBookRequest, reset } from "./../../../../reducers/addBookReducer";
+import { addBookAsyncThunk, reset, clearMessage } from "./../../../../reducers/addBookReducer";
+import { BOOKS_API, backEndRoot, backEndPort } from "./../../../../contants.js";
+import axios from "axios";
 
 // Hooks
 import useAddBookState from "./../../../../hooks/useAddBookState";
@@ -22,7 +24,7 @@ function AddBooks() {
     Title: "",
     Author: "",
     Quantity: 0,
-    Details: "",
+    Details: [],
   });
 
   const dispatch = useDispatch();
@@ -61,13 +63,22 @@ function AddBooks() {
       Title: "",
       Author: "",
       Quantity: 0,
-      Details: "",
+      Details: [],
     });
     dispatch(reset());
   };
-  const addBookAction = () => {
-    dispatch(addBookRequest(addBookFormData)).then((result) => {});
-    console.log("Dispatch add new book action.");
+  const addBookAction = async () => {
+    dispatch(addBookAsyncThunk({ username: "ayesha112", bookData: addBookFormData }))
+      .unwrap()
+      .then((result) => {
+        console.log("Unwrapped result " + JSON.stringify(result));
+      })
+      .catch((error) => {
+        console.log("Unwrapped error " + JSON.stringify(error));
+      });
+    // setTimeout(() => {
+    //   dispatch(clearMessage());
+    // }, 2000);
   };
 
   return (
