@@ -67,18 +67,13 @@ function AddBooks() {
     });
     dispatch(reset());
   };
+
   const addBookAction = async () => {
     dispatch(addBookAsyncThunk({ username: "ayesha112", bookData: addBookFormData }))
       .unwrap()
-      .then((result) => {
-        console.log("Unwrapped result " + JSON.stringify(result));
-      })
-      .catch((error) => {
-        console.log("Unwrapped error " + JSON.stringify(error));
+      .catch((message) => {
+        console.log("Unwrapped message" + JSON.stringify(message));
       });
-    // setTimeout(() => {
-    //   dispatch(clearMessage());
-    // }, 2000);
   };
 
   return (

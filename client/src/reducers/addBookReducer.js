@@ -7,10 +7,16 @@ const initialState = { success: false, fail: false, pending: false, message: "",
 const addBookAsyncThunk = createAsyncThunk(
   "addNewBook",
   async ({ username, bookData }, { rejectWithValue, fulfillWithValue }) => {
-    let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/testBook`;
+    let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/testBook`; // , { username: username, ...bookData }
 
-    let response = await axios.get(url); // , { username: username, ...bookData }
-    return response;
+    try {
+      let response = await axios.get(url);
+      console.log("Response success.");
+      return response.data;
+    } catch (error) {
+      console.log("Rejected with value.");
+      return rejectWithValue(error);
+    }
   }
 );
 
@@ -44,11 +50,11 @@ const addBookSlice = createSlice({
         state.message = "Successfully added a new book. System response : " + JSON.stringify(action.payload);
         state.state = "success";
       }),
-      builder.addCase(addBookAsyncThunk.rejected, (state, action) => {
+      builder.addCase(addBookAsyncThunk.rejected, (state, payload) => {
         state.pending = false;
         state.success = false;
         state.fail = true;
-        state.message = "Failed to add a new book.";
+        state.message = "Failed to add a new book. System error : " + JSON.stringify(payload);
         state.state = "fail";
       });
   },
