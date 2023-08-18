@@ -240,7 +240,7 @@ const searchBookController = async (req, res, next) => {
 
 const testBookController = async (req, res, next) => {
   console.log("Test called");
-  return res.status(404).json({ message: "Book test is failed" });
+  return res.status(200).json({ message: "Book has been successfully added." });
 };
 
 export {

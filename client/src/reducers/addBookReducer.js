@@ -7,15 +7,14 @@ const initialState = { success: false, fail: false, pending: false, message: "",
 const addBookAsyncThunk = createAsyncThunk(
   "addNewBook",
   async ({ username, bookData }, { rejectWithValue, fulfillWithValue }) => {
-    let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/testBook`; // , { username: username, ...bookData }
+    let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/addNew`; // , { username: username, ...bookData }
 
     try {
-      let response = await axios.get(url);
-      console.log("Response success.");
+      let response = await axios.put(url, { username: username, ...bookData });
       return response.data;
     } catch (error) {
-      console.log("Rejected with value.");
-      return rejectWithValue(error);
+      let { message } = error.response.data;
+      return rejectWithValue(message);
     }
   }
 );
@@ -40,21 +39,22 @@ const addBookSlice = createSlice({
       state.pending = true;
       state.success = false;
       state.fail = false;
-      state.message = "Wait...";
+      state.message = "Waiting...";
       state.state = "";
     }),
       builder.addCase(addBookAsyncThunk.fulfilled, (state, action) => {
+        let { payload } = action;
         state.pending = false;
         state.success = true;
         state.fail = false;
-        state.message = "Successfully added a new book. System response : " + JSON.stringify(action.payload);
+        state.message = payload.message;
         state.state = "success";
       }),
-      builder.addCase(addBookAsyncThunk.rejected, (state, payload) => {
+      builder.addCase(addBookAsyncThunk.rejected, (state, action) => {
         state.pending = false;
         state.success = false;
         state.fail = true;
-        state.message = "Failed to add a new book. System error : " + JSON.stringify(payload);
+        state.message = action.payload;
         state.state = "fail";
       });
   },

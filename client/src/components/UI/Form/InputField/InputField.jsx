@@ -5,7 +5,7 @@ import { isAlpha, isNumeric } from "validator";
 
 function InputField({ label, placeholder, type, source, updateValue, validationHint, enableQuickSelect = false }) {
   const [currentValue, setCurrentValue] = useState("");
-  const [qs, setQs] = useState(false);
+  const [qs, setQs] = useState(false); // qs = quick select
   const [validationMessage, setValidationMessage] = useState("");
 
   useEffect(() => {
@@ -41,6 +41,12 @@ function InputField({ label, placeholder, type, source, updateValue, validationH
       }
     } else if (type === "number") {
       if (isNumeric(e.toString())) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (type === "ISBN") {
+      if (isNumeric(e.toString()) && e.toString().length <= 13) {
         return true;
       } else {
         return false;

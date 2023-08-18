@@ -8,11 +8,13 @@ import axios from "axios";
 
 // Hooks
 import useAddBookState from "./../../../../hooks/useAddBookState";
+import useLoginState from "./../../../../hooks/useLoginState";
 
 //Components
 import Button from "./../../../UI/Button/Button";
 import InputField from "./../../../UI/Form/InputField/InputField";
 import Spinner from "./../../../UI/Animations/Spinner/Spinner";
+import BookDetailsInput from "../../../UI/BookDetailsInput/BookDetailsInput";
 
 function AddBooks() {
   const charLimit = 200;
@@ -26,8 +28,13 @@ function AddBooks() {
     Quantity: 0,
     Details: [],
   });
+  const [bookDetails, setBookDetails] = useState([
+    { serialNumber: "1", aisle: "A1", shelf: "1" },
+    { serialNumber: "2", aisle: "A2", shelf: "1" },
+  ]);
 
   const dispatch = useDispatch();
+  const { username } = useLoginState();
 
   const setBookQuantity = (input) => {
     setAddBookFormData({ ...addBookFormData, Quantity: input });
@@ -69,11 +76,10 @@ function AddBooks() {
   };
 
   const addBookAction = async () => {
-    dispatch(addBookAsyncThunk({ username: "ayesha112", bookData: addBookFormData }))
-      .unwrap()
-      .catch((message) => {
-        console.log("Unwrapped message" + JSON.stringify(message));
-      });
+    dispatch(addBookAsyncThunk({ username: username, bookData: addBookFormData }));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 2000);
   };
 
   return (
@@ -85,8 +91,8 @@ function AddBooks() {
             <InputField
               label="ISBN"
               placeholder={"Enter ISBN-13"}
-              type={"number"}
-              validationHint={"Can only be digits."}
+              type={"ISBN"}
+              validationHint={"Can only be 13 digits."}
               source={addBookFormData.ISBN}
               updateValue={(e) => updateISBN(e)}
             />
@@ -112,7 +118,10 @@ function AddBooks() {
               type={"number"}
               validationHint={"Can only be digits"}
               source={addBookFormData.Quantity}
-              updateValue={(e) => setBookQuantity(e)}
+              updateValue={(e) => {
+                setBookQuantity(e);
+                console.log(e);
+              }}
               enableQuickSelect={true}
             />
           </div>
@@ -128,6 +137,21 @@ function AddBooks() {
               <p className={`charCount ${colorState}`}>{`${charCount}/200 characters`}</p>
             </div>
           </div>
+          {addBookFormData.Quantity > 0 && (
+            <div className="col3">
+              <p className="detailTitle">Enter details</p>
+              <div className="bookDetailsRows">
+                {bookDetails.map((bookDetail, index) => {
+                  <BookDetailsInput
+                    detailsSource={bookDetails[index]}
+                    detailUpdate={(e) => {
+                      setBookDetails([...bookDetails, e]);
+                    }}
+                  />;
+                })}
+              </div>
+            </div>
+          )}
         </div>
         <div className="bottom">
           <div className="buttons">
