@@ -1,0 +1,61 @@
+@import "../../../colors.scss";
+
+.mainDropDown {
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  .t {
+    width: 100%;
+    height: min-content;
+    .dropDownTitle {
+      font-weight: 500;
+      margin: 0px;
+      user-select: none;
+    }
+    .selectedOption {
+      margin: 0px;
+      user-select: none;
+      width: 100%;
+      font-style: italic;
+      cursor: pointer;
+      &.selected {
+        border-radius: 3px;
+        border: 2px solid black;
+      }
+    }
+  }
+  .b {
+    width: 100%;
+    height: 200px;
+    border-top: 2px solid black;
+    .options {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      overflow-y: scroll;
+      p {
+        width: 100%;
+        font-weight: 400;
+        font-size: 14px;
+        margin: 0px;
+        user-select: none;
+        text-align: left;
+        user-select: none;
+        cursor: pointer;
+        &:hover {
+          color: $rootColor;
+          font-weight: 500;
+        }
+      }
+      &.open {
+        height: 200px;
+      }
+    }
+  }
+}

@@ -7,8 +7,7 @@ const initialState = { success: false, fail: false, pending: false, message: "",
 const addBookAsyncThunk = createAsyncThunk(
   "addNewBook",
   async ({ username, bookData }, { rejectWithValue, fulfillWithValue }) => {
-    let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/addNew`; // , { username: username, ...bookData }
-
+    let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/addNew`;
     try {
       let response = await axios.put(url, { username: username, ...bookData });
       return response.data;
@@ -61,5 +60,5 @@ const addBookSlice = createSlice({
 });
 
 export const addBookReducer = addBookSlice.reducer;
-export const { reset, clearMessage } = addBookSlice.actions;
+export const { reset, clearMessage, addStorageInfo, removeStorageInfo } = addBookSlice.actions;
 export { addBookAsyncThunk };

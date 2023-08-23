@@ -9,13 +9,20 @@ import HomePageDailyMessage from "../../components/UI/HomePageDailyMessage/HomeP
 
 // Hooks
 import useAuthBlurState from "../../hooks/useAuthBlurState.js";
+import useGeolocation from "../../hooks/useGeoLocation.js";
 
 // Images
 import backgroundImage from "./../../assets/library.png";
 import { useSelector } from "react-redux";
 
 function App() {
+  const { error, data } = useGeolocation();
   const { blurState, blurText } = useAuthBlurState();
+
+  useEffect(() => {
+    console.log("Geo-location data " + JSON.stringify(data));
+    console.log("Geo-location error " + JSON.stringify(error));
+  });
 
   return (
     <div className="mainApp">
@@ -28,7 +35,9 @@ function App() {
         </div>
         <div className="dailyMessage">
           <HomePageDailyMessage
-            dailyMessage={"Everything you need for a better future and success has already been written. All you have to do is go to library."}
+            dailyMessage={
+              "Everything you need for a better future and success has already been written. All you have to do is go to library."
+            }
             author={"Henri Frederic Ameil"}
           />
         </div>

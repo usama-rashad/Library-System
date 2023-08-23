@@ -10,11 +10,12 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
     height: min-content;
     column-gap: 5px;
     margin-bottom: 2px;
     margin-right: 10px;
+
     .fields {
       flex: 5;
       display: flex;
@@ -23,23 +24,12 @@
       justify-content: center;
       height: min-content;
       column-gap: 5px;
-    }
-    .buttons {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      height: 26px;
-      column-gap: 3px;
-      .icons {
-        width: 20px;
-        height: 20px;
+      p {
+        font-weight: 500;
+        margin: 0px;
         user-select: none;
-        cursor: pointer;
-        &:hover {
-          animation: changeColor 100ms ease-in 1 forwards;
-        }
+        width: 20px;
+        text-align: right;
       }
     }
   }

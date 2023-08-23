@@ -1,18 +1,13 @@
 import "./BookDetailsInput.scss";
 
-// Icons
-import DeleteIcon from "../../../assets/trash-can-solid.svg";
-import AddIcon from "../../../assets/square-plus-solid.svg";
-
 import React, { useEffect, useState } from "react";
 import InputField from "../Form/InputField/InputField";
 
-function BookDetailsInput({ detailsSource, detailUpdate }) {
-  const [bookDetails, setBookDetails] = useState({ serialNumber: "", aisle: "", shelf: "" });
+// Actions
+import { removeStorageInfo, addStorageInfo } from "./../../../reducers/addBookReducer.js";
 
-  useEffect(() => {
-    setBookDetails(detailsSource);
-  }, [detailsSource]);
+function BookDetailsInput({ serialNumber, detailsSource, detailUpdate }) {
+  const [bookDetails, setBookDetails] = useState({ serialNumber: "", aisle: "", shelf: "" });
 
   // Input actions
   const updateSerialNumber = (input) => {
@@ -37,6 +32,7 @@ function BookDetailsInput({ detailsSource, detailUpdate }) {
     <div className="mainBookDetailsInput">
       <div className="row">
         <div className="fields">
+          <p>{serialNumber}.</p>
           <InputField
             label=""
             placeholder={"Enter serial number"}
@@ -63,8 +59,8 @@ function BookDetailsInput({ detailsSource, detailUpdate }) {
           />
         </div>
         <div className="buttons">
-          <img src={AddIcon} className="icons addIcon" />
-          <img src={DeleteIcon} className="icons deleteIcon" />
+          {/* <img src={AddIcon} className="icons addIcon" onClick={() => addNewRow()} />
+          <img src={DeleteIcon} className="icons deleteIcon" onClick={() => removeRow()} /> */}
         </div>
       </div>
     </div>

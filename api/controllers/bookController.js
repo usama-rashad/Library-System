@@ -67,9 +67,9 @@ const addBookImageController = async (req, res, next) => {
 };
 
 const addNewBookController = async (req, res, next) => {
-  let { title, author, ISBN, details, quantity } = req.body;
+  let { title, author, ISBN, details, StorageInfo } = req.body;
   console.log("New book requested with data : " + JSON.stringify(req.body));
-  if (!title || !author || !ISBN || !details || !quantity) {
+  if (!title || !author || !ISBN || !details || !StorageInfo) {
     return res.status(404).json({ message: "Missing information" });
   }
   // Find a previous book and compare ISBNs
@@ -82,7 +82,6 @@ const addNewBookController = async (req, res, next) => {
   newBook.title = title;
   newBook.author = author;
   newBook.ISBN = ISBN;
-  newBook.quantity = quantity;
   newBook.addDate = new Date();
   // List of books in the inventory
   newBook.details = details;
@@ -95,8 +94,8 @@ const addNewBookController = async (req, res, next) => {
 };
 
 const updateBookInfoController = async (req, res, next) => {
-  let { title, author, ISBN, aisle, shelf, serialNumber, quantity } = req.body;
-  if (!title || !author || !ISBN || !aisle || !shelf || !serialNumber || !quantity) {
+  let { title, author, ISBN, aisle, shelf, serialNumber, details } = req.body;
+  if (!title || !author || !ISBN || !aisle || !shelf || !serialNumber || !details) {
     return res.status(404).json({ message: `Missing information. Book was not updated.` });
   }
   // Find a previous book and compare ISBNs
@@ -110,7 +109,7 @@ const updateBookInfoController = async (req, res, next) => {
   existingBook.ISBN = ISBN;
   existingBook.aisle = aisle;
   existingBook.shelf = shelf;
-  existingBook.quantity = quantity;
+  existingBook.details = details;
   existingBook.serialNumber = serialNumber;
   try {
     let saveResult = await existingBook.save();

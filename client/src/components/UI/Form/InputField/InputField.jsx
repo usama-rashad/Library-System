@@ -13,23 +13,26 @@ function InputField({ label, placeholder, type, source, updateValue, validationH
   }, [enableQuickSelect]);
 
   useEffect(() => {
-    update(source);
+    setCurrentValue(source);
   }, [source]);
 
   const update = (e) => {
     if (e.length > 0) {
       if (validateInput(e)) {
-        updateValue(e);
+        qsAction(e);
         setValidationMessage("");
-        setCurrentValue(e);
       } else {
         setValidationMessage(validationHint);
       }
     } else {
-      setCurrentValue(e);
+      qsAction(e);
       setValidationMessage("");
-      updateValue(e);
     }
+  };
+
+  const qsAction = (e) => {
+    setCurrentValue(e);
+    updateValue(e);
   };
 
   const validateInput = (e) => {
@@ -63,15 +66,15 @@ function InputField({ label, placeholder, type, source, updateValue, validationH
       <p className="message">{validationMessage}</p>
       {qs && (
         <div className="quickSelect">
-          <button onClick={() => setCurrentValue(1)}>1</button>
-          <button onClick={() => setCurrentValue(2)}>2</button>
-          <button onClick={() => setCurrentValue(3)}>3</button>
-          <button onClick={() => setCurrentValue(4)}>4</button>
-          <button onClick={() => setCurrentValue(5)}>5</button>
-          <button onClick={() => setCurrentValue(6)}>6</button>
-          <button onClick={() => setCurrentValue(7)}>7</button>
-          <button onClick={() => setCurrentValue(8)}>8</button>
-          <button onClick={() => setCurrentValue(9)}>9</button>
+          <button onClick={() => qsAction(1)}>1</button>
+          <button onClick={() => qsAction(2)}>2</button>
+          <button onClick={() => qsAction(3)}>3</button>
+          <button onClick={() => qsAction(4)}>4</button>
+          <button onClick={() => qsAction(5)}>5</button>
+          <button onClick={() => qsAction(6)}>6</button>
+          <button onClick={() => qsAction(7)}>7</button>
+          <button onClick={() => qsAction(8)}>8</button>
+          <button onClick={() => qsAction(9)}>9</button>
         </div>
       )}
     </div>

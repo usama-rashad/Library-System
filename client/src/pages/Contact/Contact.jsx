@@ -21,10 +21,26 @@ function Contact() {
         <div className="left">
           <p className="title">The People</p>
           <div className="peopleGrid">
-            <PersonCard picture={"https://randomuser.me/api/portraits/women/86.jpg"} name={"Jean Coleman"} position={"Managment"} />
-            <PersonCard picture={"https://randomuser.me/api/portraits/men/29.jpg"} name={"Ian Graham"} position={"Accounting"} />
-            <PersonCard picture={"https://randomuser.me/api/portraits/women/85.jpg"} name={"Jean Johnston"} position={"Logistics"} />
-            <PersonCard picture={"https://randomuser.me/api/portraits/men/33.jpg"} name={"Julio Phillips"} position={"Assistance"} />
+            <PersonCard
+              picture={"https://randomuser.me/api/portraits/women/86.jpg"}
+              name={"Jean Coleman"}
+              position={"Managment"}
+            />
+            <PersonCard
+              picture={"https://randomuser.me/api/portraits/men/29.jpg"}
+              name={"Ian Graham"}
+              position={"Accounting"}
+            />
+            <PersonCard
+              picture={"https://randomuser.me/api/portraits/women/85.jpg"}
+              name={"Jean Johnston"}
+              position={"Logistics"}
+            />
+            <PersonCard
+              picture={"https://randomuser.me/api/portraits/men/33.jpg"}
+              name={"Julio Phillips"}
+              position={"Assistance"}
+            />
           </div>
         </div>
         <div className="right">
@@ -39,7 +55,9 @@ function Contact() {
             <p className="fieldName">Message</p>
             <textarea className="messageInput" />
           </div>
-          <Button>Submit</Button>
+          <Button>
+            <p>Submit</p>
+          </Button>
         </div>
       </div>
     </div>
