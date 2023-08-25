@@ -6,10 +6,10 @@ const initialState = { success: false, fail: false, pending: false, message: "",
 
 const addBookAsyncThunk = createAsyncThunk(
   "addNewBook",
-  async ({ username, bookData }, { rejectWithValue, fulfillWithValue }) => {
+  async ({ username, bookData, storageInfo }, { rejectWithValue, fulfillWithValue }) => {
     let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/addNew`;
     try {
-      let response = await axios.put(url, { username: username, ...bookData });
+      let response = await axios.put(url, { username: username, ...bookData, storageInfo: storageInfo });
       return response.data;
     } catch (error) {
       let { message } = error.response.data;

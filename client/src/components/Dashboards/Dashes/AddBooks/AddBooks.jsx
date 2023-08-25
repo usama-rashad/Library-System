@@ -18,19 +18,30 @@ import InputField from "./../../../UI/Form/InputField/InputField";
 import Spinner from "./../../../UI/Animations/Spinner/Spinner";
 import BookDetailsInput from "../../../UI/BookDetailsInput/BookDetailsInput";
 import DropDown from "../../../UI/DropDown/DropDown";
+import useStorageInfo from "../../../../reducers/useStorageInfo";
 
 function AddBooks() {
   const charLimit = 200;
   const { success, fail, pending, message, state } = useAddBookState();
   const [charCount, setCharCount] = useState(0);
   const [colorState, setColorState] = useState("");
-  const [storageInfo, setStorageInfo] = useState([{ serialNumber: 1, shelf: "", aisle: "" }]);
   const [addBookFormData, setAddBookFormData] = useState({
     ISBN: "", // Store the ISBN as 13 digits. No hyphen.
-    Title: "",
-    Author: "",
-    Details: "",
+    title: "",
+    author: "",
+    details: "",
   });
+  const {
+    array: storageInfo,
+    push: appendStorageInfo,
+    remove: reduceStorageInfo,
+    updateRow,
+    length,
+  } = useStorageInfo([{ serialNumber: undefined, aisle: "", shelf: "" }]);
+
+  // useEffect(() => {
+  //   console.log(storageInfo);
+  // }, [storageInfo]);
 
   const dispatch = useDispatch();
   const { username } = useLoginState();
@@ -40,11 +51,11 @@ function AddBooks() {
     if (charCount <= charLimit) {
       setCharCount(charCount);
       setColorState("");
-      setAddBookFormData({ ...addBookFormData, Details: input });
+      setAddBookFormData({ ...addBookFormData, details: input });
     } else {
       setColorState("error");
       let trimmedMessage = input.slice(0, charLimit);
-      setAddBookFormData({ ...addBookFormData, Details: trimmedMessage });
+      setAddBookFormData({ ...addBookFormData, details: trimmedMessage });
     }
   };
   const updateISBN = (input) => {
@@ -59,31 +70,34 @@ function AddBooks() {
 
   // HELPER FUNCTIONS
   const addStorageInfo = () => {
-    setStorageInfo([...storageInfo, {}]);
+    appendStorageInfo({ serialNumber: length + 1, aisle: "", shelf: "" });
   };
 
   const removeStorageInfo = () => {
     if (storageInfo.length === 1) {
       return;
     }
-    setStorageInfo((prev) => prev.splice(0, prev.length - 1));
+    reduceStorageInfo();
+  };
+
+  const storageInfoUpdate = (e) => {
+    console.log(e);
   };
 
   // BUTTON ACTIONS
   const clearButtonAction = () => {
-    console.log("Clear all the fields.");
     setAddBookFormData({
       ...addBookFormData,
       ISBN: "", // Store the ISBN as 13 digits. No hyphen.
-      Title: "",
-      Author: "",
-      Details: details,
+      title: "",
+      author: "",
+      details: details,
     });
     dispatch(reset());
   };
 
   const addBookAction = async () => {
-    dispatch(addBookAsyncThunk({ username: username, bookData: addBookFormData }));
+    dispatch(addBookAsyncThunk({ username: username, bookData: addBookFormData, storageInfo: storageInfo }));
     setTimeout(() => {
       dispatch(clearMessage());
     }, 2000);
@@ -108,7 +122,7 @@ function AddBooks() {
               placeholder={"Enter title"}
               type={"any"}
               validationHint={""}
-              source={addBookFormData.Title}
+              source={addBookFormData.title}
               updateValue={(e) => updateTitle(e)}
             />
             <InputField
@@ -116,7 +130,7 @@ function AddBooks() {
               placeholder={"Enter author name"}
               type={"text"}
               validationHint={"Can only be letters"}
-              source={addBookFormData.Author}
+              source={addBookFormData.author}
               updateValue={(e) => updateAuthor(e)}
             />
             <DropDown
@@ -144,7 +158,7 @@ function AddBooks() {
                 "History",
                 "Travel",
                 "Guide / How-to",
-                "Families & Relationships",
+                "Families and Relationships",
                 "Humor",
               ]}
             />
@@ -154,7 +168,7 @@ function AddBooks() {
               <p>Description</p>
               <textarea
                 placeholder="Enter book description..."
-                value={addBookFormData.Details}
+                value={addBookFormData.details}
                 type="text"
                 onChange={(e) => updateDetails(e.target.value)}
               />
@@ -171,7 +185,17 @@ function AddBooks() {
             </div>
             <div className="bookDetailsRows">
               {storageInfo.map((bookDetail, index) => {
-                return <BookDetailsInput key={index} serialNumber={index + 1} />;
+                return (
+                  <BookDetailsInput
+                    key={index}
+                    index={index}
+                    source={bookDetail}
+                    serialNumber={index + 1}
+                    onDataChange={(e) => {
+                      storageInfoUpdate(e);
+                    }}
+                  />
+                );
               })}
             </div>
             <div className="finalBookCount">

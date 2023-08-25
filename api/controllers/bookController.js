@@ -67,9 +67,9 @@ const addBookImageController = async (req, res, next) => {
 };
 
 const addNewBookController = async (req, res, next) => {
-  let { title, author, ISBN, details, StorageInfo } = req.body;
+  let { title, author, ISBN, details, storageInfo } = req.body;
   console.log("New book requested with data : " + JSON.stringify(req.body));
-  if (!title || !author || !ISBN || !details || !StorageInfo) {
+  if (!title || !author || !ISBN || !details || !storageInfo) {
     return res.status(404).json({ message: "Missing information" });
   }
   // Find a previous book and compare ISBNs

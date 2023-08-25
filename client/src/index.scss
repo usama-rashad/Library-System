@@ -1,3 +1,5 @@
+@import "colors.scss";
+
 ::-webkit-scrollbar {
   display: none;
   width: 10px;
@@ -16,7 +18,7 @@
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(168, 155, 255);
+  background: $rootColorLight2;
 }
 
 body {

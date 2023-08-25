@@ -6,9 +6,8 @@ import InputField from "../Form/InputField/InputField";
 // Actions
 import { removeStorageInfo, addStorageInfo } from "./../../../reducers/addBookReducer.js";
 
-function BookDetailsInput({ serialNumber, detailsSource, detailUpdate }) {
+function BookDetailsInput({ serialNumber, detailsSource, onDataChange, index }) {
   const [bookDetails, setBookDetails] = useState({ serialNumber: "", aisle: "", shelf: "" });
-
   // Input actions
   const updateSerialNumber = (input) => {
     setBookDetails({ ...bookDetails, serialNumber: input });
@@ -25,14 +24,20 @@ function BookDetailsInput({ serialNumber, detailsSource, detailUpdate }) {
 
   // Output update
   const outputUpdate = () => {
-    detailUpdate(bookDetails);
+    onDataChange({ data: bookDetails, index: index });
   };
+
+  // Effects
+  // Initial update
+  // useEffect(() => {
+  //   setBookDetails(detailsSource);
+  // }, [detailsSource]);
 
   return (
     <div className="mainBookDetailsInput">
       <div className="row">
         <div className="fields">
-          <p>{serialNumber}.</p>
+          <p className="seialNumber">{serialNumber}.</p>
           <InputField
             label=""
             placeholder={"Enter serial number"}
