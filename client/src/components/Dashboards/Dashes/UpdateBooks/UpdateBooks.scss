@@ -2,9 +2,28 @@
   width: 100%;
   height: 100%;
   background-color: white;
-  p {
-    padding-left: 10px;
-    font-size: 1rem;
-    font-weight: 500;
+  overflow-x: scroll;
+  .pageLayout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .dashTitle {
+      align-self: flex-start;
+      padding-left: 10px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      user-select: none;
+    }
+    .content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
   }
 }

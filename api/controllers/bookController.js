@@ -13,6 +13,16 @@ function addImageToList(newImage, list) {
   let newList = list.push(newImage);
   return newList;
 }
+function validateStorageInfo(storageInfo) {
+  let missingRowCount = 0;
+  storageInfo.forEach((dataRow) => {
+    let { serialNumber, aisle, shelf } = dataRow;
+    if (!serialNumber || !aisle || !shelf) {
+      missingRowCount++;
+    }
+  });
+  return missingRowCount;
+}
 
 // CONTROLLERS
 const updateBookThumbnailController = async (req, res, next) => {
@@ -67,10 +77,15 @@ const addBookImageController = async (req, res, next) => {
 };
 
 const addNewBookController = async (req, res, next) => {
-  let { title, author, ISBN, details, storageInfo } = req.body;
-  console.log("New book requested with data : " + JSON.stringify(req.body));
-  if (!title || !author || !ISBN || !details || !storageInfo) {
+  let { title, author, ISBN, description, storageInfo } = req.body;
+  if (!title || !author || !ISBN || !description || !storageInfo) {
     return res.status(404).json({ message: "Missing information" });
+  }
+  let missingRows = validateStorageInfo(storageInfo);
+  if (missingRows > 0) {
+    return res
+      .status(404)
+      .json({ message: `Storage data missing from ${missingRows} ${missingRows > 1 ? "rows" : "row"}` });
   }
   // Find a previous book and compare ISBNs
   let existingBook = await booksModel.findOne({ ISBN: ISBN });
@@ -83,8 +98,9 @@ const addNewBookController = async (req, res, next) => {
   newBook.author = author;
   newBook.ISBN = ISBN;
   newBook.addDate = new Date();
+  newBook.description = description;
   // List of books in the inventory
-  newBook.details = details;
+  newBook.storageInfo = storageInfo;
   try {
     let saveResult = await newBook.save();
     return res.status(200).json({ message: `Book added to database.` });
@@ -95,7 +111,7 @@ const addNewBookController = async (req, res, next) => {
 
 const updateBookInfoController = async (req, res, next) => {
   let { title, author, ISBN, aisle, shelf, serialNumber, details } = req.body;
-  if (!title || !author || !ISBN || !aisle || !shelf || !serialNumber || !details) {
+  if (!title || !author || !ISBN || !aisle || !shelf || !serialNumber || !description) {
     return res.status(404).json({ message: `Missing information. Book was not updated.` });
   }
   // Find a previous book and compare ISBNs
@@ -106,10 +122,7 @@ const updateBookInfoController = async (req, res, next) => {
   // No book found so add a new book
   existingBook.title = title;
   existingBook.author = author;
-  existingBook.ISBN = ISBN;
-  existingBook.aisle = aisle;
-  existingBook.shelf = shelf;
-  existingBook.details = details;
+  existingBook.description = description;
   existingBook.serialNumber = serialNumber;
   try {
     let saveResult = await existingBook.save();
@@ -239,7 +252,9 @@ const searchBookController = async (req, res, next) => {
 
 const testBookController = async (req, res, next) => {
   console.log("Test called");
-  return res.status(200).json({ message: "Book has been successfully added." });
+  setTimeout(() => {
+    return res.status(200).json({ message: "Test route is OK." });
+  }, 2000);
 };
 
 export {

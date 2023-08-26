@@ -6,20 +6,17 @@ import InputField from "../Form/InputField/InputField";
 // Actions
 import { removeStorageInfo, addStorageInfo } from "./../../../reducers/addBookReducer.js";
 
-function BookDetailsInput({ serialNumber, detailsSource, onDataChange, index }) {
+function BookDetailsInput({ serialNumber, onDataChange, index }) {
   const [bookDetails, setBookDetails] = useState({ serialNumber: "", aisle: "", shelf: "" });
   // Input actions
   const updateSerialNumber = (input) => {
     setBookDetails({ ...bookDetails, serialNumber: input });
-    outputUpdate();
   };
   const updateAisle = (input) => {
     setBookDetails({ ...bookDetails, aisle: input });
-    outputUpdate();
   };
   const updateShelf = (input) => {
     setBookDetails({ ...bookDetails, shelf: input });
-    outputUpdate();
   };
 
   // Output update
@@ -28,10 +25,9 @@ function BookDetailsInput({ serialNumber, detailsSource, onDataChange, index }) 
   };
 
   // Effects
-  // Initial update
-  // useEffect(() => {
-  //   setBookDetails(detailsSource);
-  // }, [detailsSource]);
+  useEffect(() => {
+    outputUpdate();
+  }, [bookDetails]);
 
   return (
     <div className="mainBookDetailsInput">
@@ -59,7 +55,7 @@ function BookDetailsInput({ serialNumber, detailsSource, onDataChange, index }) 
             placeholder={"Enter shelf number"}
             type={"number"}
             validationHint={"Can only be digits."}
-            source={bookDetails.shelf}
+            source={bookDetails.shelf} //
             updateValue={(e) => updateShelf(e)}
           />
         </div>

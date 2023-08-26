@@ -5,7 +5,6 @@ import { isAlpha, isNumeric } from "validator";
 
 function InputField({ label, placeholder, type, source, updateValue, validationHint }) {
   const [currentValue, setCurrentValue] = useState("");
-  const [qs, setQs] = useState(false); // qs = quick select
   const [validationMessage, setValidationMessage] = useState("");
 
   useEffect(() => {
@@ -33,7 +32,7 @@ function InputField({ label, placeholder, type, source, updateValue, validationH
 
   const validateInput = (e) => {
     if (type === "text") {
-      if (isAlpha(e.toString())) {
+      if (isAlpha(e.toString(), "en-US", { ignore: " " })) {
         return true;
       } else {
         return false;

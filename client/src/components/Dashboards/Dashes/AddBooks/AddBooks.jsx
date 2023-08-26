@@ -29,7 +29,7 @@ function AddBooks() {
     ISBN: "", // Store the ISBN as 13 digits. No hyphen.
     title: "",
     author: "",
-    details: "",
+    description: "",
   });
   const {
     array: storageInfo,
@@ -39,33 +39,29 @@ function AddBooks() {
     length,
   } = useStorageInfo([{ serialNumber: undefined, aisle: "", shelf: "" }]);
 
-  // useEffect(() => {
-  //   console.log(storageInfo);
-  // }, [storageInfo]);
-
   const dispatch = useDispatch();
   const { username } = useLoginState();
 
-  const updateDetails = (input) => {
+  const updateDescription = (input) => {
     let charCount = input.length;
     if (charCount <= charLimit) {
       setCharCount(charCount);
       setColorState("");
-      setAddBookFormData({ ...addBookFormData, details: input });
+      setAddBookFormData({ ...addBookFormData, description: input });
     } else {
       setColorState("error");
       let trimmedMessage = input.slice(0, charLimit);
-      setAddBookFormData({ ...addBookFormData, details: trimmedMessage });
+      setAddBookFormData({ ...addBookFormData, description: trimmedMessage });
     }
   };
   const updateISBN = (input) => {
     setAddBookFormData({ ...addBookFormData, ISBN: input });
   };
   const updateTitle = (input) => {
-    setAddBookFormData({ ...addBookFormData, Title: input });
+    setAddBookFormData({ ...addBookFormData, title: input });
   };
   const updateAuthor = (input) => {
-    setAddBookFormData({ ...addBookFormData, Author: input });
+    setAddBookFormData({ ...addBookFormData, author: input });
   };
 
   // HELPER FUNCTIONS
@@ -81,7 +77,7 @@ function AddBooks() {
   };
 
   const storageInfoUpdate = (e) => {
-    console.log(e);
+    updateRow(e.data, e.index);
   };
 
   // BUTTON ACTIONS
@@ -168,9 +164,9 @@ function AddBooks() {
               <p>Description</p>
               <textarea
                 placeholder="Enter book description..."
-                value={addBookFormData.details}
+                value={addBookFormData.description}
                 type="text"
-                onChange={(e) => updateDetails(e.target.value)}
+                onChange={(e) => updateDescription(e.target.value)}
               />
               <p className={`charCount ${colorState}`}>{`${charCount}/200 characters`}</p>
             </div>
@@ -189,7 +185,6 @@ function AddBooks() {
                   <BookDetailsInput
                     key={index}
                     index={index}
-                    source={bookDetail}
                     serialNumber={index + 1}
                     onDataChange={(e) => {
                       storageInfoUpdate(e);
