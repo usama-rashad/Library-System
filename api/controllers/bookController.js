@@ -1,5 +1,6 @@
 import { booksModel } from "../models/books.model.js";
 import path from "path";
+import fs from "fs";
 
 const maxBookImages = 5;
 
@@ -49,16 +50,16 @@ const updateBookThumbnailController = async (req, res, next) => {
 };
 
 const addBookImageController = async (req, res, next) => {
-  let { ISBN, imageNumber } = req.body;
-  let bookImage = req.imageName;
-  if (!bookImage) {
-    return res.status(404).json({ message: `File name or ISBN not provided.` });
-  }
-  if (imageNumber > maxBookImages - 1) {
+  // let { ISBN } = req.body;
+  // let files = req.files;
+
+  return res.status(200).json({ message: "Image added." });
+
+  if (files.length > maxBookImages - 1) {
     return res.status(404).json({ message: `Not possible to add more than 5 images.` });
   }
   if (req.fileSizeLimit) {
-    return res.status(404).json({ message: `File size is too large. Make sure file is smaller than 1MB.` });
+    return res.status(404).json({ message: `File size is too large. Make sure that the file is smaller than 1MB.` });
   }
   // Find a previous book and compare ISBNs
   let existingBook = await booksModel.findOne({ ISBN: ISBN });
@@ -83,9 +84,7 @@ const addNewBookController = async (req, res, next) => {
   }
   let missingRows = validateStorageInfo(storageInfo);
   if (missingRows > 0) {
-    return res
-      .status(404)
-      .json({ message: `Storage data missing from ${missingRows} ${missingRows > 1 ? "rows" : "row"}` });
+    return res.status(404).json({ message: `Storage data missing from ${missingRows} ${missingRows > 1 ? "rows" : "row"}` });
   }
   // Find a previous book and compare ISBNs
   let existingBook = await booksModel.findOne({ ISBN: ISBN });
@@ -110,7 +109,7 @@ const addNewBookController = async (req, res, next) => {
 };
 
 const updateBookInfoController = async (req, res, next) => {
-  let { title, author, ISBN, aisle, shelf, serialNumber, details } = req.body;
+  let { title, author, ISBN, aisle, shelf, serialNumber, description } = req.body;
   if (!title || !author || !ISBN || !aisle || !shelf || !serialNumber || !description) {
     return res.status(404).json({ message: `Missing information. Book was not updated.` });
   }
@@ -253,7 +252,7 @@ const searchBookController = async (req, res, next) => {
 const testBookController = async (req, res, next) => {
   console.log("Test called");
   setTimeout(() => {
-    return res.status(200).json({ message: "Test route is OK." });
+    return res.status(404).json({ message: "Book test failed." });
   }, 2000);
 };
 

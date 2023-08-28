@@ -11,6 +11,7 @@ import AddIcon from "../../../../assets/square-plus-regular.svg";
 // Hooks
 import useAddBookState from "./../../../../hooks/useAddBookState";
 import useLoginState from "./../../../../hooks/useLoginState";
+import useStorageInfo from "../../../../reducers/useStorageInfo";
 
 //Components
 import Button from "./../../../UI/Button/Button";
@@ -18,7 +19,7 @@ import InputField from "./../../../UI/Form/InputField/InputField";
 import Spinner from "./../../../UI/Animations/Spinner/Spinner";
 import BookDetailsInput from "../../../UI/BookDetailsInput/BookDetailsInput";
 import DropDown from "../../../UI/DropDown/DropDown";
-import useStorageInfo from "../../../../reducers/useStorageInfo";
+import PictureUploader from "../../../UI/PictureUploader/PictureUploader";
 
 function AddBooks() {
   const charLimit = 200;
@@ -31,13 +32,7 @@ function AddBooks() {
     author: "",
     description: "",
   });
-  const {
-    array: storageInfo,
-    push: appendStorageInfo,
-    remove: reduceStorageInfo,
-    updateRow,
-    length,
-  } = useStorageInfo([{ serialNumber: undefined, aisle: "", shelf: "" }]);
+  const { array: storageInfo, push: appendStorageInfo, remove: reduceStorageInfo, updateRow, length } = useStorageInfo([{ serialNumber: undefined, aisle: "", shelf: "" }]);
 
   const dispatch = useDispatch();
   const { username } = useLoginState();
@@ -105,30 +100,9 @@ function AddBooks() {
         <p className="dashTitle">Add a new book</p>
         <div className="fieldGrid">
           <div className="col1">
-            <InputField
-              label="ISBN"
-              placeholder={"Enter ISBN-13"}
-              type={"ISBN"}
-              validationHint={"Can only be 13 digits."}
-              source={addBookFormData.ISBN}
-              updateValue={(e) => updateISBN(e)}
-            />
-            <InputField
-              label="Title"
-              placeholder={"Enter title"}
-              type={"any"}
-              validationHint={""}
-              source={addBookFormData.title}
-              updateValue={(e) => updateTitle(e)}
-            />
-            <InputField
-              label="Author"
-              placeholder={"Enter author name"}
-              type={"text"}
-              validationHint={"Can only be letters"}
-              source={addBookFormData.author}
-              updateValue={(e) => updateAuthor(e)}
-            />
+            <InputField label="ISBN" placeholder={"Enter ISBN-13"} type={"ISBN"} validationHint={"Can only be 13 digits."} source={addBookFormData.ISBN} updateValue={(e) => updateISBN(e)} />
+            <InputField label="Title" placeholder={"Enter title"} type={"any"} validationHint={""} source={addBookFormData.title} updateValue={(e) => updateTitle(e)} />
+            <InputField label="Author" placeholder={"Enter author name"} type={"text"} validationHint={"Can only be letters"} source={addBookFormData.author} updateValue={(e) => updateAuthor(e)} />
             <DropDown
               title={"Genre"}
               options={[
@@ -162,12 +136,7 @@ function AddBooks() {
           <div className="col2">
             <div className="field">
               <p>Description</p>
-              <textarea
-                placeholder="Enter book description..."
-                value={addBookFormData.description}
-                type="text"
-                onChange={(e) => updateDescription(e.target.value)}
-              />
+              <textarea placeholder="Enter book description..." value={addBookFormData.description} type="text" onChange={(e) => updateDescription(e.target.value)} />
               <p className={`charCount ${colorState}`}>{`${charCount}/200 characters`}</p>
             </div>
           </div>
@@ -198,6 +167,10 @@ function AddBooks() {
               <p>{storageInfo.length}</p>
             </div>
           </div>
+        </div>
+        <div className="pictureUpload">
+          <p className="title">Upload pictures</p>
+          <PictureUploader bookInfo={addBookFormData} />
         </div>
         <div className="bottom">
           <div className="buttons">

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { produce } from "immer";
 
 const useArray = (initialValue) => {
   const [array, setArray] = useState(initialValue);
@@ -10,12 +11,20 @@ const useArray = (initialValue) => {
   const remove = () => {
     setArray([...array.splice(0, array.length - 1)]);
   };
+  const update = (value, index) => {
+    let modifiedArray = produce(array, (draft) => {
+      draft[index] = value;
+    });
+    setArray(modifiedArray);
+  };
+
+  useEffect(() => {}, [array]);
 
   useEffect(() => {
     setLength(array.length);
   }, [array]);
 
-  return { array, setArray, push, remove, length };
+  return { array, setArray, push, remove, update, length };
 };
 
 export default useArray;
