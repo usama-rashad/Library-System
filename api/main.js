@@ -2,16 +2,11 @@ import env from "dotenv";
 import cors from "cors";
 import express from "express";
 import cookieParser from "cookie-parser";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // Route imports
-import {
-  loginRoute,
-  loginSystemStatusRoute,
-  logoutRoute,
-  signupRoute,
-  deleteUserRoute,
-  loginCreateAccessTokenRoute,
-} from "./routes/userRoutes.js";
+import { loginRoute, loginSystemStatusRoute, logoutRoute, signupRoute, deleteUserRoute, loginCreateAccessTokenRoute } from "./routes/userRoutes.js";
 import {
   bookTestRoute,
   addNewBookRoute,
@@ -34,6 +29,12 @@ const app = express();
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: ["http://localhost:4000", "http://localhost:3000"] })); // Port of the client app
 app.use(express.json());
+// Serve pictures via static path
+const __filename = fileURLToPath(import.meta.url);
+let __dirname = path.dirname(__filename);
+let publicImagesFolderPath = path.join(__dirname, "public");
+console.log(publicImagesFolderPath);
+app.use("/static", express.static("public"));
 
 // Routes
 const USERS_API = "/api/users";

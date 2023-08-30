@@ -1,1 +1,2 @@
-1) Need to remove the auto login from the LoginState component to the Navbar component
+// Notes
+    fs.unlinkSync("./uploads/bookImages_111111113_book1.jpg"); // <-- this seems to work

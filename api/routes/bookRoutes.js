@@ -10,7 +10,7 @@ const router = express.Router();
 const diskStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     // initial upload path
-    cb(null, "uploads");
+    cb(null, "public/uploads/images");
   },
   filename: (req, file, cb) => {
     let { ISBN } = req.body;
@@ -27,7 +27,7 @@ const diskStorage = multer.diskStorage({
   },
 });
 
-const upload = multer({
+export const upload = multer({
   storage: diskStorage,
   limits: { fileSize: 1024 * 1024 * 1 },
 });
@@ -49,7 +49,7 @@ import {
 
 const bookTestRoute = router.get("/testBook", testBookController);
 const addNewBookRoute = router.put("/addNew", verifyUser_MW, addNewBookController);
-const addBookImageRoute = router.put("/addImage", verifyUser_MW, upload.array("bookImages", 5), addBookImageController);
+const addBookImageRoute = router.put("/addImage", verifyUser_MW, upload.array("bookImages"), addBookImageController);
 const deleteBookImageRoute = router.put("/deleteImage", verifyUser_MW, deleteImageController);
 const updateBookThumbnailRoute = router.put("/updateThumbnail", upload.single("thumbnail"), updateBookThumbnailController);
 const findBookByISBNRoute = router.get("/findByISBN", verifyUser_MW, findBookByISBNController);

@@ -1,4 +1,6 @@
 import { booksModel } from "../models/books.model.js";
+import { upload } from "../routes/bookRoutes.js";
+import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
 
@@ -23,6 +25,14 @@ function validateStorageInfo(storageInfo) {
     }
   });
   return missingRowCount;
+}
+function deleteFiles(filesList) {
+  const __filename = fileURLToPath(import.meta.url);
+  // let appDirName = path.dirname(__filename);
+  console.log(filesList);
+  filesList.forEach((file) => {
+    fs.unlinkSync("./public/uploads/images/" + file);
+  });
 }
 
 // CONTROLLERS
@@ -50,29 +60,47 @@ const updateBookThumbnailController = async (req, res, next) => {
 };
 
 const addBookImageController = async (req, res, next) => {
-  // let { ISBN } = req.body;
-  // let files = req.files;
+  let { ISBN } = req.body;
+  let files = req.files;
+  let fileQty = files.length;
 
-  return res.status(200).json({ message: "Image added." });
+  let filesList = [];
+  files.forEach((file, index) => {
+    filesList.push(file.fieldname + "_" + ISBN + "_" + file.originalname);
+  });
 
-  if (files.length > maxBookImages - 1) {
+  if (files.length === 0) {
+    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
+    return res.status(404).json({ message: `Not image selected. Select atleast one image.` });
+  }
+  if (files.length > maxBookImages) {
+    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
     return res.status(404).json({ message: `Not possible to add more than 5 images.` });
   }
   if (req.fileSizeLimit) {
+    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
     return res.status(404).json({ message: `File size is too large. Make sure that the file is smaller than 1MB.` });
   }
   // Find a previous book and compare ISBNs
   let existingBook = await booksModel.findOne({ ISBN: ISBN });
   if (!existingBook) {
-    return res.status(404).json({ message: `Book with ISBN ${ISBN} not found.` });
+    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
+    if (ISBN === "") {
+      return res.status(404).json({ message: `No ISBN provided. Check your ISBN.` });
+    }
+    return res.status(404).json({ message: `Book with ISBN ${ISBN} not found. Check your ISBN.` });
   }
-  let images = existingBook.additionalImages;
-  images[imageNumber] = bookImage;
-  existingBook.additionalImages = images;
+  // Clear existing images
+  existingBook.additionalImages = [];
+  files.forEach((value, index) => {
+    existingBook.additionalImages[index] = value.originalname;
+  });
+
   try {
     let saveResult = await existingBook.save();
-    return res.status(200).json({ message: `Book image has been added.` });
+    return res.status(200).json({ message: `Added ${fileQty} images.` });
   } catch (error) {
+    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
     return res.status(404).json({ message: `Error while saving to database.` });
   }
 };

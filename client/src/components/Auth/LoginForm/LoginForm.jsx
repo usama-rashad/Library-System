@@ -90,7 +90,7 @@ function LoginForm({ errorMessage }) {
           </div>
           <div className="section3">
             <Button height={"30px"} width={"80px"} clickAction={loginRequest}>
-              Login
+              <p>Login</p>
             </Button>
             <div className="forgotPassword">
               <p>Forgot password? Click</p>

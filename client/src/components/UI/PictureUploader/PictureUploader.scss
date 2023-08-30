@@ -9,6 +9,22 @@
   align-items: flex-start;
   justify-content: center;
   row-gap: 1px;
+  position: relative;
+  .blurredBack {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.753);
+  }
+  .pictureViewer {
+    position: fixed;
+    left: 20%;
+    top: 20%;
+    transform-origin: 100px 100px;
+    // transform: translate(-0%, 0);
+  }
   .pictureUploadLine {
     display: flex;
     flex-direction: row;
@@ -22,6 +38,20 @@
         color: $rootColor;
         font-weight: 500;
       }
+    }
+    .errorMessage {
+      font-size: 14px;
+      font-weight: 500;
+      color: red;
+      padding-left: 10px;
+      margin: 0px;
+    }
+    .successMessage {
+      font-size: 14px;
+      font-weight: 500;
+      color: green;
+      padding-left: 10px;
+      margin: 0px;
     }
     input {
       color: black;

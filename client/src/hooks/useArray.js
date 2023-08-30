@@ -17,6 +17,9 @@ const useArray = (initialValue) => {
     });
     setArray(modifiedArray);
   };
+  const clear = () => {
+    setArray([]);
+  };
 
   useEffect(() => {}, [array]);
 
@@ -24,7 +27,7 @@ const useArray = (initialValue) => {
     setLength(array.length);
   }, [array]);
 
-  return { array, setArray, push, remove, update, length };
+  return { array, setArray, push, remove, update, length, clear };
 };
 
 export default useArray;
