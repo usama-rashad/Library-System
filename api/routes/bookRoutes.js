@@ -10,7 +10,7 @@ const router = express.Router();
 const diskStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     // initial upload path
-    cb(null, "public/uploads/images");
+    cb(null, "public/uploads/images/temp");
   },
   filename: (req, file, cb) => {
     let { ISBN } = req.body;

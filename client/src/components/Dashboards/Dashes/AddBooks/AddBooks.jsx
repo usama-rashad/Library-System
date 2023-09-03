@@ -21,8 +21,9 @@ import BookDetailsInput from "../../../UI/BookDetailsInput/BookDetailsInput";
 import DropDown from "../../../UI/DropDown/DropDown";
 import PictureUploader from "../../../UI/PictureUploader/PictureUploader";
 
+const charLimit = 2000;
+
 function AddBooks() {
-  const charLimit = 200;
   const { success, fail, pending, message, state } = useAddBookState();
   const [charCount, setCharCount] = useState(0);
   const [colorState, setColorState] = useState("");
@@ -89,9 +90,9 @@ function AddBooks() {
 
   const addBookAction = async () => {
     dispatch(addBookAsyncThunk({ username: username, bookData: addBookFormData, storageInfo: storageInfo }));
-    setTimeout(() => {
-      dispatch(clearMessage());
-    }, 2000);
+    // setTimeout(() => {
+    //   dispatch(clearMessage());
+    // }, 10000);
   };
 
   return (
@@ -137,7 +138,7 @@ function AddBooks() {
             <div className="field">
               <p>Description</p>
               <textarea placeholder="Enter book description..." value={addBookFormData.description} type="text" onChange={(e) => updateDescription(e.target.value)} />
-              <p className={`charCount ${colorState}`}>{`${charCount}/200 characters`}</p>
+              <p className={`charCount ${colorState}`}>{`${charCount}/${charLimit} characters`}</p>
             </div>
           </div>
           <div className="col3">

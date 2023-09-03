@@ -6,7 +6,6 @@ import { BOOKS_API, backEndRoot, backEndPort, imagesServerPath } from "../../../
 
 // Hooks
 import useLoginState from "../../../hooks/useLoginState.js";
-import useArray from "../../../hooks/useArray.js";
 
 // Components
 import ModalWindow from "../../UI/ModalWindow/ModalWindow";
@@ -46,11 +45,6 @@ function PictureUploader({ bookInfo }) {
       data: formData,
       headers: { "content-type": "multipart/form-data" },
       url: backEndRoot + ":" + backEndPort + BOOKS_API + "/addImage",
-      // onUploadProgress: (progressEvent) => {
-      //   const { loaded, total } = progressEvent;
-      //   let percent = Math.floor((loaded * 100) / total);
-      //   console.log(percent);
-      // },
     })
       .then((result) => {
         setPictureUploadSuccess(result.data.message);

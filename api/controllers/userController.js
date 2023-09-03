@@ -21,7 +21,10 @@ const createRefreshToken = (username) => {
 };
 
 const signupController = async (req, res, next) => {
-  let { username, password, email } = req.body;
+  let { username, password, firstname, lastname } = req.body;
+  if (!username || !password || !firstname || !lastname) {
+    return res.status(404).json({ message: "Mising information." });
+  }
   // Check if the username already exists
   let existingUser = await usersModel.findOne({ username: username });
   if (existingUser) return res.status(404).json({ message: "User already exsits." });
@@ -33,10 +36,11 @@ const signupController = async (req, res, next) => {
     // Create new user
     let newUser = new usersModel();
     newUser.username = username;
+    newUser.firstname = firstname;
+    newUser.lastname = lastname;
     newUser.password = hashedPassword;
     newUser.isLoggedIn = false;
     newUser.isAdmin = false;
-    newUser.email = email ? email : "NA";
     await newUser.save();
     return res.status(200).json({ message: "New user has been created." });
   } catch (error) {
@@ -45,7 +49,8 @@ const signupController = async (req, res, next) => {
     if (!isDBConnectionOK) {
       error = "DB connection error";
     }
-    return res.status(500).json({ message: "Error while creating new user.", error: error });
+    console.log(error);
+    return res.status(500).json({ message: "Error while creating new user." });
   }
 };
 
@@ -92,7 +97,7 @@ const logoutController = async (req, res, next) => {
 const loginController = async (req, res, next) => {
   // Check if user exists in user DB and log him in if the password is correct. Set a loginStatus flag in the DB
   let { username, password, rememberFlag } = req.body;
-  console.log("Login request with " + JSON.stringify(req.body));
+  console.log("Login request by " + username);
   if (!username || !password || username === "" || password === "") {
     return res.status(404).json({ message: "Username and/or password must be entered." });
   }
@@ -117,7 +122,10 @@ const loginController = async (req, res, next) => {
         res.cookie("ML_accessToken", accessToken, { httpOnly: true, maxAge: 30 * 1000 }); // 30 seconds
         res.cookie("ML_refreshToken", refreshtoken, { httpOnly: true, maxAge: 30 * 24 * 3600 * 1000 }); // 30 days
       }
-      res.status(200).json({ message: "Login successful", isAdmin: existingUser.isAdmin }).send();
+      res
+        .status(200)
+        .json({ message: "Login successful", isAdmin: existingUser.isAdmin, name: { first: existingUser.firstname, last: existingUser.lastname } })
+        .send();
     } else {
       return res.status(404).json({ message: "Username and/or password is incorrect." });
     }
@@ -170,7 +178,10 @@ const checkLoginController = async (req, res, next) => {
       return res.status(404).json({ message: "Re-Login unsuccessful" });
     }
     if (existingUser.isLoggedIn) {
-      return res.status(200).json({ message: "Re-Login successful", username: decodedUsername, isAdmin: existingUser.isAdmin }).send();
+      return res
+        .status(200)
+        .json({ message: "Re-Login successful", username: decodedUsername, isAdmin: existingUser.isAdmin, name: { first: existingUser.firstname, last: existingUser.lastname } })
+        .send();
     } else {
       return res.status(404).json({ message: "Re-Login unsuccessful" });
     }

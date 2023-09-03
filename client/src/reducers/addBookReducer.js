@@ -8,8 +8,6 @@ const addBookAsyncThunk = createAsyncThunk("addNewBook", async ({ username, book
   let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/addNew`;
   try {
     let response = await axios.put(url, { username: username, ...bookData, storageInfo: storageInfo });
-    // let testReponse = await axios.get("http://localhost:4020/api/books/testBook");
-    console.log(testReponse.data.message);
     return response.data;
   } catch (error) {
     let { message } = error.response.data;

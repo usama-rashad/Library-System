@@ -49,8 +49,7 @@ function Navbar() {
       .post(`${backEndRoot}:${backEndPort}${USERS_API}/checkLogin`, {}, { withCredentials: true, timeout: 1000 })
       .then((result) => {
         let username = result.data.username;
-        console.log("Admin flag " + result.data.isAdmin);
-        dispatch(loggedIn({ username: username, isAdmin: result.data.isAdmin }));
+        dispatch(loggedIn({ username: username, isAdmin: result.data.isAdmin, name: result.data.name }));
       })
       .catch((error) => {
         console.log("Login failed " + error);

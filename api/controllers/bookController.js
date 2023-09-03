@@ -31,7 +31,7 @@ function deleteFiles(filesList) {
   // let appDirName = path.dirname(__filename);
   console.log(filesList);
   filesList.forEach((file) => {
-    fs.unlinkSync("./public/uploads/images/" + file);
+    fs.unlinkSync("./public/uploads/images/temp/" + file);
   });
 }
 
@@ -88,7 +88,7 @@ const addBookImageController = async (req, res, next) => {
     if (ISBN === "") {
       return res.status(404).json({ message: `No ISBN provided. Check your ISBN.` });
     }
-    return res.status(404).json({ message: `Book with ISBN ${ISBN} not found. Check your ISBN.` });
+    return res.status(404).json({ message: `Book with ISBN ${ISBN} not found. Add the book first and then upload the images.` });
   }
   // Clear existing images
   existingBook.additionalImages = [];
@@ -130,7 +130,7 @@ const addNewBookController = async (req, res, next) => {
   newBook.storageInfo = storageInfo;
   try {
     let saveResult = await newBook.save();
-    return res.status(200).json({ message: `Book added to database.` });
+    return res.status(200).json({ message: `Book with ISBN ${ISBN} added to database.` });
   } catch (error) {
     return res.status(404).json({ message: `Error while saving to database.` });
   }

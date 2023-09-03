@@ -34,15 +34,15 @@ function LoginForm({ errorMessage }) {
     let loginResponse = await axios
       .post(`${backEndRoot}:${backEndPort}${USERS_API}/login`, { username: username, password: password, rememberFlag: rememberFlag }, { withCredentials: true, timeout: 1000 })
       .then((result) => {
-        console.log("Admin flag " + result.data.isAdmin);
+        console.log(`${username} ${result.data.isAdmin ? " is an admin." : " is not an admin"}`);
         setError({});
         setSuccess(result.data.message);
-        dispatch(loggedIn({ username: username, isAdmin: result.data.isAdmin }));
+        dispatch(loggedIn({ username: username, isAdmin: result.data.isAdmin, name: result.data.name }));
         dispatch(close());
       })
       .catch((failure) => {
-        let { message, error } = failure.response.data;
-        setError({ message, error });
+        let { message } = failure.response.data;
+        setError(message);
         setSuccess("");
       });
   };

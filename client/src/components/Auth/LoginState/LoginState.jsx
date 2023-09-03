@@ -18,7 +18,7 @@ import Button from "../../UI/Button/Button";
 
 function LoginState() {
   // States
-  const { username, thumbnail, isLoggedIn, isAdmin } = useLoginState();
+  const { username, thumbnail, isLoggedIn, isAdmin, name } = useLoginState();
 
   // Reducers
   const dispatch = useDispatch();
@@ -38,7 +38,9 @@ function LoginState() {
     <div className="mainLoginState">
       <div className="status">
         <p className="statusText">Logged in as:</p>
-        <p className="statusName">{username}</p>
+        <p className="statusName">
+          {name.first} {name.last}
+        </p>
         {isAdmin && <p className="adminStatus">Administrator</p>}
       </div>
       <div className="button">
