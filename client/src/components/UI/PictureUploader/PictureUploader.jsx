@@ -6,12 +6,19 @@ import { BOOKS_API, backEndRoot, backEndPort, imagesServerPath } from "../../../
 
 // Hooks
 import useLoginState from "../../../hooks/useLoginState.js";
+import useArray from "../../../hooks/useArray.js";
 
 // Components
 import ModalWindow from "../../UI/ModalWindow/ModalWindow";
+import ProgressBar from "../../UI/ProgressBar/ProgressBar";
 
 // Constants
 const bookImagePrefix = "bookImages";
+
+// Image upload status request
+async function getImageUploadStatus() {
+  return await axios.get(backEndRoot + ":" + backEndPort + BOOKS_API + "/getImageUploadStatus");
+}
 
 function PictureUploader({ bookInfo }) {
   const { ISBN } = bookInfo;
@@ -22,6 +29,7 @@ function PictureUploader({ bookInfo }) {
   const [pictureUploadSuccess, setPictureUploadSuccess] = useState("");
   const [pictureUploadErrror, setPictureUploadError] = useState("");
   const [imageNames, setImageNames] = useState([]);
+  const [pictureUploadStatus, stePictureUploadStatus] = useState([]);
 
   const updateFileHandle = () => {
     setFileCount(fileInputRef.current.files.length);
@@ -64,6 +72,22 @@ function PictureUploader({ bookInfo }) {
     setModalState(true);
   };
 
+  // Effect to fetch upload status constantly
+  useEffect(() => {
+    let intervalID = setInterval(async () => {
+      let response = await getImageUploadStatus()
+        .then((result) => {
+          stePictureUploadStatus(result.data.uploadStatus);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, [2000]);
+    return () => {
+      clearInterval(intervalID);
+    };
+  });
+
   return (
     <div className="mainPictureUploader">
       {modalState && <div className="blurredBack"></div>}
@@ -73,7 +97,7 @@ function PictureUploader({ bookInfo }) {
             {imageNames.map((image, index) => {
               return (
                 <div key={index} className="element">
-                  <img crossorigin src={`${imagesServerPath}${bookImagePrefix}_${ISBN}_${image}`} alt={image} loading="eager" />
+                  <img crossOrigin="anonymous" src={`${imagesServerPath}${bookImagePrefix}_${ISBN}_${image}`} alt={image} />
                   <p className="imageName">{image}</p>
                 </div>
               );
@@ -100,6 +124,11 @@ function PictureUploader({ bookInfo }) {
         </button>
         {pictureUploadErrror && <p className="errorMessage">{pictureUploadErrror}</p>}
         {pictureUploadSuccess && <p className="successMessage">{pictureUploadSuccess}</p>}
+      </div>
+      <div className="pictureUploadProgress">
+        {pictureUploadStatus.map((pictureUpload, index) => {
+          return <ProgressBar key={index} progress={pictureUpload.uploadPct} fileName={pictureUpload.filename} indentifier={index} />;
+        })}
       </div>
     </div>
   );

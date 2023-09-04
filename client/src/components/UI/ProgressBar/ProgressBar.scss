@@ -1,0 +1,46 @@
+.mainProgressBar {
+  width: 200px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid lightgrey;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+
+  &.complete {
+    display: none;
+  }
+
+  .info {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    margin-left: 5px;
+    .fileName {
+      height: 100%;
+      font-size: 12px;
+      font-weight: 500;
+      margin-left: 5px;
+      margin: 0px;
+    }
+    .progress {
+      height: 5px;
+      //   width: 0%;
+      background-color: green;
+      border: 1px solid black;
+      transition: width 300ms ease;
+    }
+  }
+
+  .progressText {
+    flex: 1;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 10px;
+  }
+}

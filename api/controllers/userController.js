@@ -20,6 +20,15 @@ const createRefreshToken = (username) => {
   });
 };
 
+const makeNameFirstLetterUpperCase = (name) => {
+  let firstLetter = name.slice(0, 1);
+  let restName = name.splice(0, 1);
+  let final = firstLetter.toUpperCase() + restName;
+  return final;
+};
+
+// Controllers
+
 const signupController = async (req, res, next) => {
   let { username, password, firstname, lastname } = req.body;
   if (!username || !password || !firstname || !lastname) {
@@ -122,6 +131,7 @@ const loginController = async (req, res, next) => {
         res.cookie("ML_accessToken", accessToken, { httpOnly: true, maxAge: 30 * 1000 }); // 30 seconds
         res.cookie("ML_refreshToken", refreshtoken, { httpOnly: true, maxAge: 30 * 24 * 3600 * 1000 }); // 30 days
       }
+
       res
         .status(200)
         .json({ message: "Login successful", isAdmin: existingUser.isAdmin, name: { first: existingUser.firstname, last: existingUser.lastname } })
@@ -177,6 +187,7 @@ const checkLoginController = async (req, res, next) => {
     if (!existingUser) {
       return res.status(404).json({ message: "Re-Login unsuccessful" });
     }
+
     if (existingUser.isLoggedIn) {
       return res
         .status(200)

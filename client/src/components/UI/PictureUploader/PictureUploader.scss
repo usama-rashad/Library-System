@@ -57,4 +57,14 @@
       color: black;
     }
   }
+  .pictureUploadProgress {
+    height: 100px;
+    width: min-content;
+    column-gap: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 20px;
+  }
 }

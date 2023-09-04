@@ -27,8 +27,10 @@ const diskStorage = multer.diskStorage({
   },
 });
 
+const memoryStorage = multer.memoryStorage();
+
 export const upload = multer({
-  storage: diskStorage,
+  storage: memoryStorage,
   limits: { fileSize: 1024 * 1024 * 1 },
 });
 
@@ -45,6 +47,7 @@ import {
   returnBookController,
   searchBookController,
   testBookController,
+  returnImageUploadStatusController,
 } from "./../controllers/bookController.js";
 
 const bookTestRoute = router.get("/testBook", testBookController);
@@ -58,5 +61,6 @@ const updateBookRoute = router.put("/updateBookInfo", verifyUser_MW, updateBookI
 const issueBookRoute = router.put("/issueBook", verifyUser_MW, issueBookController);
 const returnBookRoute = router.put("/returnBook", verifyUser_MW, returnBookController);
 const searchBookRoute = router.get("/searchBookByName", searchBookController);
+const imageUploadStatus = router.get("/getImageUploadStatus", returnImageUploadStatusController);
 
-export { bookTestRoute, addNewBookRoute, addBookImageRoute, deleteBookImageRoute, updateBookThumbnailRoute, updateBookRoute, findBookByISBNRoute, deleteBookByISBNRoute, issueBookRoute, returnBookRoute, searchBookRoute };
+export { bookTestRoute, addNewBookRoute, addBookImageRoute, deleteBookImageRoute, updateBookThumbnailRoute, updateBookRoute, findBookByISBNRoute, deleteBookByISBNRoute, issueBookRoute, returnBookRoute, searchBookRoute, imageUploadStatus };

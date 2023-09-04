@@ -3,8 +3,12 @@ import { upload } from "../routes/bookRoutes.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
+import { firebaseApp, firebaseStorage } from "./../firebase.js";
+import { ref, getDownloadURL, uploadString, uploadBytesResumable } from "firebase/storage";
 
 const maxBookImages = 5;
+
+let fileUploadStatus = []; // Structure [{fileName : "book.jpg" , uploadPct : 100%, imageURL : ""}]
 
 // HELPERS
 function createDate() {
@@ -32,6 +36,46 @@ function deleteFiles(filesList) {
   console.log(filesList);
   filesList.forEach((file) => {
     fs.unlinkSync("./public/uploads/images/temp/" + file);
+  });
+}
+function updateFileUploadStatus(progressPct, fileName) {
+  let index = fileUploadStatus.findIndex((entry) => entry.filename === fileName);
+  if (index !== -1) {
+    fileUploadStatus[index].uploadPct = progressPct;
+  }
+}
+function updateFileUploadURL(URL, fileName) {
+  let index = fileUploadStatus.findIndex((entry) => entry.filename === fileName);
+  if (index !== -1) {
+    fileUploadStatus[index].imageURL = URL;
+  }
+}
+
+async function storeFile(file, ISBN) {
+  return new Promise((res, rej) => {
+    let fileStorageRef = ref(firebaseStorage, "images/" + file.originalname);
+    let uploadTask = uploadBytesResumable(fileStorageRef, file.buffer, { contentType: file.mimetype, customMetadata: { ISBN: ISBN, filename: file.originalname } });
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        let uploadPct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // Update the progress of each file insides the global
+        let fileName = uploadTask._metadata.customMetadata.filename;
+        updateFileUploadStatus(uploadPct.toFixed(1), fileName);
+      },
+      (error) => {
+        rej("Failed to upload the file");
+      },
+      () => {
+        // Get the image URL
+        let fileName = uploadTask._metadata.customMetadata.filename;
+        getDownloadURL(fileStorageRef).then((downloadURL) => {
+          updateFileUploadURL(downloadURL, fileName);
+          res(1);
+        });
+      }
+    );
   });
 }
 
@@ -63,11 +107,13 @@ const addBookImageController = async (req, res, next) => {
   let { ISBN } = req.body;
   let files = req.files;
   let fileQty = files.length;
-
   let filesList = [];
-  files.forEach((file, index) => {
-    filesList.push(file.fieldname + "_" + ISBN + "_" + file.originalname);
-  });
+  if (!ISBN || ISBN == "") {
+    return res.status(404).json({ message: `No ISBN provided. Check your ISBN.` });
+  }
+
+  // Clear the file upload status
+  fileUploadStatus = [];
 
   if (files.length === 0) {
     deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
@@ -90,7 +136,17 @@ const addBookImageController = async (req, res, next) => {
     }
     return res.status(404).json({ message: `Book with ISBN ${ISBN} not found. Add the book first and then upload the images.` });
   }
+
+  // Send the files to Firebase storage
+  files.forEach(async (file, index) => {
+    fileUploadStatus.push({ filename: file.originalname, uploadPct: 0 });
+    await storeFile(file, ISBN).then((result) => {
+      console.log(`${file.originalname} uploaded .Status ${result}`);
+    });
+  });
+
   // Clear existing images
+  console.log("Updating image names in DB.");
   existingBook.additionalImages = [];
   files.forEach((value, index) => {
     existingBook.additionalImages[index] = value.originalname;
@@ -98,6 +154,7 @@ const addBookImageController = async (req, res, next) => {
 
   try {
     let saveResult = await existingBook.save();
+
     return res.status(200).json({ message: `Added ${fileQty} images.` });
   } catch (error) {
     deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
@@ -277,6 +334,10 @@ const searchBookController = async (req, res, next) => {
     });
 };
 
+const returnImageUploadStatusController = async (req, res, next) => {
+  return res.status(200).json({ uploadStatus: fileUploadStatus });
+};
+
 const testBookController = async (req, res, next) => {
   console.log("Test called");
   setTimeout(() => {
@@ -296,4 +357,5 @@ export {
   issueBookController,
   returnBookController,
   searchBookController,
+  returnImageUploadStatusController,
 };

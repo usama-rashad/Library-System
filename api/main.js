@@ -4,6 +4,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
+import * as firebase from "./firebase.js";
 
 // Route imports
 import { loginRoute, loginSystemStatusRoute, logoutRoute, signupRoute, deleteUserRoute, loginCreateAccessTokenRoute } from "./routes/userRoutes.js";
@@ -19,6 +20,7 @@ import {
   issueBookRoute,
   returnBookRoute,
   searchBookRoute,
+  imageUploadStatus,
 } from "./routes/bookRoutes.js";
 
 env.config();
@@ -59,5 +61,6 @@ app.use(BOOKS_API, updateBookRoute);
 app.use(BOOKS_API, issueBookRoute);
 app.use(BOOKS_API, returnBookRoute);
 app.use(BOOKS_API, searchBookRoute);
+app.use(BOOKS_API, imageUploadStatus);
 
 export default app;
