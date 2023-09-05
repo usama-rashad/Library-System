@@ -29,14 +29,14 @@ const app = express();
 
 // CORS and JSON parser, Cookie parser
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: ["http://localhost:4000", "http://localhost:3000"] })); // Port of the client app
+app.use(cors({ credentials: true, origin: ["http://localhost:4000", "http://localhost:3000", "https://firebasestorage.googleapis.com"] })); // Port of the client app
 app.use(express.json());
-// Serve pictures via static path
-const __filename = fileURLToPath(import.meta.url);
-let __dirname = path.dirname(__filename);
-let publicImagesFolderPath = path.join(__dirname, "public");
-console.log(publicImagesFolderPath);
-app.use("/static", express.static("public"));
+// // Serve pictures via static path
+// const __filename = fileURLToPath(import.meta.url);
+// let __dirname = path.dirname(__filename);
+// let publicImagesFolderPath = path.join(__dirname, "public");
+// console.log(publicImagesFolderPath);
+// app.use("/static", express.static("public"));
 
 // Routes
 const USERS_API = "/api/users";

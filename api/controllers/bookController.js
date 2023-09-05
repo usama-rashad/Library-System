@@ -9,6 +9,7 @@ import { ref, getDownloadURL, uploadString, uploadBytesResumable } from "firebas
 const maxBookImages = 5;
 
 let fileUploadStatus = []; // Structure [{fileName : "book.jpg" , uploadPct : 100%, imageURL : ""}]
+let uploadStatus = "Ready.";
 
 // HELPERS
 function createDate() {
@@ -50,8 +51,8 @@ function updateFileUploadURL(URL, fileName) {
     fileUploadStatus[index].imageURL = URL;
   }
 }
-
-async function storeFile(file, ISBN) {
+async function storeImage(file, ISBN) {
+  console.log("Started upload for file " + file.originalname);
   return new Promise((res, rej) => {
     let fileStorageRef = ref(firebaseStorage, "images/" + file.originalname);
     let uploadTask = uploadBytesResumable(fileStorageRef, file.buffer, { contentType: file.mimetype, customMetadata: { ISBN: ISBN, filename: file.originalname } });
@@ -65,18 +66,27 @@ async function storeFile(file, ISBN) {
         updateFileUploadStatus(uploadPct.toFixed(1), fileName);
       },
       (error) => {
-        rej("Failed to upload the file");
+        rej("Failed to upload " + file.originalname);
       },
       () => {
         // Get the image URL
         let fileName = uploadTask._metadata.customMetadata.filename;
         getDownloadURL(fileStorageRef).then((downloadURL) => {
           updateFileUploadURL(downloadURL, fileName);
-          res(1);
+          console.log("Completed upload for file " + file.originalname);
+          res(downloadURL);
         });
       }
     );
   });
+}
+async function uploadFiles(files, ISBN) {
+  let promises = [];
+  files.forEach(async (file, index) => {
+    fileUploadStatus.push({ filename: files[index].originalname, uploadPct: 0 });
+    promises[index] = storeImage(files[index], ISBN);
+  });
+  return Promise.all(promises);
 }
 
 // CONTROLLERS
@@ -116,45 +126,39 @@ const addBookImageController = async (req, res, next) => {
   fileUploadStatus = [];
 
   if (files.length === 0) {
-    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
     return res.status(404).json({ message: `Not image selected. Select atleast one image.` });
   }
   if (files.length > maxBookImages) {
-    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
     return res.status(404).json({ message: `Not possible to add more than 5 images.` });
   }
   if (req.fileSizeLimit) {
-    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
     return res.status(404).json({ message: `File size is too large. Make sure that the file is smaller than 1MB.` });
   }
   // Find a previous book and compare ISBNs
   let existingBook = await booksModel.findOne({ ISBN: ISBN });
   if (!existingBook) {
-    deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
     if (ISBN === "") {
       return res.status(404).json({ message: `No ISBN provided. Check your ISBN.` });
     }
     return res.status(404).json({ message: `Book with ISBN ${ISBN} not found. Add the book first and then upload the images.` });
   }
 
-  // Send the files to Firebase storage
-  files.forEach(async (file, index) => {
-    fileUploadStatus.push({ filename: file.originalname, uploadPct: 0 });
-    await storeFile(file, ISBN).then((result) => {
-      console.log(`${file.originalname} uploaded .Status ${result}`);
+  // Wait for all the files to upload and update the image URLs
+  uploadStatus = "Uploading...";
+  let response = await uploadFiles(files, ISBN)
+    .then((response) => {
+      console.log(response);
+      uploadStatus = "Complete.";
+      console.log("Updating image names in DB.");
+      existingBook.additionalImages = response;
+    })
+    .catch((error) => {
+      uploadStatus = "Error.";
+      return res.status(404).json({ message: `Failed to upload images.`, error: error });
     });
-  });
-
-  // Clear existing images
-  console.log("Updating image names in DB.");
-  existingBook.additionalImages = [];
-  files.forEach((value, index) => {
-    existingBook.additionalImages[index] = value.originalname;
-  });
 
   try {
     let saveResult = await existingBook.save();
-
     return res.status(200).json({ message: `Added ${fileQty} images.` });
   } catch (error) {
     deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
@@ -335,7 +339,7 @@ const searchBookController = async (req, res, next) => {
 };
 
 const returnImageUploadStatusController = async (req, res, next) => {
-  return res.status(200).json({ uploadStatus: fileUploadStatus });
+  return res.status(200).json({ uploadStatus: fileUploadStatus, commonStatus: uploadStatus });
 };
 
 const testBookController = async (req, res, next) => {

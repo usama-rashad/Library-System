@@ -30,6 +30,7 @@ function PictureUploader({ bookInfo }) {
   const [pictureUploadErrror, setPictureUploadError] = useState("");
   const [imageNames, setImageNames] = useState([]);
   const [pictureUploadStatus, stePictureUploadStatus] = useState([]);
+  const [commonUploadStatus, setCommonUploadStatus] = useState("");
 
   const updateFileHandle = () => {
     setFileCount(fileInputRef.current.files.length);
@@ -78,6 +79,7 @@ function PictureUploader({ bookInfo }) {
       let response = await getImageUploadStatus()
         .then((result) => {
           stePictureUploadStatus(result.data.uploadStatus);
+          setCommonUploadStatus(result.data.commonStatus);
         })
         .catch((error) => {
           console.log(error);
@@ -94,11 +96,11 @@ function PictureUploader({ bookInfo }) {
       <div className="pictureViewer">
         <ModalWindow open={modalState} closeAction={() => setModalState(false)}>
           <div className="images">
-            {imageNames.map((image, index) => {
+            {pictureUploadStatus.map((image, index) => {
               return (
                 <div key={index} className="element">
-                  <img crossOrigin="anonymous" src={`${imagesServerPath}${bookImagePrefix}_${ISBN}_${image}`} alt={image} />
-                  <p className="imageName">{image}</p>
+                  <img src={image.imageURL} alt={image.imageURL} />
+                  <p className="imageName">{image.filename}</p>
                 </div>
               );
             })}
@@ -124,6 +126,7 @@ function PictureUploader({ bookInfo }) {
         </button>
         {pictureUploadErrror && <p className="errorMessage">{pictureUploadErrror}</p>}
         {pictureUploadSuccess && <p className="successMessage">{pictureUploadSuccess}</p>}
+        {commonUploadStatus && <p className="statusMessage">{commonUploadStatus}</p>}
       </div>
       <div className="pictureUploadProgress">
         {pictureUploadStatus.map((pictureUpload, index) => {
