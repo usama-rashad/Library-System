@@ -7,7 +7,7 @@ const booksSchema = new mongoose.Schema({
   thumbnail: String,
   description: String,
   addDate: Date,
-  additionalImages: [String],
+  additionalImages: [], // { String, String }
   storageInfo: [], // type {serialNumber: Number, aisle: String, shelf: String}
   issueList: [], // userID: String, issueDate: Date, isIssued: Boolean
 });

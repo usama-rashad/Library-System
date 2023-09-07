@@ -3,7 +3,7 @@ import "./InputField.scss";
 import React, { useEffect, useState } from "react";
 import { isAlpha, isNumeric } from "validator";
 
-function InputField({ label, placeholder, type, source, updateValue, validationHint }) {
+function InputField({ label, placeholder, type, source, updateValue, validationHint, showLabel = true }) {
   const [currentValue, setCurrentValue] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
 
@@ -56,7 +56,7 @@ function InputField({ label, placeholder, type, source, updateValue, validationH
 
   return (
     <div className="mainInputField">
-      <p>{label}</p>
+      {showLabel && <p>{label}</p>}
       <input placeholder={placeholder} value={currentValue} onChange={(e) => updateCurrentValue(e.target.value)} />
       <p className="message">{validationMessage}</p>
     </div>

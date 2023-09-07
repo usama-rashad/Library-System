@@ -1,9 +1,10 @@
 import "./UpdateBooks.scss";
 
+import React from "react";
+
 // Components
 import PaginatedView from "../../../UI/PaginatedView/PaginatedView";
-
-import React from "react";
+import BookFilter from "../../../UI/BookFilter/BookFilter";
 
 function UpdateBooks() {
   return (
@@ -11,7 +12,8 @@ function UpdateBooks() {
       <div className="pageLayout">
         <p className="dashTitle">Update books</p>
         <div className="content">
-          <PaginatedView headerCols={["S.No", "ISBN", "Title", "Genre", "Issued"]} />
+          <BookFilter />
+          <PaginatedView headerCols={["S.No", "ISBN", "Title", "Author", "Genré", "Quantity", ""]} flex={[1, 3, 10, 3, 3, 3, 1]} />
         </div>
       </div>
     </div>

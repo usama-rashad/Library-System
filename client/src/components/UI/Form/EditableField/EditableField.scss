@@ -1,0 +1,43 @@
+.mainEditableField {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4px;
+  width: min-content;
+  height: 30px;
+  .labelText {
+    color: black;
+    font-weight: 500;
+    margin-right: 5px;
+    width: 80px;
+  }
+
+  .editableInput {
+    box-sizing: border-box;
+    width: 200px;
+    vertical-align: middle;
+    font-weight: 500;
+  }
+  .editableLabel {
+    box-sizing: border-box;
+    margin: 0;
+    width: 200px;
+    vertical-align: middle;
+    font-weight: 400;
+  }
+  .toggleEdit {
+    box-sizing: border-box;
+    width: 60px;
+    vertical-align: middle;
+
+    &.apply {
+      color: green;
+      font-weight: 500;
+    }
+    &.edit {
+      color: black;
+      font-weight: 500;
+    }
+  }
+}

@@ -31,11 +31,13 @@ function PictureUploader({ bookInfo }) {
   const [imageNames, setImageNames] = useState([]);
   const [pictureUploadStatus, stePictureUploadStatus] = useState([]);
   const [commonUploadStatus, setCommonUploadStatus] = useState("");
+  const [startRequest, setStartRequest] = useState(false);
 
   const updateFileHandle = () => {
     setFileCount(fileInputRef.current.files.length);
   };
   const uploadPictureAction = async () => {
+    setStartRequest(true);
     let formData = new FormData();
     formData.append("username", username);
     formData.append("ISBN", ISBN);
@@ -58,6 +60,7 @@ function PictureUploader({ bookInfo }) {
       .then((result) => {
         setPictureUploadSuccess(result.data.message);
         setPictureUploadError("");
+        setStartRequest(false);
       })
       .catch((error) => {
         if (error.response.data) {
@@ -65,6 +68,7 @@ function PictureUploader({ bookInfo }) {
         } else {
           setPictureUploadError(error.response);
         }
+        setStartRequest(false);
         setPictureUploadSuccess("");
       });
   };

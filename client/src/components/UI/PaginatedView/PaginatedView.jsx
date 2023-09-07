@@ -1,6 +1,9 @@
 import "./PaginatedView.scss";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// Components
+import BookUpdateRow from "../BookUpdateRow/BookUpdateRow";
 
 // Icons
 
@@ -11,7 +14,6 @@ function ChevronLeftIcon() {
     </svg>
   );
 }
-
 function ChevronRightIcon() {
   return (
     <svg viewBox="0 0 320 512" className="rightChevron">
@@ -20,9 +22,10 @@ function ChevronRightIcon() {
   );
 }
 
-function PaginatedView({ headerCols }) {
+function PaginatedView({ headerCols, flex }) {
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(10);
+  const [selectedRowNumber, setSelectedRowNumber] = useState(0);
 
   const newPagePageNumber = (e) => {
     if (!e) {
@@ -32,20 +35,42 @@ function PaginatedView({ headerCols }) {
     }
   };
 
+  const selectedRow = (e) => {
+    setSelectedRowNumber(e);
+  };
+
+  // Update the flex width of the header column titles
+  useEffect(() => {
+    let titles = document.getElementsByName("headerTitles");
+    flex.forEach((flexAmount, index) => {
+      let title = titles[index];
+      titles[index].style.setProperty("flex", flexAmount);
+    });
+  }, []);
+
   return (
     <div className="mainPaginatedView">
       <div className="header">
         {headerCols.map((col, index) => {
           return (
             <>
-              <p>{col}</p>
+              <p name="headerTitles" key={index}>
+                {col}
+              </p>
               {index === headerCols.length - 1 ? "" : <div className="seperator"></div>}
             </>
           );
         })}
       </div>
 
-      <div className="dataContent"></div>
+      <div className="dataContent">
+        <BookUpdateRow index={1} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512222, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
+        <BookUpdateRow index={2} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
+        <BookUpdateRow index={3} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
+        <BookUpdateRow index={4} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
+        <BookUpdateRow index={5} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
+        <BookUpdateRow index={6} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
+      </div>
 
       <div className="pageNav">
         <ChevronLeftIcon />

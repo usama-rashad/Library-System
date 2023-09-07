@@ -10,6 +10,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     .dashTitle {
       align-self: flex-start;
       padding-left: 10px;
@@ -24,6 +25,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      row-gap: 5px;
     }
   }
 }

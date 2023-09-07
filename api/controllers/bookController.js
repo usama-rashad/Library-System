@@ -147,10 +147,10 @@ const addBookImageController = async (req, res, next) => {
   uploadStatus = "Uploading...";
   let response = await uploadFiles(files, ISBN)
     .then((response) => {
-      console.log(response);
       uploadStatus = "Complete.";
-      console.log("Updating image names in DB.");
-      existingBook.additionalImages = response;
+      existingBook.additionalImages = fileUploadStatus.map((fileStatus) => {
+        return { filename: fileStatus.filename, URL: fileStatus.imageURL };
+      });
     })
     .catch((error) => {
       uploadStatus = "Error.";

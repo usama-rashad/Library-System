@@ -1,0 +1,23 @@
+@import "../../../colors.scss";
+.mainBookFilter {
+  width: 98%;
+  height: 70px;
+  background-color: white;
+  border: 1px solid darkgrey;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 2px;
+  #titleText {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: $rootColor;
+  }
+  #searchButton {
+    justify-self: flex-end;
+  }
+}
