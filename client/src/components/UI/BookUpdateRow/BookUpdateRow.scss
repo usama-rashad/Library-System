@@ -1,7 +1,7 @@
 @import "../../../colors.scss";
 
 $topHeight: 35px;
-$bottomHeight: 300px;
+$bottomHeight: 280px;
 
 .mainBookUpdateRow {
   height: $topHeight;
@@ -100,20 +100,31 @@ $bottomHeight: 300px;
     .datagrid {
       background-color: white;
       background-image: linear-gradient(white, rgb(236, 236, 236));
-
       margin: 0 auto;
-      height: min-content;
+      height: 100%;
       padding: 5px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: flex-start;
       justify-content: center;
-      .bookDescription {
+      column-gap: 8px;
+      .editableFields {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
         width: min-content;
+        #fillerRow {
+          margin: 0;
+          height: 25px;
+        }
+      }
+      .bookDescription {
+        width: min-content;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         .title {
           color: black;
           font-weight: 500;
@@ -136,6 +147,37 @@ $bottomHeight: 300px;
           margin-top: 5px;
           &.error {
             color: red;
+          }
+        }
+      }
+      .pictureSection {
+        width: min-content;
+        display: flex;
+        flex-direction: column;
+        align-content: start;
+        justify-content: start;
+        height: min-content;
+
+        .title {
+          color: black;
+          font-weight: 500;
+          margin-right: 5px;
+          width: 80px;
+          margin: 0;
+        }
+        .pictures {
+          display: flex;
+          flex-direction: row;
+          align-content: start;
+          justify-content: start;
+          height: min-content;
+          column-gap: 3px;
+          .pictureFrame {
+            height: 160px;
+            width: 130px;
+            background-color: white;
+            border: 1px solid lightgrey;
+            border-radius: 5px;
           }
         }
       }

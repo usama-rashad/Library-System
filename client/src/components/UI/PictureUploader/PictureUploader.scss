@@ -23,7 +23,6 @@
     left: 20%;
     top: 20%;
     transform-origin: 100px 100px;
-    // transform: translate(-0%, 0);
   }
   .pictureUploadLine {
     display: flex;
@@ -65,7 +64,7 @@
     }
   }
   .pictureUploadProgress {
-    height: 100px;
+    height: min-content;
     width: min-content;
     column-gap: 5px;
     display: flex;

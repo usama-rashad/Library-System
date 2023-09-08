@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 
 // Components
 import EditableField from "../Form/EditableField/EditableField";
+import PictureWithUpload from "../PictureWithUpload/PictureWithUpload";
 
 // Images
 import ChevronRight from "../../../assets/chevron-right-solid.svg";
@@ -91,13 +92,26 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
           <p id="title">Edit data</p>
         </div>
         <div className="datagrid">
-          <EditableField label={"Title"} initialValue={"Usama Rashad"} />
-          <EditableField label={"Author"} initialValue={"Usama Rashad"} />
-          <EditableField label={"Genre"} initialValue={"Usama Rashad"} />
+          <div className="editableFields">
+            <p id="fillerRow"></p>
+            <EditableField label={"Title"} initialValue={"Usama Rashad"} />
+            <EditableField label={"Author"} initialValue={"Usama Rashad"} />
+            <EditableField label={"Genre"} initialValue={"Usama Rashad"} />
+          </div>
           <div className="bookDescription">
             <p className="title">Description</p>
             <textarea type="text" value={modifiedBookData.description} onChange={(e) => updateDescription(e.target.value)} />
             <p className={`charCount ${colorState}`}>{`${charCount}/${charLimit} characters`}</p>
+          </div>
+          <div className="pictureSection">
+            <p className="title">Pictures</p>
+            <div className="pictures">
+              <PictureWithUpload />
+              <PictureWithUpload />
+              <PictureWithUpload />
+              <PictureWithUpload />
+              <PictureWithUpload />
+            </div>
           </div>
         </div>
       </div>

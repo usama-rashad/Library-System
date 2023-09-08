@@ -13,7 +13,7 @@ function UpdateBooks() {
         <p className="dashTitle">Update books</p>
         <div className="content">
           <BookFilter />
-          <PaginatedView headerCols={["S.No", "ISBN", "Title", "Author", "Genré", "Quantity", ""]} flex={[1, 3, 10, 3, 3, 3, 1]} />
+          {/* <PaginatedView headerCols={["S.No", "ISBN", "Title", "Author", "Genré", "Quantity", ""]} flex={[1, 3, 10, 3, 3, 3, 1]} /> */}
         </div>
       </div>
     </div>
