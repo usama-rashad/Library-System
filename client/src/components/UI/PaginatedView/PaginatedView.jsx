@@ -64,12 +64,42 @@ function PaginatedView({ headerCols, flex }) {
       </div>
 
       <div className="dataContent">
-        <BookUpdateRow index={1} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512222, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
-        <BookUpdateRow index={2} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
-        <BookUpdateRow index={3} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
-        <BookUpdateRow index={4} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
-        <BookUpdateRow index={5} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
-        <BookUpdateRow index={6} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 10, 3, 3, 3, 1]} bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }} />
+        <BookUpdateRow
+          index={1}
+          rowSelected={(e) => selectedRow(e)}
+          flex={[1, 3, 10, 3, 3, 3, 1]}
+          bookData={{ isbn: 9512222, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
+        />
+        <BookUpdateRow
+          index={2}
+          rowSelected={(e) => selectedRow(e)}
+          flex={[1, 3, 10, 3, 3, 3, 1]}
+          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
+        />
+        <BookUpdateRow
+          index={3}
+          rowSelected={(e) => selectedRow(e)}
+          flex={[1, 3, 10, 3, 3, 3, 1]}
+          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
+        />
+        <BookUpdateRow
+          index={4}
+          rowSelected={(e) => selectedRow(e)}
+          flex={[1, 3, 10, 3, 3, 3, 1]}
+          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
+        />
+        <BookUpdateRow
+          index={5}
+          rowSelected={(e) => selectedRow(e)}
+          flex={[1, 3, 10, 3, 3, 3, 1]}
+          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
+        />
+        <BookUpdateRow
+          index={6}
+          rowSelected={(e) => selectedRow(e)}
+          flex={[1, 3, 10, 3, 3, 3, 1]}
+          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
+        />
       </div>
 
       <div className="pageNav">

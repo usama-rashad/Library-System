@@ -1,7 +1,7 @@
 @import "../../../colors.scss";
 
 $topHeight: 35px;
-$bottomHeight: 280px;
+$bottomHeight: 320px;
 
 .mainBookUpdateRow {
   height: $topHeight;
@@ -15,6 +15,7 @@ $bottomHeight: 280px;
   border-bottom: 1px solid lightgrey;
   cursor: pointer;
   transition: height 300ms ease;
+  position: relative;
 
   &.open {
     height: calc($topHeight + $bottomHeight);
@@ -84,6 +85,7 @@ $bottomHeight: 280px;
     background-color: white;
     margin: 0;
     padding: 0;
+    position: relative;
     .content {
       display: flex;
       flex-direction: column;
@@ -103,8 +105,9 @@ $bottomHeight: 280px;
       margin: 0 auto;
       height: 100%;
       padding: 5px;
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      // flex-direction: row;
+      grid-template-columns: repeat(3, 1fr);
       align-items: flex-start;
       justify-content: center;
       column-gap: 8px;
@@ -134,8 +137,8 @@ $bottomHeight: 280px;
         }
         textarea {
           resize: none;
-          height: 100px;
-          width: 500px;
+          height: 150px;
+          width: 200px;
           color: black;
         }
         .charCount {
@@ -150,7 +153,25 @@ $bottomHeight: 280px;
           }
         }
       }
-      .pictureSection {
+      .storageInfo {
+        width: min-content;
+        display: flex;
+        flex-direction: column;
+        align-content: start;
+        justify-content: start;
+        // height: min-content;
+        overflow-y: scroll;
+        height: 200px;
+        .title {
+          color: black;
+          font-weight: 500;
+          margin-right: 5px;
+          width: 80px;
+          margin: 0;
+          white-space: nowrap;
+        }
+      }
+      .column1 {
         width: min-content;
         display: flex;
         flex-direction: column;
@@ -159,26 +180,20 @@ $bottomHeight: 280px;
         height: min-content;
 
         .title {
-          color: black;
-          font-weight: 500;
+          color: $rootColor;
+          font-weight: 600;
           margin-right: 5px;
           width: 80px;
           margin: 0;
+          white-space: nowrap;
         }
-        .pictures {
+        .column1 {
           display: flex;
           flex-direction: row;
           align-content: start;
           justify-content: start;
           height: min-content;
           column-gap: 3px;
-          .pictureFrame {
-            height: 160px;
-            width: 130px;
-            background-color: white;
-            border: 1px solid lightgrey;
-            border-radius: 5px;
-          }
         }
       }
     }

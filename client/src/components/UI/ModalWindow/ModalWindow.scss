@@ -8,7 +8,12 @@
   box-shadow: 1px 1px 5px 5px rgb(207, 207, 207);
   border-radius: 10px;
   display: none;
-  position: fixed;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+
   &.open {
     display: block;
     animation: open 500ms ease-in-out 0s 1 forwards;

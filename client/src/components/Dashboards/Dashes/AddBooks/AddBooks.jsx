@@ -33,7 +33,13 @@ function AddBooks() {
     author: "",
     description: "",
   });
-  const { array: storageInfo, push: appendStorageInfo, remove: reduceStorageInfo, updateRow, length } = useStorageInfo([{ serialNumber: undefined, aisle: "", shelf: "" }]);
+  const {
+    array: storageInfo,
+    push: appendStorageInfo,
+    remove: reduceStorageInfo,
+    updateRow,
+    length,
+  } = useStorageInfo([{ serialNumber: undefined, aisle: "", shelf: "" }]);
 
   const dispatch = useDispatch();
   const { username } = useLoginState();
@@ -90,9 +96,6 @@ function AddBooks() {
 
   const addBookAction = async () => {
     dispatch(addBookAsyncThunk({ username: username, bookData: addBookFormData, storageInfo: storageInfo }));
-    // setTimeout(() => {
-    //   dispatch(clearMessage());
-    // }, 10000);
   };
 
   return (
@@ -101,9 +104,30 @@ function AddBooks() {
         <p className="dashTitle">Add a new book</p>
         <div className="fieldGrid">
           <div className="col1">
-            <InputField label="ISBN" placeholder={"Enter ISBN-13"} type={"ISBN"} validationHint={"Can only be 13 digits."} source={addBookFormData.ISBN} updateValue={(e) => updateISBN(e)} />
-            <InputField label="Title" placeholder={"Enter title"} type={"any"} validationHint={""} source={addBookFormData.title} updateValue={(e) => updateTitle(e)} />
-            <InputField label="Author" placeholder={"Enter author name"} type={"text"} validationHint={"Can only be letters"} source={addBookFormData.author} updateValue={(e) => updateAuthor(e)} />
+            <InputField
+              label="ISBN"
+              placeholder={"Enter ISBN-13"}
+              type={"ISBN"}
+              validationHint={"Can only be 13 digits."}
+              source={addBookFormData.ISBN}
+              updateValue={(e) => updateISBN(e)}
+            />
+            <InputField
+              label="Title"
+              placeholder={"Enter title"}
+              type={"any"}
+              validationHint={""}
+              source={addBookFormData.title}
+              updateValue={(e) => updateTitle(e)}
+            />
+            <InputField
+              label="Author"
+              placeholder={"Enter author name"}
+              type={"text"}
+              validationHint={"Can only be letters"}
+              source={addBookFormData.author}
+              updateValue={(e) => updateAuthor(e)}
+            />
             <DropDown
               title={"Genre"}
               options={[
@@ -137,7 +161,12 @@ function AddBooks() {
           <div className="col2">
             <div className="field">
               <p>Description</p>
-              <textarea placeholder="Enter book description..." value={addBookFormData.description} type="text" onChange={(e) => updateDescription(e.target.value)} />
+              <textarea
+                placeholder="Enter book description..."
+                value={addBookFormData.description}
+                type="text"
+                onChange={(e) => updateDescription(e.target.value)}
+              />
               <p className={`charCount ${colorState}`}>{`${charCount}/${charLimit} characters`}</p>
             </div>
           </div>

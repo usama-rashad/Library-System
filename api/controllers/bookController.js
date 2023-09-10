@@ -55,7 +55,10 @@ async function storeImage(file, ISBN) {
   console.log("Started upload for file " + file.originalname);
   return new Promise((res, rej) => {
     let fileStorageRef = ref(firebaseStorage, "images/" + file.originalname);
-    let uploadTask = uploadBytesResumable(fileStorageRef, file.buffer, { contentType: file.mimetype, customMetadata: { ISBN: ISBN, filename: file.originalname } });
+    let uploadTask = uploadBytesResumable(fileStorageRef, file.buffer, {
+      contentType: file.mimetype,
+      customMetadata: { ISBN: ISBN, filename: file.originalname },
+    });
 
     uploadTask.on(
       "state_changed",

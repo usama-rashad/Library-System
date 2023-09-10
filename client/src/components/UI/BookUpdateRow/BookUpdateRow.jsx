@@ -4,7 +4,8 @@ import React, { useEffect, useState, useRef } from "react";
 
 // Components
 import EditableField from "../Form/EditableField/EditableField";
-import PictureWithUpload from "../PictureWithUpload/PictureWithUpload";
+import BookDetailsInput from "../BookDetailsInput/BookDetailsInput";
+import ModalWindow from "../ModalWindow/ModalWindow";
 
 // Images
 import ChevronRight from "../../../assets/chevron-right-solid.svg";
@@ -16,6 +17,7 @@ const charLimit = 2000;
 function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
   const topRef = useRef();
   const [open, setOpen] = useState(false);
+  const [pictureEditorOpenState, setPictureEditorOpenState] = useState(false);
   const [colorState, setColorState] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [modifiedBookData, setModifiedBookData] = useState({});
@@ -36,8 +38,10 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
   }, []);
 
   useEffect(() => {
-    console.log(modifiedBookData);
-  }, [modifiedBookData]);
+    if (!open) {
+      closePictureEditor();
+    }
+  }, [open]);
 
   const toggleMenu = () => {
     setOpen((prev) => !prev);
@@ -56,8 +60,20 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
     }
   };
 
+  const openPictureEditor = () => {
+    setPictureEditorOpenState(true);
+  };
+
+  const closePictureEditor = () => {
+    setPictureEditorOpenState(false);
+  };
+
+  const rowClick = () => {
+    rowSelected();
+  };
+
   return (
-    <div className={`mainBookUpdateRow ${open ? "open" : ""}`} onClick={() => rowSelected()}>
+    <div className={`mainBookUpdateRow ${open ? "open" : ""}`} onClick={rowClick}>
       <div ref={topRef} className="top" onClick={toggleMenu}>
         <p name="topFields" className="topFields">
           {index}
@@ -88,30 +104,35 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
         </div>
       </div>
       <div className="bottom">
+        <ModalWindow open={pictureEditorOpenState} closeAction={() => closePictureEditor()} />
+
         <div className="content">
           <p id="title">Edit data</p>
         </div>
         <div className="datagrid">
-          <div className="editableFields">
-            <p id="fillerRow"></p>
-            <EditableField label={"Title"} initialValue={"Usama Rashad"} />
-            <EditableField label={"Author"} initialValue={"Usama Rashad"} />
-            <EditableField label={"Genre"} initialValue={"Usama Rashad"} />
+          <div className="column1">
+            <div className="editableFields">
+              <p id="fillerRow"></p>
+              <EditableField label={"Title"} initialValue={"Usama Rashad"} />
+              <EditableField label={"Author"} initialValue={"Usama Rashad"} />
+              <EditableField label={"Genre"} initialValue={"Usama Rashad"} />
+            </div>
+            <div className="pictures">
+              <p className="title">Edit pictures</p>
+              <button onClick={() => openPictureEditor()}>Edit pictures</button>
+            </div>
           </div>
           <div className="bookDescription">
             <p className="title">Description</p>
             <textarea type="text" value={modifiedBookData.description} onChange={(e) => updateDescription(e.target.value)} />
             <p className={`charCount ${colorState}`}>{`${charCount}/${charLimit} characters`}</p>
           </div>
-          <div className="pictureSection">
-            <p className="title">Pictures</p>
-            <div className="pictures">
-              <PictureWithUpload />
-              <PictureWithUpload />
-              <PictureWithUpload />
-              <PictureWithUpload />
-              <PictureWithUpload />
-            </div>
+          <div className="storageInfo">
+            <p className="title">Storage Info</p>
+            <BookDetailsInput index={1} onDataChange={(e) => {}} serialNumber={1} />
+            <BookDetailsInput index={1} onDataChange={(e) => {}} serialNumber={2} />
+            <BookDetailsInput index={1} onDataChange={(e) => {}} serialNumber={3} />
+            <BookDetailsInput index={1} onDataChange={(e) => {}} serialNumber={4} />
           </div>
         </div>
       </div>

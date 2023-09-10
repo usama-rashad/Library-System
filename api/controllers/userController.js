@@ -7,6 +7,7 @@ import { isDBConnectionOK } from "./../db/db.js";
 
 // Helpers
 const createAccessToken = (username) => {
+  console.log("Created a new access token.");
   return jwt.sign({ username: username, createdTime: new Date() }, process.env.JWT_ACCESSTOKEN_PRIVATEKEY, {
     expiresIn: process.env.ACCESS_TOKEN_VALIDITY,
     algorithm: "HS256",
@@ -134,7 +135,11 @@ const loginController = async (req, res, next) => {
 
       res
         .status(200)
-        .json({ message: "Login successful", isAdmin: existingUser.isAdmin, name: { first: existingUser.firstname, last: existingUser.lastname } })
+        .json({
+          message: "Login successful",
+          isAdmin: existingUser.isAdmin,
+          name: { first: existingUser.firstname, last: existingUser.lastname },
+        })
         .send();
     } else {
       return res.status(404).json({ message: "Username and/or password is incorrect." });
@@ -191,7 +196,12 @@ const checkLoginController = async (req, res, next) => {
     if (existingUser.isLoggedIn) {
       return res
         .status(200)
-        .json({ message: "Re-Login successful", username: decodedUsername, isAdmin: existingUser.isAdmin, name: { first: existingUser.firstname, last: existingUser.lastname } })
+        .json({
+          message: "Re-Login successful",
+          username: decodedUsername,
+          isAdmin: existingUser.isAdmin,
+          name: { first: existingUser.firstname, last: existingUser.lastname },
+        })
         .send();
     } else {
       return res.status(404).json({ message: "Re-Login unsuccessful" });
@@ -227,4 +237,12 @@ const loginCreateAccessTokenController = (req, res, next) => {
   });
 };
 
-export { signupController, deleteUserController, loginController, checkLoginController, logoutController, loginSystemStatusController, loginCreateAccessTokenController };
+export {
+  signupController,
+  deleteUserController,
+  loginController,
+  checkLoginController,
+  logoutController,
+  loginSystemStatusController,
+  loginCreateAccessTokenController,
+};
