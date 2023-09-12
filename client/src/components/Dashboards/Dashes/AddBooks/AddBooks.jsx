@@ -70,14 +70,12 @@ function AddBooks() {
   const addStorageInfo = () => {
     appendStorageInfo({ serialNumber: length + 1, aisle: "", shelf: "" });
   };
-
   const removeStorageInfo = () => {
     if (storageInfo.length === 1) {
       return;
     }
     reduceStorageInfo();
   };
-
   const storageInfoUpdate = (e) => {
     updateRow(e.data, e.index);
   };
@@ -93,7 +91,6 @@ function AddBooks() {
     });
     dispatch(reset());
   };
-
   const addBookAction = async () => {
     dispatch(addBookAsyncThunk({ username: username, bookData: addBookFormData, storageInfo: storageInfo }));
   };
@@ -206,7 +203,11 @@ function AddBooks() {
           <div className="buttons">
             <Button clickAction={() => addBookAction()}>
               <p>Add Book</p>
-              {pending && <Spinner />}
+              {pending && (
+                <div className="spinnerDiv">
+                  <Spinner />
+                </div>
+              )}
             </Button>
             <Button clickAction={() => clearButtonAction()}>
               <p>Clear</p>

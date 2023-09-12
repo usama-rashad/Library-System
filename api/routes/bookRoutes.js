@@ -55,7 +55,7 @@ const addNewBookRoute = router.put("/addNew", verifyUser_MW, addNewBookControlle
 const addBookImageRoute = router.put("/addImage", verifyUser_MW, upload.array("bookImages"), addBookImageController);
 const deleteBookImageRoute = router.put("/deleteImage", verifyUser_MW, deleteImageController);
 const updateBookThumbnailRoute = router.put("/updateThumbnail", upload.single("thumbnail"), updateBookThumbnailController);
-const findBookByISBNRoute = router.get("/findByISBN", verifyUser_MW, findBookByISBNController);
+const findBookByISBNRoute = router.post("/findByISBN", findBookByISBNController);
 const deleteBookByISBNRoute = router.delete("/deleteByISBN", verifyUser_MW, deleteBookByISBNController);
 const updateBookRoute = router.put("/updateBookInfo", verifyUser_MW, updateBookInfoController);
 const issueBookRoute = router.put("/issueBook", verifyUser_MW, issueBookController);
@@ -63,4 +63,17 @@ const returnBookRoute = router.put("/returnBook", verifyUser_MW, returnBookContr
 const searchBookRoute = router.get("/searchBookByName", searchBookController);
 const imageUploadStatus = router.get("/getImageUploadStatus", returnImageUploadStatusController);
 
-export { bookTestRoute, addNewBookRoute, addBookImageRoute, deleteBookImageRoute, updateBookThumbnailRoute, updateBookRoute, findBookByISBNRoute, deleteBookByISBNRoute, issueBookRoute, returnBookRoute, searchBookRoute, imageUploadStatus };
+export {
+  bookTestRoute,
+  addNewBookRoute,
+  addBookImageRoute,
+  deleteBookImageRoute,
+  updateBookThumbnailRoute,
+  updateBookRoute,
+  findBookByISBNRoute,
+  deleteBookByISBNRoute,
+  issueBookRoute,
+  returnBookRoute,
+  searchBookRoute,
+  imageUploadStatus,
+};

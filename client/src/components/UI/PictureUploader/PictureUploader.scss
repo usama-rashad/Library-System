@@ -19,10 +19,9 @@
     background-color: rgba(255, 255, 255, 0.753);
   }
   .pictureViewer {
-    position: fixed;
-    left: 20%;
-    top: 20%;
-    transform-origin: 100px 100px;
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
   .pictureUploadLine {
     display: flex;

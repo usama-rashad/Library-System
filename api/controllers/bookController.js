@@ -255,13 +255,21 @@ const deleteImageController = async (req, res, next) => {
 
 const findBookByISBNController = async (req, res, next) => {
   let { ISBN } = req.body;
+
+  let searchPattern = ISBN;
   // Find book by ISBN
-  let result = await booksModel.find({ ISBN: ISBN });
-  if (result) {
-    return res.status(200).json({ message: "Books found", books: result });
-  } else {
-    return res.status(404).json({ message: "Error while searching." });
-  }
+  console.log("Searhcing for books with ISBN " + ISBN);
+  await booksModel
+    .find({ ISBN: { $regex: searchPattern, $options: "i" } })
+    .then((result) => {
+      setTimeout(() => {
+        return res.status(200).json({ message: `${result.length} books found`, books: result });
+      }, 1000);
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(404).json({ message: "Error while searching.", error: error });
+    });
 };
 
 const issueBookController = async (req, res, next) => {

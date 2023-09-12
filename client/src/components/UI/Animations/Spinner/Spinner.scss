@@ -1,7 +1,7 @@
 @import "../../../../colors.scss";
 
-$spinnerHeight: 20px;
-$spinnerWidth: 20px;
+$spinnerHeight: 100%;
+$spinnerWidth: 100%;
 
 .mainSpinner {
   height: $spinnerHeight;
@@ -11,7 +11,7 @@ $spinnerWidth: 20px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 3px;
+  margin: 0px;
   .outerCircle {
     height: 100%;
     width: 100%;

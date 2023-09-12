@@ -6,6 +6,7 @@ import React, { useEffect, useState, useRef } from "react";
 import EditableField from "../Form/EditableField/EditableField";
 import BookDetailsInput from "../BookDetailsInput/BookDetailsInput";
 import ModalWindow from "../ModalWindow/ModalWindow";
+import Button from "../Button/Button";
 
 // Images
 import ChevronRight from "../../../assets/chevron-right-solid.svg";
@@ -20,7 +21,11 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
   const [pictureEditorOpenState, setPictureEditorOpenState] = useState(false);
   const [colorState, setColorState] = useState("");
   const [charCount, setCharCount] = useState(0);
-  const [modifiedBookData, setModifiedBookData] = useState({});
+  const [modifiedBookData, setModifiedBookData] = useState(bookData);
+
+  useEffect(() => {
+    setModifiedBookData(bookData);
+  }, [bookData.ISBN]);
 
   // Update the flex width of the rwo elements
   useEffect(() => {
@@ -96,7 +101,7 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.qty}
+          {bookData.storageInfo.length}
         </p>
         <div className="seperator"></div>
         <div name="topFields" className="userSelection" onClick={toggleMenu}>
@@ -104,7 +109,18 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
         </div>
       </div>
       <div className="bottom">
-        <ModalWindow open={pictureEditorOpenState} closeAction={() => closePictureEditor()} />
+        <ModalWindow open={pictureEditorOpenState} closeAction={() => closePictureEditor()}>
+          <div className="imageRow">
+            {bookData.additionalImages.map((images, index) => {
+              return (
+                <div className="images" key={index}>
+                  <img src={images.URL} />
+                  <p className="imageName">{images.filename}</p>
+                </div>
+              );
+            })}
+          </div>
+        </ModalWindow>
 
         <div className="content">
           <p id="title">Edit data</p>
@@ -113,9 +129,10 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
           <div className="column1">
             <div className="editableFields">
               <p id="fillerRow"></p>
-              <EditableField label={"Title"} initialValue={"Usama Rashad"} />
-              <EditableField label={"Author"} initialValue={"Usama Rashad"} />
-              <EditableField label={"Genre"} initialValue={"Usama Rashad"} />
+
+              <EditableField label={"Title"} initialValue={modifiedBookData.title} />
+              <EditableField label={"Author"} initialValue={modifiedBookData.author} />
+              <EditableField label={"Genre"} initialValue={modifiedBookData?.genre} />
             </div>
             <div className="pictures">
               <p className="title">Edit pictures</p>
@@ -129,11 +146,17 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
           </div>
           <div className="storageInfo">
             <p className="title">Storage Info</p>
-            <BookDetailsInput index={1} onDataChange={(e) => {}} serialNumber={1} />
-            <BookDetailsInput index={1} onDataChange={(e) => {}} serialNumber={2} />
-            <BookDetailsInput index={1} onDataChange={(e) => {}} serialNumber={3} />
-            <BookDetailsInput index={1} onDataChange={(e) => {}} serialNumber={4} />
+            {modifiedBookData.storageInfo.map((storageInfo, index) => {
+              return (
+                <BookDetailsInput key={index} initialValue={storageInfo} index={index} onDataChange={(e) => {}} serialNumber={index + 1} />
+              );
+            })}
           </div>
+        </div>
+        <div className="buttons">
+          <Button enable={false}>
+            <p>Apply</p>
+          </Button>
         </div>
       </div>
     </div>

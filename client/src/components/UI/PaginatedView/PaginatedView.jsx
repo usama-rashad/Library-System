@@ -4,8 +4,13 @@ import React, { useEffect, useState } from "react";
 
 // Components
 import BookUpdateRow from "../BookUpdateRow/BookUpdateRow";
+import Spinner from "../Animations/Spinner/Spinner";
+
+// Hooks
+import useUpdateBookState from "../../../hooks/useUpdateBookState.js";
 
 // Icons
+import BookAnimation from "../../../assets/bookAnimation.gif";
 
 function ChevronLeftIcon() {
   return (
@@ -23,6 +28,7 @@ function ChevronRightIcon() {
 }
 
 function PaginatedView({ headerCols, flex }) {
+  const { success, fail, pending: isLoading, message, state, books } = useUpdateBookState();
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(10);
   const [selectedRowNumber, setSelectedRowNumber] = useState(0);
@@ -39,9 +45,14 @@ function PaginatedView({ headerCols, flex }) {
     setSelectedRowNumber(e);
   };
 
+  // START HERE !!!!
+  useEffect(() => {
+    console.log(books);
+  }, [books]);
+
   // Update the flex width of the header column titles
   useEffect(() => {
-    let titles = document.getElementsByName("headerTitles");
+    let titles = document.getElementsByName("columnDivs");
     flex.forEach((flexAmount, index) => {
       let title = titles[index];
       titles[index].style.setProperty("flex", flexAmount);
@@ -49,57 +60,37 @@ function PaginatedView({ headerCols, flex }) {
   }, []);
 
   return (
-    <div className="mainPaginatedView">
+    <div className={`mainPaginatedView `}>
+      {isLoading && (
+        <div className="spinnerDiv">
+          <img src={BookAnimation} />
+        </div>
+      )}
       <div className="header">
         {headerCols.map((col, index) => {
           return (
-            <>
-              <p name="headerTitles" key={index}>
-                {col}
-              </p>
+            <div className="divColumn" key={index} name="columnDivs">
+              <p name="headerTitles">{col}</p>
               {index === headerCols.length - 1 ? "" : <div className="seperator"></div>}
-            </>
+            </div>
           );
         })}
       </div>
 
-      <div className="dataContent">
-        <BookUpdateRow
-          index={1}
-          rowSelected={(e) => selectedRow(e)}
-          flex={[1, 3, 10, 3, 3, 3, 1]}
-          bookData={{ isbn: 9512222, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
-        />
-        <BookUpdateRow
-          index={2}
-          rowSelected={(e) => selectedRow(e)}
-          flex={[1, 3, 10, 3, 3, 3, 1]}
-          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
-        />
-        <BookUpdateRow
-          index={3}
-          rowSelected={(e) => selectedRow(e)}
-          flex={[1, 3, 10, 3, 3, 3, 1]}
-          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
-        />
-        <BookUpdateRow
-          index={4}
-          rowSelected={(e) => selectedRow(e)}
-          flex={[1, 3, 10, 3, 3, 3, 1]}
-          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
-        />
-        <BookUpdateRow
-          index={5}
-          rowSelected={(e) => selectedRow(e)}
-          flex={[1, 3, 10, 3, 3, 3, 1]}
-          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
-        />
-        <BookUpdateRow
-          index={6}
-          rowSelected={(e) => selectedRow(e)}
-          flex={[1, 3, 10, 3, 3, 3, 1]}
-          bookData={{ isbn: 9512622, title: "Programming in Python with Usama", author: "Usama", genre: "Information Tech.", qty: 2 }}
-        />
+      <div className={`dataContent  ${isLoading ? "loading" : ""}`}>
+        {books.length > 0
+          ? books.map((book, index) => {
+              return (
+                <BookUpdateRow
+                  key={index}
+                  index={index + 1}
+                  rowSelected={(e) => selectedRow(e)}
+                  flex={[1, 3, 10, 3, 3, 3, 1]}
+                  bookData={book}
+                />
+              );
+            })
+          : null}
       </div>
 
       <div className="pageNav">

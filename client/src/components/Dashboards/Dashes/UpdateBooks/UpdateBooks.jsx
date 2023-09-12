@@ -1,12 +1,23 @@
 import "./UpdateBooks.scss";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Components
 import PaginatedView from "../../../UI/PaginatedView/PaginatedView";
 import BookFilter from "../../../UI/BookFilter/BookFilter";
 
+// Hooks
+import useUpdateBookState from "../../../../hooks/useUpdateBookState";
+
+// Reducer
+import { useDispatch } from "react-redux";
+
+// Reducers
+
 function UpdateBooks() {
+  const dispatch = useDispatch();
+  const { books } = useUpdateBookState();
+
   return (
     <div className="mainUpdateBooks">
       <div className="pageLayout">

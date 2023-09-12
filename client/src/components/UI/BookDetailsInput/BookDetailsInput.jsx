@@ -6,8 +6,12 @@ import InputField from "../Form/InputField/InputField";
 // Actions
 import { removeStorageInfo, addStorageInfo } from "./../../../reducers/addBookReducer.js";
 
-function BookDetailsInput({ serialNumber, onDataChange, index }) {
-  const [bookDetails, setBookDetails] = useState({ serialNumber: "", aisle: "", shelf: "" });
+function BookDetailsInput({ initialValue, serialNumber, onDataChange, index }) {
+  const [bookDetails, setBookDetails] = useState({
+    serialNumber: initialValue?.serialNumber || "",
+    aisle: initialValue?.aisle || "",
+    shelf: initialValue?.shelf || "",
+  });
   // Input actions
   const updateSerialNumber = (input) => {
     setBookDetails({ ...bookDetails, serialNumber: input });

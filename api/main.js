@@ -2,12 +2,22 @@ import env from "dotenv";
 import cors from "cors";
 import express from "express";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 import * as firebase from "./firebase.js";
 
+import { booksModel } from "../api/models/books.model.js";
+
 // Route imports
-import { loginRoute, loginSystemStatusRoute, logoutRoute, signupRoute, deleteUserRoute, loginCreateAccessTokenRoute } from "./routes/userRoutes.js";
+import {
+  loginRoute,
+  loginSystemStatusRoute,
+  logoutRoute,
+  signupRoute,
+  deleteUserRoute,
+  loginCreateAccessTokenRoute,
+} from "./routes/userRoutes.js";
 import {
   bookTestRoute,
   addNewBookRoute,
@@ -31,6 +41,8 @@ const app = express();
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: ["http://localhost:4000", "http://localhost:3000", "https://firebasestorage.googleapis.com"] })); // Port of the client app
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // // Serve pictures via static path
 // const __filename = fileURLToPath(import.meta.url);
 // let __dirname = path.dirname(__filename);
@@ -62,5 +74,9 @@ app.use(BOOKS_API, issueBookRoute);
 app.use(BOOKS_API, returnBookRoute);
 app.use(BOOKS_API, searchBookRoute);
 app.use(BOOKS_API, imageUploadStatus);
+
+await booksModel.find({ ISBN: "4455668" }).then((results) => {
+  console.log(results);
+});
 
 export default app;

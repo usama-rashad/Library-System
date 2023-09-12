@@ -7,6 +7,11 @@ function EditableField({ label, initialValue }) {
   const [inputValue, setInputValue] = useState(initialValue);
   const [editMode, setEditMode] = useState(false);
 
+  // Initial value changed
+  useEffect(() => {
+    setInputValue(initialValue);
+  }, [initialValue]);
+
   // Enter key press
   useEffect(() => {
     document.addEventListener("keyup", detectEnterPress);
@@ -29,7 +34,9 @@ function EditableField({ label, initialValue }) {
     <div className="mainEditableField">
       <p className="labelText">{label}</p>
       <div className="inputs">
-        {editMode && <input placeholder={inputValue} className="editableInput" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />}
+        {editMode && (
+          <input placeholder={inputValue} className="editableInput" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+        )}
         {!editMode && <p className="editableLabel">{inputValue}</p>}
       </div>
       <button className={`toggleEdit ${editMode ? "apply" : "edit"}`} onClick={toggleEditMode}>

@@ -7,10 +7,6 @@ $bottomHeight: 320px;
   height: $topHeight;
   width: 100%;
   background-color: white;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
   overflow: hidden;
   border-bottom: 1px solid lightgrey;
   cursor: pointer;
@@ -86,6 +82,26 @@ $bottomHeight: 320px;
     margin: 0;
     padding: 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .imageRow {
+      margin-top: 5px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      column-gap: 5px;
+      height: 100%;
+      width: 100%;
+      .images {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
     .content {
       display: flex;
       flex-direction: column;
@@ -106,24 +122,23 @@ $bottomHeight: 320px;
       height: 100%;
       padding: 5px;
       display: grid;
-      // flex-direction: row;
       grid-template-columns: repeat(3, 1fr);
       align-items: flex-start;
-      justify-content: center;
       column-gap: 8px;
       .editableFields {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        width: min-content;
+        // width: min-content;
+        width: 100%;
         #fillerRow {
           margin: 0;
           height: 25px;
         }
       }
       .bookDescription {
-        width: min-content;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -138,7 +153,7 @@ $bottomHeight: 320px;
         textarea {
           resize: none;
           height: 150px;
-          width: 200px;
+          width: 100%;
           color: black;
         }
         .charCount {
@@ -196,6 +211,16 @@ $bottomHeight: 320px;
           column-gap: 3px;
         }
       }
+    }
+    .buttons {
+      height: min-content;
+      width: 100%;
+      background-color: rgb(236, 236, 236);
+      padding-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

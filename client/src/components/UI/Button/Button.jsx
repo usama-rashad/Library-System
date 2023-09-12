@@ -1,9 +1,25 @@
 import "./Button.scss";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-function Button({ width = "max-content", height = "30px", children, clickAction }) {
+function Button({ width = "max-content", height = "30px", children, clickAction, enable = true }) {
+  const [enabled, setEnabled] = useState(true);
+  useEffect(() => {
+    setEnabled(enable);
+  }, [enable]);
+
+  const clickPassThrough = () => {
+    if (enable) {
+      clickAction();
+    }
+  };
+
   return (
-    <div className="mainButton" style={{ width: width, height: height }} onClick={clickAction} tabIndex={0}>
+    <div
+      className={`mainButton ${enabled ? "" : "disabled"}`}
+      style={{ width: width, height: height }}
+      onClick={clickPassThrough}
+      tabIndex={0}
+    >
       {children}
     </div>
   );
