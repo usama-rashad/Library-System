@@ -8,7 +8,7 @@ import { ref, getDownloadURL, uploadString, uploadBytesResumable } from "firebas
 
 const maxBookImages = 5;
 
-let fileUploadStatus = []; // Structure [{fileName : "book.jpg" , uploadPct : 100%, imageURL : ""}]
+let fileUploadStatus = [];
 let uploadStatus = "Ready.";
 
 // HELPERS
@@ -43,6 +43,8 @@ function updateFileUploadStatus(progressPct, fileName) {
   let index = fileUploadStatus.findIndex((entry) => entry.filename === fileName);
   if (index !== -1) {
     fileUploadStatus[index].uploadPct = progressPct;
+  } else {
+    fileUploadStatus.push({ filename: fileName, uploadPct: 0 });
   }
 }
 function updateFileUploadURL(URL, fileName) {
@@ -166,6 +168,46 @@ const addBookImageController = async (req, res, next) => {
   } catch (error) {
     deleteFiles(filesList); // Delete the uploaded files if there is an error to avoid having unreference files
     return res.status(404).json({ message: `Error while saving to database.` });
+  }
+};
+
+const addSingleBookImageController = async (req, res, next) => {
+  let { ISBN, imageNumber } = req.body;
+  let file = req.file;
+
+  let filesList = [];
+  if (!ISBN || ISBN == "") {
+    return res.status(404).json({ message: `No ISBN provided. Check your ISBN.` });
+  }
+
+  // Clear the file upload status
+  fileUploadStatus = [];
+
+  if (file === null) {
+    return res.status(404).json({ message: `Not image selected. Select atleast one image.` });
+  }
+
+  if (req.fileSizeLimit) {
+    return res.status(404).json({ message: `File size is too large. Make sure that the file is smaller than 1MB.` });
+  }
+  // Find a previous book and compare ISBNs
+  let existingBook = await booksModel.findOne({ ISBN: ISBN });
+  if (!existingBook) {
+    if (ISBN === "") {
+      return res.status(404).json({ message: `No ISBN provided. Check your ISBN.` });
+    }
+    return res.status(404).json({ message: `Book with ISBN ${ISBN} not found. Add the book first and then edit the images.` });
+  }
+
+  // Wait for all the files to upload and update the image URLs
+  uploadStatus = "Uploading...";
+  try {
+    let fileURL = await storeImage(file, ISBN, imageNumber);
+    uploadStatus = "Complete.";
+    existingBook.additionalImages[imageNumber] = { filename: file.originalname, URL: fileURL };
+    let saveResult = await existingBook.save();
+  } catch (error) {
+    return res.status(404).json({ message: `Failed to upload image.`, error: error });
   }
 };
 
@@ -350,7 +392,41 @@ const searchBookController = async (req, res, next) => {
 };
 
 const returnImageUploadStatusController = async (req, res, next) => {
+  console.log(fileUploadStatus);
   return res.status(200).json({ uploadStatus: fileUploadStatus, commonStatus: uploadStatus });
+};
+
+const fetchBookGenresController = async (req, res, next) => {
+  return res.status(200).json({
+    message: "OK",
+    genres: [
+      "IT",
+      "Fantasy",
+      "Adventure",
+      "Romance",
+      "Contemporary",
+      "Dystopian",
+      "Mystery",
+      "Horror",
+      "Thriller",
+      "Paranormal",
+      "Historical fiction",
+      "Science Fiction",
+      "Children’s",
+      "Memoir",
+      "Cookbook",
+      "Art",
+      "Self-help",
+      "Personal Development",
+      "Motivational",
+      "Health",
+      "History",
+      "Travel",
+      "Guide / How-to",
+      "Families and Relationships",
+      "Humor",
+    ],
+  });
 };
 
 const testBookController = async (req, res, next) => {
@@ -365,6 +441,7 @@ export {
   addNewBookController,
   updateBookThumbnailController,
   addBookImageController,
+  addSingleBookImageController,
   deleteImageController,
   findBookByISBNController,
   updateBookInfoController,
@@ -373,4 +450,6 @@ export {
   returnBookController,
   searchBookController,
   returnImageUploadStatusController,
+  fetchBookGenresController,
 };
+``;

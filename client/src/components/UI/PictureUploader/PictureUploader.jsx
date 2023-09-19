@@ -50,6 +50,7 @@ function PictureUploader({ bookInfo }) {
     }
 
     setImageNames(images);
+    setPictureUploadError("");
 
     await axios({
       method: "put",

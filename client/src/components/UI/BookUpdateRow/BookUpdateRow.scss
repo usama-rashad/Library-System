@@ -1,7 +1,7 @@
 @import "../../../colors.scss";
 
 $topHeight: 35px;
-$bottomHeight: 320px;
+$bottomHeight: 450px;
 
 .mainBookUpdateRow {
   height: $topHeight;
@@ -39,6 +39,9 @@ $bottomHeight: 320px;
     // Left align the titles
     p:nth-of-type(3) {
       margin-left: 5px;
+      text-align: left;
+    }
+    p:nth-of-type(4) {
       text-align: left;
     }
 
@@ -100,6 +103,18 @@ $bottomHeight: 320px;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+        img {
+          height: auto;
+          width: 200px;
+        }
+        .imageName {
+          margin: 0;
+        }
+
+        .controlPanel {
+          margin: 10px;
+        }
       }
     }
     .content {
@@ -121,23 +136,17 @@ $bottomHeight: 320px;
       margin: 0 auto;
       height: 100%;
       padding: 5px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      // display: grid;
+      // grid-template-columns: repeat(3, 1fr);
+      // align-items: flex-start;
+      display: flex;
+      flex-direction: row;
       align-items: flex-start;
+      justify-content: center;
       column-gap: 8px;
-      .editableFields {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        // width: min-content;
-        width: 100%;
-        #fillerRow {
-          margin: 0;
-          height: 25px;
-        }
-      }
+      width: 100%;
       .bookDescription {
+        flex: 5;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -169,21 +178,77 @@ $bottomHeight: 320px;
         }
       }
       .storageInfo {
-        width: min-content;
+        flex: 3;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-content: start;
         justify-content: start;
-        // height: min-content;
+        margin-right: 5px;
+
         overflow-y: scroll;
         height: 200px;
         .title {
-          color: black;
-          font-weight: 500;
-          margin-right: 5px;
-          width: 80px;
-          margin: 0;
-          white-space: nowrap;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          .detailTitle {
+            flex: 10;
+            color: black;
+            font-weight: 500;
+            margin-right: 5px;
+            width: 80px;
+            margin: 0;
+            white-space: nowrap;
+          }
+          .iconButtons {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            .icons {
+              width: 20px;
+              height: 20px;
+              user-select: none;
+              cursor: pointer;
+            }
+          }
+        }
+        .bookDetailsRows {
+          height: 200px;
+          width: 100%;
+          border-top: 2px solid $rootColor;
+          padding-top: 5px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          overflow: scroll;
+          background-color: white;
+        }
+        .finalBookCount {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-end;
+          width: 100%;
+          column-gap: 5px;
+          border-top: 2px solid $rootColor;
+          background-color: white;
+
+          p {
+            font-weight: 500;
+            margin: 0px;
+            user-select: none;
+            font-size: 12px;
+          }
+          :nth-child(2) {
+            color: $rootColor;
+          }
         }
       }
       .column1 {
@@ -202,13 +267,38 @@ $bottomHeight: 320px;
           margin: 0;
           white-space: nowrap;
         }
-        .column1 {
+
+        .editableFields {
           display: flex;
-          flex-direction: row;
-          align-content: start;
-          justify-content: start;
-          height: min-content;
-          column-gap: 3px;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          // width: min-content;
+          width: 100%;
+          #fillerRow {
+            margin: 0;
+            height: 25px;
+          }
+          .genreDiv {
+            position: relative;
+            width: 100%;
+            height: 60px;
+            background-color: transparent;
+          }
+        }
+        // .column1 {
+        //   display: flex;
+        //   flex-direction: row;
+        //   align-content: start;
+        //   justify-content: start;
+        //   height: min-content;
+        //   column-gap: 3px;
+        // }
+        .editPictures {
+          position: relative;
+          width: 100%;
+          height: 60px;
+          z-index: 0;
         }
       }
     }

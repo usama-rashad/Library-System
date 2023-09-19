@@ -22,6 +22,7 @@ import {
   bookTestRoute,
   addNewBookRoute,
   addBookImageRoute,
+  addSingleBookImageRoute,
   deleteBookImageRoute,
   updateBookThumbnailRoute,
   findBookByISBNRoute,
@@ -31,6 +32,7 @@ import {
   returnBookRoute,
   searchBookRoute,
   imageUploadStatus,
+  fetchBookGenres,
 } from "./routes/bookRoutes.js";
 
 env.config();
@@ -43,12 +45,6 @@ app.use(cors({ credentials: true, origin: ["http://localhost:4000", "http://loca
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// // Serve pictures via static path
-// const __filename = fileURLToPath(import.meta.url);
-// let __dirname = path.dirname(__filename);
-// let publicImagesFolderPath = path.join(__dirname, "public");
-// console.log(publicImagesFolderPath);
-// app.use("/static", express.static("public"));
 
 // Routes
 const USERS_API = "/api/users";
@@ -65,6 +61,7 @@ app.use(USERS_API, loginCreateAccessTokenRoute);
 app.use(BOOKS_API, bookTestRoute);
 app.use(BOOKS_API, addNewBookRoute);
 app.use(BOOKS_API, addBookImageRoute);
+app.use(BOOKS_API, addSingleBookImageRoute);
 app.use(BOOKS_API, updateBookThumbnailRoute);
 app.use(BOOKS_API, deleteBookImageRoute);
 app.use(BOOKS_API, findBookByISBNRoute);
@@ -74,9 +71,6 @@ app.use(BOOKS_API, issueBookRoute);
 app.use(BOOKS_API, returnBookRoute);
 app.use(BOOKS_API, searchBookRoute);
 app.use(BOOKS_API, imageUploadStatus);
-
-await booksModel.find({ ISBN: "4455668" }).then((results) => {
-  console.log(results);
-});
+app.use(BOOKS_API, fetchBookGenres);
 
 export default app;

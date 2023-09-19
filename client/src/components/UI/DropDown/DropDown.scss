@@ -11,6 +11,7 @@
   box-sizing: border-box;
   overflow: hidden;
   background-color: white;
+  z-index: 999;
   .t {
     width: 100%;
     height: min-content;
@@ -23,6 +24,7 @@
       border: 1px solid rgb(116, 116, 116);
       box-sizing: border-box;
       border-radius: 2px;
+      background-color: white;
 
       img {
         width: 1rem;
@@ -47,6 +49,8 @@
       font-weight: 500;
       margin: 0px;
       user-select: none;
+      font-size: 14px;
+      background-color: transparent;
     }
     .selectedOption {
       margin: 0px;
@@ -71,7 +75,7 @@
     height: 0px;
     transition: height 100ms ease-in;
     border-radius: 3px;
-
+    z-index: 10;
     &.open {
       height: 200px;
       border-bottom: 2px solid black;
@@ -86,6 +90,7 @@
       overflow-y: scroll;
       overflow-x: hidden;
       padding-bottom: 10px;
+      background-color: white;
       ::-webkit-scrollbar-thumb:hover {
         background: $rootColorLight2;
       }

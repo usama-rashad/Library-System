@@ -38,6 +38,7 @@ export const upload = multer({
 import {
   updateBookThumbnailController,
   addBookImageController,
+  addSingleBookImageController,
   deleteImageController,
   addNewBookController,
   findBookByISBNController,
@@ -48,11 +49,13 @@ import {
   searchBookController,
   testBookController,
   returnImageUploadStatusController,
+  fetchBookGenresController,
 } from "./../controllers/bookController.js";
 
 const bookTestRoute = router.get("/testBook", testBookController);
 const addNewBookRoute = router.put("/addNew", verifyUser_MW, addNewBookController);
 const addBookImageRoute = router.put("/addImage", verifyUser_MW, upload.array("bookImages"), addBookImageController);
+const addSingleBookImageRoute = router.put("/addSingleImage", upload.single("bookImage"), addSingleBookImageController);
 const deleteBookImageRoute = router.put("/deleteImage", verifyUser_MW, deleteImageController);
 const updateBookThumbnailRoute = router.put("/updateThumbnail", upload.single("thumbnail"), updateBookThumbnailController);
 const findBookByISBNRoute = router.post("/findByISBN", findBookByISBNController);
@@ -62,11 +65,13 @@ const issueBookRoute = router.put("/issueBook", verifyUser_MW, issueBookControll
 const returnBookRoute = router.put("/returnBook", verifyUser_MW, returnBookController);
 const searchBookRoute = router.get("/searchBookByName", searchBookController);
 const imageUploadStatus = router.get("/getImageUploadStatus", returnImageUploadStatusController);
+const fetchBookGenres = router.get("/fetchGenres", fetchBookGenresController);
 
 export {
   bookTestRoute,
   addNewBookRoute,
   addBookImageRoute,
+  addSingleBookImageRoute,
   deleteBookImageRoute,
   updateBookThumbnailRoute,
   updateBookRoute,
@@ -76,4 +81,5 @@ export {
   returnBookRoute,
   searchBookRoute,
   imageUploadStatus,
+  fetchBookGenres,
 };

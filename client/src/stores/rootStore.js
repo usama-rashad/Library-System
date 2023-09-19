@@ -4,6 +4,7 @@ import { authReducer } from "../reducers/authReducer";
 import { dashboardSelectionReducer } from "../reducers/dashboardSelectionReducer";
 import { addBookReducer } from "./../reducers/addBookReducer";
 import { updateBookReducer } from "./../reducers/updateBooksReducer";
+import { getGenresReducer } from "./../reducers/getGenreReducer";
 
 const combinedReducers = combineReducers({
   loginSignup: loginSignupReducer,
@@ -11,6 +12,7 @@ const combinedReducers = combineReducers({
   dashboard: dashboardSelectionReducer,
   addBooks: addBookReducer,
   updateBooks: updateBookReducer,
+  getGenres: getGenresReducer,
 });
 const rootStore = configureStore({
   reducer: combinedReducers,

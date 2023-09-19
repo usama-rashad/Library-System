@@ -63,10 +63,6 @@ function BookDetailsInput({ initialValue, serialNumber, onDataChange, index }) {
             updateValue={(e) => updateShelf(e)}
           />
         </div>
-        <div className="buttons">
-          {/* <img src={AddIcon} className="icons addIcon" onClick={() => addNewRow()} />
-          <img src={DeleteIcon} className="icons deleteIcon" onClick={() => removeRow()} /> */}
-        </div>
       </div>
     </div>
   );

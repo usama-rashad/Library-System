@@ -46,9 +46,7 @@ function PaginatedView({ headerCols, flex }) {
   };
 
   // START HERE !!!!
-  useEffect(() => {
-    console.log(books);
-  }, [books]);
+  useEffect(() => {}, [books]);
 
   // Update the flex width of the header column titles
   useEffect(() => {

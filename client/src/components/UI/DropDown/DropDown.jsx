@@ -11,6 +11,12 @@ function DropDown({ title, options }) {
   const [selectedOption, setSelectedOption] = useState("");
   const [optionName, setOptionName] = useState("");
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setSelectedOption(loadvalue);
+  //   }, 2000);
+  // }, []);
+
   const makeSelection = (e) => {
     setSelectedOption(e);
     setOpen(false);

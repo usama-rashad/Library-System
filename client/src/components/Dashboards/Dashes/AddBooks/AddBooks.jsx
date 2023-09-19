@@ -3,6 +3,7 @@ import "./AddBooks.scss";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBookAsyncThunk, reset, clearMessage, addStorageInfo } from "./../../../../reducers/addBookReducer";
+import { getGenresThunk } from "./../../../../reducers/getGenreReducer";
 
 // Icons
 import DeleteIcon from "../../../../assets/trash-can-regular.svg";
@@ -11,6 +12,8 @@ import AddIcon from "../../../../assets/square-plus-regular.svg";
 // Hooks
 import useAddBookState from "./../../../../hooks/useAddBookState";
 import useLoginState from "./../../../../hooks/useLoginState";
+import useGetBookGenres from "../../../../hooks/useGetBookGenres";
+
 import useStorageInfo from "../../../../reducers/useStorageInfo";
 
 //Components
@@ -25,6 +28,7 @@ const charLimit = 2000;
 
 function AddBooks() {
   const { success, fail, pending, message, state } = useAddBookState();
+  const { genres } = useGetBookGenres();
   const [charCount, setCharCount] = useState(0);
   const [colorState, setColorState] = useState("");
   const [addBookFormData, setAddBookFormData] = useState({
@@ -43,6 +47,10 @@ function AddBooks() {
 
   const dispatch = useDispatch();
   const { username } = useLoginState();
+
+  useEffect(() => {
+    dispatch(getGenresThunk());
+  }, []);
 
   const updateDescription = (input) => {
     let charCount = input.length;
@@ -125,35 +133,7 @@ function AddBooks() {
               source={addBookFormData.author}
               updateValue={(e) => updateAuthor(e)}
             />
-            <DropDown
-              title={"Genre"}
-              options={[
-                "Fantasy",
-                "Adventure",
-                "Romance",
-                "Contemporary",
-                "Dystopian",
-                "Mystery",
-                "Horror",
-                "Thriller",
-                "Paranormal",
-                "Historical fiction",
-                "Science Fiction",
-                "Children’s",
-                "Memoir",
-                "Cookbook",
-                "Art",
-                "Self-help",
-                "Personal Development",
-                "Motivational",
-                "Health",
-                "History",
-                "Travel",
-                "Guide / How-to",
-                "Families and Relationships",
-                "Humor",
-              ]}
-            />
+            <DropDown title={"Genre"} options={genres} />
           </div>
           <div className="col2">
             <div className="field">

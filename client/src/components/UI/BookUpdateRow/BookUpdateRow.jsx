@@ -1,15 +1,26 @@
 import "./BookUpdateRow.scss";
 
 import React, { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 
 // Components
 import EditableField from "../Form/EditableField/EditableField";
 import BookDetailsInput from "../BookDetailsInput/BookDetailsInput";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import Button from "../Button/Button";
+import SinglePictureUploader from "../../UI/SinglePictureUploader/SinglePictureUploader";
+import DropDown from "../DropDown/DropDown";
+
+// Icons
+import DeleteIcon from "../../../assets/trash-can-regular.svg";
+import AddIcon from "../../../assets/square-plus-regular.svg";
 
 // Images
 import ChevronRight from "../../../assets/chevron-right-solid.svg";
+
+// Hooks
+import useStorageInfo from "../../../reducers/useStorageInfo";
+import useGetBookGenres from "../../../hooks/useGetBookGenres";
 
 const closeHeight = 40;
 const openHeight = 150;
@@ -22,6 +33,15 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
   const [colorState, setColorState] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [modifiedBookData, setModifiedBookData] = useState(bookData);
+  const { genres } = useGetBookGenres();
+
+  const {
+    array: storageInfo,
+    push: appendStorageInfo,
+    remove: reduceStorageInfo,
+    updateRow,
+    length,
+  } = useStorageInfo(bookData.storageInfo);
 
   useEffect(() => {
     setModifiedBookData(bookData);
@@ -77,6 +97,20 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
     rowSelected();
   };
 
+  // HELPER FUNCTIONS
+  const addStorageInfo = () => {
+    appendStorageInfo({ serialNumber: length + 1, aisle: "", shelf: "" });
+  };
+  const removeStorageInfo = () => {
+    if (storageInfo.length === 1) {
+      return;
+    }
+    reduceStorageInfo();
+  };
+  const storageInfoUpdate = (e) => {
+    updateRow(e.data, e.index);
+  };
+
   return (
     <div className={`mainBookUpdateRow ${open ? "open" : ""}`} onClick={rowClick}>
       <div ref={topRef} className="top" onClick={toggleMenu}>
@@ -85,7 +119,7 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.isbn}
+          {bookData.ISBN}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
@@ -116,6 +150,9 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
                 <div className="images" key={index}>
                   <img src={images.URL} />
                   <p className="imageName">{images.filename}</p>
+                  <div className="controlPanel">
+                    <SinglePictureUploader bookInfo={modifiedBookData} imageNumber={index} />
+                  </div>
                 </div>
               );
             })}
@@ -129,12 +166,13 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
           <div className="column1">
             <div className="editableFields">
               <p id="fillerRow"></p>
-
               <EditableField label={"Title"} initialValue={modifiedBookData.title} />
               <EditableField label={"Author"} initialValue={modifiedBookData.author} />
-              <EditableField label={"Genre"} initialValue={modifiedBookData?.genre} />
+              <div className="genreDiv">
+                <DropDown title={"Genre"} options={genres} />
+              </div>
             </div>
-            <div className="pictures">
+            <div className="editPictures">
               <p className="title">Edit pictures</p>
               <button onClick={() => openPictureEditor()}>Edit pictures</button>
             </div>
@@ -145,12 +183,30 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
             <p className={`charCount ${colorState}`}>{`${charCount}/${charLimit} characters`}</p>
           </div>
           <div className="storageInfo">
-            <p className="title">Storage Info</p>
-            {modifiedBookData.storageInfo.map((storageInfo, index) => {
-              return (
-                <BookDetailsInput key={index} initialValue={storageInfo} index={index} onDataChange={(e) => {}} serialNumber={index + 1} />
-              );
-            })}
+            <div className="title">
+              <p className="detailTitle">Enter storage information</p>
+              <div className="iconButtons">
+                <img src={AddIcon} className="icons addIcon" onClick={() => addStorageInfo()} />
+                <img src={DeleteIcon} className="icons deleteIcon" onClick={() => removeStorageInfo()} />
+              </div>
+            </div>
+            <div className="bookDetailsRows">
+              {storageInfo.map((storageInfo, index) => {
+                return (
+                  <BookDetailsInput
+                    key={index}
+                    initialValue={storageInfo}
+                    index={index}
+                    onDataChange={(e) => {}}
+                    serialNumber={index + 1}
+                  />
+                );
+              })}
+            </div>
+            <div className="finalBookCount">
+              <p>Total books : </p>
+              <p>{storageInfo.length}</p>
+            </div>
           </div>
         </div>
         <div className="buttons">
