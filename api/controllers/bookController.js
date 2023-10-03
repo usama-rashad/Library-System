@@ -267,6 +267,7 @@ const updateBookInfoController = async (req, res, next) => {
 
 const deleteBookByISBNController = async (req, res, next) => {
   let { ISBN } = req.body;
+  console.log(`${ISBN} delete request.`);
   // Find book and delete
   let existingBook = await booksModel.findOne({ ISBN: ISBN });
   if (existingBook) {
@@ -367,7 +368,6 @@ const returnBookController = async (req, res, next) => {
 
 const searchBookController = async (req, res, next) => {
   let { title } = req.body;
-  console.log(title);
   if (!title || title === "") {
     return res.status(404).json({ message: "No book name. Enter a name." });
   }

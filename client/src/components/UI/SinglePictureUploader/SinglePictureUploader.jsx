@@ -98,7 +98,7 @@ function SinglePictureUploader({ bookInfo, imageNumber }) {
         </div>
       </div>
       <div className="uploadProgressBar">
-        <ProgressBar progress={progressPct} fileName={fileName} indentifier={imageNumber} />
+        <ProgressBar progress={progressPct} fileName={fileName} />
       </div>
     </div>
   );

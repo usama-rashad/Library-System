@@ -18,7 +18,11 @@ const getBooksByISBNThunk = createAsyncThunk("getBooksByISBN", async ({ ISBN }, 
 const updateBooksSlice = createSlice({
   name: "updateBooks",
   initialState: initialState,
-
+  reducers: {
+    clearBooks(state, action) {
+      state.books = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getBooksByISBNThunk.pending, (state, action) => {
       state.pending = true;
@@ -46,4 +50,5 @@ const updateBooksSlice = createSlice({
 });
 
 export const updateBookReducer = updateBooksSlice.reducer;
+export const { clearBooks } = updateBooksSlice.actions;
 export { getBooksByISBNThunk };

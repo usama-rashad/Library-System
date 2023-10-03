@@ -14,6 +14,7 @@ import {
   loginSystemStatusController,
   deleteUserController,
   loginCreateAccessTokenController,
+  getUsersByFirstName,
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -32,4 +33,15 @@ const loginSystemStatusRoute = router.get("/status", loginSystemStatusController
 
 const loginCreateAccessTokenRoute = router.get("/createNewAccessToken", loginCreateAccessTokenController);
 
-export { loginRoute, checkLoginRoute, logoutRoute, signupRoute, deleteUserRoute, loginSystemStatusRoute, loginCreateAccessTokenRoute };
+const getUsersByFirstNameRoute = router.post("/findUsersByFirstName", getUsersByFirstName);
+
+export {
+  loginRoute,
+  checkLoginRoute,
+  logoutRoute,
+  signupRoute,
+  deleteUserRoute,
+  loginSystemStatusRoute,
+  loginCreateAccessTokenRoute,
+  getUsersByFirstNameRoute,
+};

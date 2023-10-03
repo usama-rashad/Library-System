@@ -1,0 +1,233 @@
+Date : 2023-09-27 14:09:36
+Directory : c:\Users\Usama\Desktop\Git Repository\Library System\client
+Total : 141 files,  10778 codes, 193 comments, 695 blanks, all 11666 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JSON           |          3 |      4,586 |         10 |          2 |      4,598 |
+| SCSS           |         46 |      3,053 |         60 |        190 |      3,303 |
+| JavaScript JSX |         49 |      2,325 |        108 |        393 |      2,826 |
+| JavaScript     |         26 |        665 |          9 |        104 |        778 |
+| HTML           |          2 |        134 |          6 |          6 |        146 |
+| XML            |         15 |         15 |          0 |          0 |         15 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                |        141 |     10,778 |        193 |        695 |     11,666 |
+| . (Files)                                                                                                                        |          6 |      4,625 |         11 |          6 |      4,642 |
+| public                                                                                                                           |          2 |        119 |          6 |          5 |        130 |
+| src                                                                                                                              |        133 |      6,034 |        176 |        684 |      6,894 |
+| src (Files)                                                                                                                      |          4 |         81 |          7 |         17 |        105 |
+| src\assets                                                                                                                       |         14 |         14 |          0 |          0 |         14 |
+| src\components                                                                                                                   |         79 |      4,795 |        151 |        491 |      5,437 |
+| src\components\Auth                                                                                                              |          6 |        625 |         17 |         42 |        684 |
+| src\components\Auth\LoginForm                                                                                                    |          2 |        270 |          5 |         15 |        290 |
+| src\components\Auth\LoginState                                                                                                   |          2 |         82 |          6 |         12 |        100 |
+| src\components\Auth\SignUpForm                                                                                                   |          2 |        273 |          6 |         15 |        294 |
+| src\components\Dashboards                                                                                                        |         18 |        790 |         20 |         85 |        895 |
+| src\components\Dashboards\DashboardInterface                                                                                     |          2 |         60 |          4 |          8 |         72 |
+| src\components\Dashboards\DashboardMenu                                                                                          |          2 |         61 |          2 |          9 |         72 |
+| src\components\Dashboards\Dashes                                                                                                 |         12 |        649 |         14 |         63 |        726 |
+| src\components\Dashboards\Dashes\AddBooks                                                                                        |          2 |        382 |          5 |         24 |        411 |
+| src\components\Dashboards\Dashes\AddUsers-NotUsed                                                                                |          2 |         78 |          1 |          6 |         85 |
+| src\components\Dashboards\Dashes\RemoveBooks                                                                                     |          2 |         55 |          4 |         10 |         69 |
+| src\components\Dashboards\Dashes\RemoveUsers                                                                                     |          2 |         20 |          0 |          5 |         25 |
+| src\components\Dashboards\Dashes\UpdateBooks                                                                                     |          2 |         61 |          3 |         11 |         75 |
+| src\components\Dashboards\Dashes\UpdateUsers                                                                                     |          2 |         53 |          1 |          7 |         61 |
+| src\components\Dashboards\WelcomeDashboard                                                                                       |          2 |         20 |          0 |          5 |         25 |
+| src\components\SocialBadge                                                                                                       |          2 |         58 |          0 |          8 |         66 |
+| src\components\UI                                                                                                                |         53 |      3,322 |        114 |        356 |      3,792 |
+| src\components\UI\Animations                                                                                                     |          2 |         43 |          0 |          8 |         51 |
+| src\components\UI\Animations\Spinner                                                                                             |          2 |         43 |          0 |          8 |         51 |
+| src\components\UI\BookCarousel                                                                                                   |          2 |         57 |          0 |          6 |         63 |
+| src\components\UI\BookDetailsInput                                                                                               |          2 |        102 |          5 |         11 |        118 |
+| src\components\UI\BookFilter                                                                                                     |          2 |        101 |          3 |         13 |        117 |
+| src\components\UI\BookFilter copy                                                                                                |          1 |         60 |          3 |         12 |         75 |
+| src\components\UI\BookRemoveRow                                                                                                  |          2 |        146 |          3 |         18 |        167 |
+| src\components\UI\BookUpdateRow                                                                                                  |          2 |        485 |         16 |         35 |        536 |
+| src\components\UI\Button                                                                                                         |          2 |         77 |          0 |         11 |         88 |
+| src\components\UI\CollapsableMenu                                                                                                |          2 |        111 |          6 |         13 |        130 |
+| src\components\UI\DropDown                                                                                                       |          2 |        169 |          5 |         16 |        190 |
+| src\components\UI\Form                                                                                                           |          4 |        167 |         21 |         23 |        211 |
+| src\components\UI\Form\EditableField                                                                                             |          2 |         83 |          2 |         12 |         97 |
+| src\components\UI\Form\InputField                                                                                                |          2 |         84 |         19 |         11 |        114 |
+| src\components\UI\HomePageDailyMessage                                                                                           |          2 |         73 |          0 |          8 |         81 |
+| src\components\UI\HomePageSearch                                                                                                 |          2 |         48 |          2 |          8 |         58 |
+| src\components\UI\ModalWindow                                                                                                    |          2 |        126 |          0 |         10 |        136 |
+| src\components\UI\NavButton                                                                                                      |          2 |         71 |          0 |          7 |         78 |
+| src\components\UI\Navbar                                                                                                         |          2 |        171 |          6 |         15 |        192 |
+| src\components\UI\PaginatedView                                                                                                  |          2 |        203 |          8 |         23 |        234 |
+| src\components\UI\PersonCard                                                                                                     |          2 |         49 |          0 |          8 |         57 |
+| src\components\UI\PictureUploader                                                                                                |          2 |        200 |          5 |         17 |        222 |
+| src\components\UI\ProgressBar                                                                                                    |          2 |         59 |          1 |          9 |         69 |
+| src\components\UI\SearchBar                                                                                                      |          2 |         97 |          5 |         15 |        117 |
+| src\components\UI\SearchBarItem                                                                                                  |          2 |         44 |          0 |          9 |         53 |
+| src\components\UI\SearchResults                                                                                                  |          2 |         59 |          1 |          6 |         66 |
+| src\components\UI\SinglePictureUploader                                                                                          |          2 |        119 |          7 |         16 |        142 |
+| src\components\UI\UserFilter                                                                                                     |          2 |        101 |          3 |         13 |        117 |
+| src\components\UI\UserUpdateRow                                                                                                  |          2 |        384 |         14 |         26 |        424 |
+| src\contexts                                                                                                                     |          2 |         11 |          0 |          9 |         20 |
+| src\hooks                                                                                                                        |         10 |        106 |          0 |         35 |        141 |
+| src\pages                                                                                                                        |         10 |        482 |          9 |         61 |        552 |
+| src\pages\AboutUs                                                                                                                |          2 |        108 |          1 |         15 |        124 |
+| src\pages\BooksPage                                                                                                              |          2 |         95 |          2 |         12 |        109 |
+| src\pages\Contact                                                                                                                |          2 |        150 |          2 |         12 |        164 |
+| src\pages\DashBoard                                                                                                              |          2 |         37 |          1 |          7 |         45 |
+| src\pages\Home                                                                                                                   |          2 |         92 |          3 |         15 |        110 |
+| src\reducers                                                                                                                     |         12 |        505 |          8 |         61 |        574 |
+| src\stores                                                                                                                       |          1 |         25 |          0 |          3 |         28 |
+| src\utility                                                                                                                      |          1 |         15 |          1 |          7 |         23 |
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                                         | language       | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\.eslintrc.cjs                                                        | JavaScript     |         15 |          0 |          1 |         16 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\firebase.json                                                        | JSON           |          7 |         10 |          0 |         17 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\index.html                                                           | HTML           |         16 |          0 |          1 |         17 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\package-lock.json                                                    | JSON           |      4,537 |          0 |          1 |      4,538 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\package.json                                                         | JSON           |         42 |          0 |          1 |         43 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\public\index.html                                                    | HTML           |        118 |          6 |          5 |        129 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\public\vite.svg                                                      | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\address-card-regular.svg                                  | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\chevron-down-solid.svg                                    | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\chevron-left-solid.svg                                    | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\chevron-right-solid.svg                                   | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\magnifying-glass-solid.svg                                | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\pen-to-square-solid.svg                                   | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\react.svg                                                 | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\right-to-bracket-solid.svg                                | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\square-plus-regular.svg                                   | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\square-plus-solid.svg                                     | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\square-xmark-solid.svg                                    | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\trash-can-regular.svg                                     | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\trash-can-solid.svg                                       | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\assets\upload-solid.svg                                          | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\colors.scss                                                      | SCSS           |          7 |          0 |          3 |         10 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Auth\LoginForm\LoginForm.jsx                          | JavaScript JSX |         94 |          5 |         10 |        109 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Auth\LoginForm\LoginForm.scss                         | SCSS           |        176 |          0 |          5 |        181 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Auth\LoginState\LoginState.jsx                        | JavaScript JSX |         39 |          6 |         11 |         56 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Auth\LoginState\LoginState.scss                       | SCSS           |         43 |          0 |          1 |         44 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Auth\SignUpForm\SignupForm.jsx                        | JavaScript JSX |         98 |          4 |         10 |        112 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Auth\SignUpForm\SignupForm.scss                       | SCSS           |        175 |          2 |          5 |        182 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\DashboardInterface\DashboardInterface.jsx  | JavaScript JSX |         30 |          3 |          6 |         39 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\DashboardInterface\DashboardInterface.scss | SCSS           |         30 |          1 |          2 |         33 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\DashboardMenu\DashboardMenu.jsx            | JavaScript JSX |         50 |          2 |          7 |         59 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\DashboardMenu\DashboardMenu.scss           | SCSS           |         11 |          0 |          2 |         13 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\AddBooks\AddBooks.jsx               | JavaScript JSX |        184 |          5 |         15 |        204 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\AddBooks\AddBooks.scss              | SCSS           |        198 |          0 |          9 |        207 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\AddUsers-NotUsed\AddUsers.jsx       | JavaScript JSX |         48 |          1 |          5 |         54 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\AddUsers-NotUsed\AddUsers.scss      | SCSS           |         30 |          0 |          1 |         31 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\RemoveBooks\RemoveBooks.jsx         | JavaScript JSX |         25 |          4 |          8 |         37 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\RemoveBooks\RemoveBooks.scss        | SCSS           |         30 |          0 |          2 |         32 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\RemoveUsers\RemoveUsers.jsx         | JavaScript JSX |         10 |          0 |          4 |         14 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\RemoveUsers\RemoveUsers.scss        | SCSS           |         10 |          0 |          1 |         11 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\UpdateBooks\UpdateBooks.jsx         | JavaScript JSX |         31 |          3 |          9 |         43 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\UpdateBooks\UpdateBooks.scss        | SCSS           |         30 |          0 |          2 |         32 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\UpdateUsers\UpdateUsers.jsx         | JavaScript JSX |         23 |          1 |          5 |         29 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\Dashes\UpdateUsers\UpdateUsers.scss        | SCSS           |         30 |          0 |          2 |         32 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\WelcomeDashboard\WelcomeDashboard.jsx      | JavaScript JSX |         10 |          0 |          4 |         14 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\Dashboards\WelcomeDashboard\WelcomeDashboard.scss     | SCSS           |         10 |          0 |          1 |         11 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\SocialBadge\SocialBadge.jsx                           | JavaScript JSX |         17 |          0 |          4 |         21 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\SocialBadge\SocialBadge.scss                          | SCSS           |         41 |          0 |          4 |         45 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Animations\Spinner\Spinner.jsx                     | JavaScript JSX |         10 |          0 |          4 |         14 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Animations\Spinner\Spinner.scss                    | SCSS           |         33 |          0 |          4 |         37 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookCarousel\BookCarousel.jsx                      | JavaScript JSX |         26 |          0 |          5 |         31 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookCarousel\BookCarousel.scss                     | SCSS           |         31 |          0 |          1 |         32 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookDetailsInput\BookDetailsInput.jsx              | JavaScript JSX |         60 |          4 |          8 |         72 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookDetailsInput\BookDetailsInput.scss             | SCSS           |         42 |          1 |          3 |         46 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookFilter copy\BookFilter.jsx                     | JavaScript JSX |         60 |          3 |         12 |         75 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookFilter\BookFilter.jsx                          | JavaScript JSX |         60 |          3 |         12 |         75 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookFilter\BookFilter.scss                         | SCSS           |         41 |          0 |          1 |         42 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookRemoveRow\BookRemoveRow.jsx                    | JavaScript JSX |         76 |          2 |         11 |         89 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookRemoveRow\BookRemoveRow.scss                   | SCSS           |         70 |          1 |          7 |         78 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookUpdateRow\BookUpdateRow.jsx                    | JavaScript JSX |        195 |          6 |         22 |        223 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\BookUpdateRow\BookUpdateRow.scss                   | SCSS           |        290 |         10 |         13 |        313 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Button\Button.jsx                                  | JavaScript JSX |         24 |          0 |          5 |         29 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Button\Button.scss                                 | SCSS           |         53 |          0 |          6 |         59 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\CollapsableMenu\CollapsableMenu.jsx                | JavaScript JSX |         34 |          2 |          7 |         43 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\CollapsableMenu\CollapsableMenu.scss               | SCSS           |         77 |          4 |          6 |         87 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\DropDown\DropDown.jsx                              | JavaScript JSX |         51 |          5 |         11 |         67 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\DropDown\DropDown.scss                             | SCSS           |        118 |          0 |          5 |        123 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Form\EditableField\EditableField.jsx               | JavaScript JSX |         39 |          2 |          9 |         50 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Form\EditableField\EditableField.scss              | SCSS           |         44 |          0 |          3 |         47 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Form\InputField\InputField.jsx                     | JavaScript JSX |         58 |          0 |          9 |         67 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Form\InputField\InputField.scss                    | SCSS           |         26 |         19 |          2 |         47 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\HomePageDailyMessage\HomePageDailyMessage.jsx      | JavaScript JSX |         17 |          0 |          4 |         21 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\HomePageDailyMessage\HomePageDailyMessage.scss     | SCSS           |         56 |          0 |          4 |         60 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\HomePageSearch\HomePageSearch.jsx                  | JavaScript JSX |         11 |          2 |          5 |         18 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\HomePageSearch\HomePageSearch.scss                 | SCSS           |         37 |          0 |          3 |         40 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\ModalWindow\ModalWindow.jsx                        | JavaScript JSX |         16 |          0 |          4 |         20 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\ModalWindow\ModalWindow.scss                       | SCSS           |        110 |          0 |          6 |        116 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\NavButton\NavButton.jsx                            | JavaScript JSX |         18 |          0 |          4 |         22 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\NavButton\NavButton.scss                           | SCSS           |         53 |          0 |          3 |         56 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Navbar\Navbar.jsx                                  | JavaScript JSX |         89 |          6 |         12 |        107 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\Navbar\Navbar.scss                                 | SCSS           |         82 |          0 |          3 |         85 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\PaginatedView\PaginatedView.jsx                    | JavaScript JSX |         85 |          4 |         15 |        104 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\PaginatedView\PaginatedView.scss                   | SCSS           |        118 |          4 |          8 |        130 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\PersonCard\PersonCard.jsx                          | JavaScript JSX |         14 |          0 |          4 |         18 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\PersonCard\PersonCard.scss                         | SCSS           |         35 |          0 |          4 |         39 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\PictureUploader\PictureUploader.jsx                | JavaScript JSX |        126 |          5 |         15 |        146 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\PictureUploader\PictureUploader.scss               | SCSS           |         74 |          0 |          2 |         76 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\ProgressBar\ProgressBar.jsx                        | JavaScript JSX |         20 |          0 |          6 |         26 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\ProgressBar\ProgressBar.scss                       | SCSS           |         39 |          1 |          3 |         43 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\SearchBarItem\SearchBarItem.jsx                    | JavaScript JSX |         18 |          0 |          5 |         23 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\SearchBarItem\SearchBarItem.scss                   | SCSS           |         26 |          0 |          4 |         30 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\SearchBar\SearchBar.jsx                            | JavaScript JSX |         31 |          1 |          8 |         40 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\SearchBar\SearchBar.scss                           | SCSS           |         66 |          4 |          7 |         77 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\SearchResults\SearchResults.jsx                    | JavaScript JSX |         18 |          1 |          4 |         23 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\SearchResults\SearchResults.scss                   | SCSS           |         41 |          0 |          2 |         43 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\SinglePictureUploader\SinglePictureUploader.jsx    | JavaScript JSX |         87 |          7 |         14 |        108 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\SinglePictureUploader\SinglePictureUploader.scss   | SCSS           |         32 |          0 |          2 |         34 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\UserFilter\UserFilter.jsx                          | JavaScript JSX |         60 |          3 |         12 |         75 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\UserFilter\UserFilter.scss                         | SCSS           |         41 |          0 |          1 |         42 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\UserUpdateRow\UserUpdateRow.jsx                    | JavaScript JSX |         94 |          4 |         13 |        111 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\components\UI\UserUpdateRow\UserUpdateRow.scss                   | SCSS           |        290 |         10 |         13 |        313 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\contants.js                                                      | JavaScript     |          6 |          0 |          2 |          8 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\contexts\TrackISBNContext.jsx                                    | JavaScript JSX |          8 |          0 |          6 |         14 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\contexts\UpdateBookContext.jsx                                   | JavaScript JSX |          3 |          0 |          3 |          6 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useAddBookState.js                                         | JavaScript     |          6 |          0 |          3 |          9 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useArray.js                                                | JavaScript     |         27 |          0 |          7 |         34 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useAuthBlurState.js                                        | JavaScript     |         14 |          0 |          3 |         17 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useDashboardInterfaceState.js                              | JavaScript     |          6 |          0 |          3 |          9 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useGeoLocation.js                                          | JavaScript     |         21 |          0 |          2 |         23 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useGetBookGenres.js                                        | JavaScript     |          8 |          0 |          3 |         11 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useISBNList.js                                             | JavaScript     |          6 |          0 |          4 |         10 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useLoginState.js                                           | JavaScript     |          6 |          0 |          3 |          9 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useUpdateBookState.js                                      | JavaScript     |          6 |          0 |          3 |          9 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\hooks\useUserEmailList.js                                        | JavaScript     |          6 |          0 |          4 |         10 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\index.scss                                                       | SCSS           |         24 |          3 |          7 |         34 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\main.jsx                                                         | JavaScript JSX |         44 |          4 |          5 |         53 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\AboutUs\AboutUs.jsx                                        | JavaScript JSX |         32 |          1 |          7 |         40 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\AboutUs\AboutUs.scss                                       | SCSS           |         76 |          0 |          8 |         84 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\BooksPage\BooksPage.jsx                                    | JavaScript JSX |         49 |          2 |          7 |         58 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\BooksPage\BooksPage.scss                                   | SCSS           |         46 |          0 |          5 |         51 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\Contact\Contact.jsx                                        | JavaScript JSX |         60 |          2 |          6 |         68 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\Contact\Contact.scss                                       | SCSS           |         90 |          0 |          6 |         96 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\DashBoard\Dashboard.jsx                                    | JavaScript JSX |         17 |          1 |          5 |         23 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\DashBoard\Dashboard.scss                                   | SCSS           |         20 |          0 |          2 |         22 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\Home\App.jsx                                               | JavaScript JSX |         41 |          3 |          9 |         53 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\pages\Home\App.scss                                              | SCSS           |         51 |          0 |          6 |         57 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\ISBNListReducer.js                                      | JavaScript     |         31 |          1 |          4 |         36 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\UserEmailListReducer.js                                 | JavaScript     |         31 |          1 |          4 |         36 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\addBookReducer.js                                       | JavaScript     |         60 |          0 |          5 |         65 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\authReducer.js                                          | JavaScript     |         24 |          0 |          4 |         28 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\dashboardSelectionReducer.js                            | JavaScript     |         43 |          2 |          5 |         50 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\deleteBooksReducer.js                                   | JavaScript     |         63 |          2 |          6 |         71 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\deleteUsersReducer.js                                   | JavaScript     |         66 |          2 |          7 |         75 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\getGenreReducer.js                                      | JavaScript     |         47 |          0 |          6 |         53 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\loginSignupReducer.js                                   | JavaScript     |         19 |          0 |          4 |         23 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\updateBooksReducer.js                                   | JavaScript     |         50 |          0 |          5 |         55 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\updateUsersReducer.js                                   | JavaScript     |         50 |          0 |          5 |         55 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\reducers\useStorageInfo.js                                       | JavaScript     |         21 |          0 |          6 |         27 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\stores\rootStore.js                                              | JavaScript     |         25 |          0 |          3 |         28 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\src\utility\BrowserNavigate.jsx                                      | JavaScript JSX |         15 |          1 |          7 |         23 |
+| c:\Users\Usama\Desktop\Git Repository\Library System\client\vite.config.js                                                       | JavaScript     |          8 |          1 |          2 |         11 |
+| Total                                                                                                                            |                |     10,778 |        193 |        695 |     11,666 |
++----------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

@@ -1,0 +1,20 @@
+"filename", "language", "JSON with Comments", "JavaScript", "JSON", "Properties", "comment", "blank", "total"
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\.env", "Properties", 0, 0, 0, 6, 2, 2, 10
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\babel.config.json", "JSON with Comments", 13, 0, 0, 0, 0, 1, 14
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\controllers\bookController.js", "JavaScript", 0, 400, 0, 0, 25, 31, 456
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\controllers\userController.js", "JavaScript", 0, 207, 0, 0, 23, 24, 254
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\db\db.js", "JavaScript", 0, 19, 0, 0, 0, 6, 25
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\firebase.js", "JavaScript", 0, 13, 0, 0, 3, 3, 19
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\jest.config.js", "JavaScript", 0, 4, 0, 0, 0, 2, 6
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\main.js", "JavaScript", 0, 65, 0, 0, 5, 9, 79
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\middleware\auth\verifyUser.js", "JavaScript", 0, 38, 0, 0, 1, 3, 42
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\models\books.model.js", "JavaScript", 0, 14, 0, 0, 0, 3, 17
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\models\tokens.model.js", "JavaScript", 0, 4, 0, 0, 0, 3, 7
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\models\users.model.js", "JavaScript", 0, 4, 0, 0, 0, 3, 7
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\package-lock.json", "JSON", 0, 0, 7773, 0, 0, 1, 7774
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\package.json", "JSON", 0, 0, 37, 0, 0, 1, 38
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\routes\bookRoutes.js", "JavaScript", 0, 74, 0, 0, 3, 9, 86
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\routes\userRoutes.js", "JavaScript", 0, 33, 0, 0, 2, 13, 48
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\server.js", "JavaScript", 0, 6, 0, 0, 1, 3, 10
+"c:\Users\Usama\Desktop\Git Repository\Library System\api\tests\controllers\userControllers.test.js", "JavaScript", 0, 33, 0, 0, 0, 3, 36
+"Total", "-", 13, 914, 7810, 6, 65, 120, 8928

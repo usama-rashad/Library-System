@@ -237,6 +237,18 @@ const loginCreateAccessTokenController = (req, res, next) => {
   });
 };
 
+const getUsersByFirstName = async (req, res, next) => {
+  let { firstname } = req.body;
+
+  let searchPattern = firstname;
+  // Search in the DB for the name
+  let usersList = await usersModel.find({ firstname: { $regex: searchPattern, $options: "i" } });
+  let userData = usersList.map((user) => {
+    return { firstName: user.firstname, lastname: user.lastname, isAdmin: user.isAdmin, username: user.username };
+  });
+  return res.status(200).json({ message: `Found ${userData.length} users.`, data: userData });
+};
+
 export {
   signupController,
   deleteUserController,
@@ -245,4 +257,5 @@ export {
   logoutController,
   loginSystemStatusController,
   loginCreateAccessTokenController,
+  getUsersByFirstName,
 };

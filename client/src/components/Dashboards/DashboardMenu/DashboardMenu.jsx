@@ -26,6 +26,7 @@ function DashboardMenu() {
   const updateBookAction = () => {
     dispatch(changeToUpdateBook());
   };
+  // Not implemented
   const addUserAction = () => {
     dispatch(changeToAddNewUsers());
   };
@@ -46,9 +47,9 @@ function DashboardMenu() {
       />
       <CollapsableMenu
         title="Users"
-        menuItems={["Add User", "Update User", "Remove User"]} // Must correspond to the list of actions
-        menuActions={[addUserAction, updateUserAction, removeUserAction]}
-        highLightIndex={[4, 5, 6]}
+        menuItems={["Update User", "Remove User"]} // Must correspond to the list of actions
+        menuActions={[updateUserAction, removeUserAction]}
+        highLightIndex={[5, 6]}
       />
     </div>
   );

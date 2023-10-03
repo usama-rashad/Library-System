@@ -17,6 +17,7 @@ import {
   signupRoute,
   deleteUserRoute,
   loginCreateAccessTokenRoute,
+  getUsersByFirstNameRoute,
 } from "./routes/userRoutes.js";
 import {
   bookTestRoute,
@@ -56,6 +57,7 @@ app.use(USERS_API, signupRoute);
 app.use(USERS_API, deleteUserRoute);
 app.use(USERS_API, loginSystemStatusRoute);
 app.use(USERS_API, loginCreateAccessTokenRoute);
+app.use(USERS_API, getUsersByFirstNameRoute);
 
 // Books
 app.use(BOOKS_API, bookTestRoute);

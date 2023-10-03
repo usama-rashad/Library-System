@@ -3,14 +3,14 @@ import "./BookFilter.scss";
 import React, { useEffect, useState, useContext } from "react";
 
 // Components
-import InputField from "../../UI/Form/InputField/InputField";
-import Button from "../../UI/Button/Button";
+import InputField from "../Form/InputField/InputField";
+import Button from "../Button/Button";
 
 // Reducer
 import { useDispatch } from "react-redux";
 import { getBooksByISBNThunk, clearBooks } from "../../../reducers/updateBooksReducer.js";
 import { deleteBooksAsyncThunk } from "../../../reducers/deleteBooksReducer";
-import { clearList } from "./../../../reducers/ISBNListReducer";
+import { clearList } from "../../../reducers/ISBNListReducer";
 
 // Hooks
 import useISBNList from "../../../hooks/useISBNList";
@@ -49,7 +49,7 @@ function BookFilter({ showDeleteButton }) {
         <p id="titleText">Filter options</p>
         <InputField
           showLabel={false}
-          label={"ISBN-13"}
+          label={searchFieldName}
           placeholder={`Enter ISBN-13`}
           type={"ISBN"}
           validationHint={"Numbers only."}

@@ -1,9 +1,11 @@
-import "./PaginatedView.scss";
+import "./PaginatedViewBooks.scss";
 
 import React, { useEffect, useState } from "react";
 
 // Components
 import BookUpdateRow from "../BookUpdateRow/BookUpdateRow";
+import BookRemoveRow from "../BookRemoveRow/BookRemoveRow";
+
 import Spinner from "../Animations/Spinner/Spinner";
 
 // Hooks
@@ -27,7 +29,7 @@ function ChevronRightIcon() {
   );
 }
 
-function PaginatedView({ headerCols, flex }) {
+function PaginatedViewBooks({ headerCols, flex, baseComponent: BaseComponent }) {
   const { success, fail, pending: isLoading, message, state, books } = useUpdateBookState();
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(10);
@@ -44,9 +46,6 @@ function PaginatedView({ headerCols, flex }) {
   const selectedRow = (e) => {
     setSelectedRowNumber(e);
   };
-
-  // START HERE !!!!
-  useEffect(() => {}, [books]);
 
   // Update the flex width of the header column titles
   useEffect(() => {
@@ -79,7 +78,7 @@ function PaginatedView({ headerCols, flex }) {
         {books.length > 0
           ? books.map((book, index) => {
               return (
-                <BookUpdateRow
+                <BaseComponent
                   key={index}
                   index={index + 1}
                   rowSelected={(e) => selectedRow(e)}
@@ -101,4 +100,4 @@ function PaginatedView({ headerCols, flex }) {
   );
 }
 
-export default PaginatedView;
+export default PaginatedViewBooks;

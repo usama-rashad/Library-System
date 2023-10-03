@@ -5,6 +5,10 @@ import { dashboardSelectionReducer } from "../reducers/dashboardSelectionReducer
 import { addBookReducer } from "./../reducers/addBookReducer";
 import { updateBookReducer } from "./../reducers/updateBooksReducer";
 import { getGenresReducer } from "./../reducers/getGenreReducer";
+import { ISBNListReducer } from "./../reducers/ISBNListReducer";
+import { UserEmailListReducer } from "./../reducers/UserEmailListReducer";
+import { deleteBooksReducer } from "./../reducers/deleteBooksReducer";
+import { updateUserReducer } from "../reducers/updateUsersReducer";
 
 const combinedReducers = combineReducers({
   loginSignup: loginSignupReducer,
@@ -12,7 +16,11 @@ const combinedReducers = combineReducers({
   dashboard: dashboardSelectionReducer,
   addBooks: addBookReducer,
   updateBooks: updateBookReducer,
+  updateUsers: updateUserReducer,
   getGenres: getGenresReducer,
+  ISBNList: ISBNListReducer,
+  userEmailList: UserEmailListReducer,
+  deleteBooks: deleteBooksReducer,
 });
 const rootStore = configureStore({
   reducer: combinedReducers,
