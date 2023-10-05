@@ -80,7 +80,7 @@ function PaginatedView({ headerCols, flex, baseComponent: BaseComponent }) {
               return (
                 <BaseComponent key={index} index={index + 1} rowSelected={(e) => selectedRow(e)} flex={[1, 3, 3, 4, 2]} bookData={book} />
               );
-            })
+            })``
           : null}
       </div>
 

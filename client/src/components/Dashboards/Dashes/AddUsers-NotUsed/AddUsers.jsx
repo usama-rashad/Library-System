@@ -1,5 +1,8 @@
 import "./AddUsers.scss";
 
+// This component will not be used since users will have to signup on the home page to add themselves
+// The admins can only delete users
+
 import React, { useState } from "react";
 
 //Components
