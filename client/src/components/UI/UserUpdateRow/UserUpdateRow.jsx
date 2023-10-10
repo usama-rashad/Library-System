@@ -14,7 +14,7 @@ import ChevronRight from "../../../assets/chevron-right-solid.svg";
 import useStorageInfo from "../../../reducers/useStorageInfo";
 import useGetBookGenres from "../../../hooks/useGetBookGenres";
 
-function UserUpdateRow({ index, userData, flex, rowSelected, isSelected }) {
+function UserUpdateRow({ index, userData, flex }) {
   const topRef = useRef();
   const [open, setOpen] = useState(false);
   const [modifiedUserData, setModifiedUserData] = useState(userData);
@@ -49,9 +49,7 @@ function UserUpdateRow({ index, userData, flex, rowSelected, isSelected }) {
     setOpen((prev) => !prev);
   };
 
-  const rowClick = () => {
-    rowSelected();
-  };
+  const rowClick = () => {};
 
   return (
     <div className={`mainUserUpdateRow ${open ? "open" : ""}`} onClick={rowClick}>

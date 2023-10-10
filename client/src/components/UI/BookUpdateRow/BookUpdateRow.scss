@@ -1,7 +1,7 @@
 @import "../../../colors.scss";
 
-$topHeight: 50px;
-$bottomHeight: 450px;
+$topHeight: 40px;
+$bottomHeight: 280px;
 
 .mainBookUpdateRow {
   height: $topHeight;
@@ -49,6 +49,7 @@ $bottomHeight: 450px;
       height: 60%;
       width: 1px;
       background-color: lightgray;
+      margin: 1px;
     }
 
     .userSelection {

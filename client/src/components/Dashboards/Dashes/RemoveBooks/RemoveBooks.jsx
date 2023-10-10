@@ -3,9 +3,7 @@ import "./RemoveBooks.scss";
 import React, { useEffect, useState } from "react";
 
 // Components
-import PaginatedViewBooks from "../../../UI/PaginatedViewBooks/PaginatedViewBooks";
 import BookFilter from "../../../UI/BookFilter/BookFilter";
-import BookRemoveRow from "../../../UI/BookRemoveRow/BookRemoveRow";
 
 // Hooks
 
@@ -22,11 +20,6 @@ function RemoveBooks() {
         <p className="dashTitle">Remove books</p>
         <div className="content">
           <BookFilter showDeleteButton={true} />
-          <PaginatedViewBooks
-            headerCols={["S.No", "ISBN", "Title", "Author", "Genré", "Quantity", ""]}
-            flex={[1, 3, 10, 3, 3, 3, 1]}
-            baseComponent={BookRemoveRow}
-          />
         </div>
       </div>
     </div>

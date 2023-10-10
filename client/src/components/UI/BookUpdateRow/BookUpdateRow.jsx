@@ -26,26 +26,20 @@ const closeHeight = 40;
 const openHeight = 150;
 const charLimit = 2000;
 
-function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
+function BookUpdateRow({ index, data, flex }) {
   const topRef = useRef();
   const [open, setOpen] = useState(false);
   const [pictureEditorOpenState, setPictureEditorOpenState] = useState(false);
   const [colorState, setColorState] = useState("");
   const [charCount, setCharCount] = useState(0);
-  const [modifiedBookData, setModifiedBookData] = useState(bookData);
+  const [modifiedBookData, setModifiedBookData] = useState(data);
   const { genres } = useGetBookGenres();
 
-  const {
-    array: storageInfo,
-    push: appendStorageInfo,
-    remove: reduceStorageInfo,
-    updateRow,
-    length,
-  } = useStorageInfo(bookData.storageInfo);
+  const { array: storageInfo, push: appendStorageInfo, remove: reduceStorageInfo, updateRow, length } = useStorageInfo(data.storageInfo);
 
   useEffect(() => {
-    setModifiedBookData(bookData);
-  }, [bookData.ISBN]);
+    setModifiedBookData(data);
+  }, [data.ISBN]);
 
   // Update the flex width of the rwo elements
   useEffect(() => {
@@ -93,9 +87,7 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
     setPictureEditorOpenState(false);
   };
 
-  const rowClick = () => {
-    rowSelected();
-  };
+  const rowClick = () => {};
 
   // HELPER FUNCTIONS
   const addStorageInfo = () => {
@@ -119,23 +111,23 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.ISBN}
+          {data.ISBN}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.title}
+          {data.title}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.author}
+          {data.author}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.genre}
+          {data.genre}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.storageInfo.length}
+          {data.storageInfo.length}
         </p>
         <div className="seperator"></div>
         <div name="topFields" className="userSelection" onClick={toggleMenu}>
@@ -145,7 +137,7 @@ function BookUpdateRow({ index, bookData, flex, rowSelected, isSelected }) {
       <div className="bottom">
         <ModalWindow open={pictureEditorOpenState} closeAction={() => closePictureEditor()}>
           <div className="imageRow">
-            {bookData.additionalImages.map((images, index) => {
+            {data.additionalImages.map((images, index) => {
               return (
                 <div className="images" key={index}>
                   <img src={images.URL} />
