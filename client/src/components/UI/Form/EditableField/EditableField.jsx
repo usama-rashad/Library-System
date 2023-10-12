@@ -2,7 +2,7 @@ import "./EditableField.scss";
 
 import React, { useEffect, useState } from "react";
 
-function EditableField({ label, initialValue }) {
+function EditableField({ label, initialValue, updateCb }) {
   const [fieldLabel, setFieldLabel] = useState(label);
   const [inputValue, setInputValue] = useState(initialValue);
   const [editMode, setEditMode] = useState(false);
@@ -29,6 +29,12 @@ function EditableField({ label, initialValue }) {
       setEditMode(false);
     }
   };
+
+  useEffect(() => {
+    if (!editMode) {
+      if (typeof updateCb === "function") updateCb(inputValue);
+    }
+  }, [editMode]);
 
   return (
     <div className="mainEditableField">

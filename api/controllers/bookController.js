@@ -243,6 +243,7 @@ const addNewBookController = async (req, res, next) => {
 };
 
 const updateBookInfoController = async (req, res, next) => {
+  console.log("Called controller to update book data.");
   let { title, author, ISBN, aisle, shelf, serialNumber, description } = req.body;
   if (!title || !author || !ISBN || !aisle || !shelf || !serialNumber || !description) {
     return res.status(404).json({ message: `Missing information. Book was not updated.` });

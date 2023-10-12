@@ -9,6 +9,7 @@ import { ISBNListReducer } from "./../reducers/ISBNListReducer";
 import { UserEmailListReducer } from "./../reducers/UserEmailListReducer";
 import { deleteBooksReducer } from "./../reducers/deleteBooksReducer";
 import { updateUserReducer } from "../reducers/updateUsersReducer";
+import { updateBookDataReducer } from "../Reducers/updateBookDataReducer";
 
 const combinedReducers = combineReducers({
   loginSignup: loginSignupReducer,
@@ -16,6 +17,7 @@ const combinedReducers = combineReducers({
   dashboard: dashboardSelectionReducer,
   addBooks: addBookReducer,
   updateBooks: updateBookReducer,
+  updateBookData: updateBookDataReducer,
   updateUsers: updateUserReducer,
   getGenres: getGenresReducer,
   ISBNList: ISBNListReducer,

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 // Reducers
 import { addToList, removeFromList } from "./../../../reducers/ISBNListReducer";
 
-function BookRemoveRow({ index, bookData, flex, rowSelected }) {
+function BookRemoveRow({ index, data, flex }) {
   const topRef = useRef();
   const deleteBoxRef = useRef();
   const dispatch = useDispatch();
@@ -38,9 +38,9 @@ function BookRemoveRow({ index, bookData, flex, rowSelected }) {
   const updateISBN = (e) => {
     setChecked(e.target.checked);
     if (e.target.checked) {
-      addToListAction(bookData.ISBN);
+      addToListAction(data.ISBN);
     } else {
-      removeFromListAction(bookData.ISBN);
+      removeFromListAction(data.ISBN);
     }
   };
 
@@ -52,23 +52,23 @@ function BookRemoveRow({ index, bookData, flex, rowSelected }) {
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.ISBN}
+          {data.ISBN}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.title}
+          {data.title}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.author}
+          {data.author}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.genre}
+          {data.genre}
         </p>
         <div className="seperator"></div>
         <p name="topFields" className="topFields">
-          {bookData.storageInfo.length}
+          {data.storageInfo.length}
         </p>
         <div className="seperator"></div>
         <div name="topFields" className="userSelection">

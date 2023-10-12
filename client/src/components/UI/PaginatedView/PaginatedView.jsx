@@ -1,11 +1,17 @@
 import "./PaginatedView.scss";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 
-function PaginatedView({ titleBarColumns, dataSource, RenderItem, renderItemFlexLayout }) {
+// Animations
+import BookAnimation from "./../../../assets/bookAnimation.gif";
+
+function PaginatedView({ busy, titleBarColumns, dataSource, RenderItem, renderItemFlexLayout }) {
   const titleBarRef = useRef();
+  const dataContentRef = (useRef < HTMLDivElement) | (null > null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageSelection, setPageSelection] = useState([]);
+  const [itemsPerPage, setItemsPerPage] = useState(0);
 
   const nextPage = () => {
     if (currentPage < totalPages) {
@@ -33,15 +39,38 @@ function PaginatedView({ titleBarColumns, dataSource, RenderItem, renderItemFlex
     }
   }, []);
 
+  // Get the hieght of the dataContent section
+  useEffect(() => {
+    setCurrentPage(1);
+    let dataContent = document.getElementById("dataContentDiv");
+    let perPage = Math.floor(dataContent.offsetHeight / 40);
+    setItemsPerPage(perPage);
+    setTotalPages(Math.ceil(dataSource.length / perPage));
+    let lowerLimit = perPage * (currentPage - 1);
+    let upperLimit = lowerLimit + perPage;
+    setPageSelection(dataSource.slice(lowerLimit, upperLimit));
+  }, [dataSource]);
+
+  useEffect(() => {
+    let lowerLimit = itemsPerPage * (currentPage - 1);
+    let upperLimit = lowerLimit + itemsPerPage;
+    setPageSelection(dataSource.slice(lowerLimit, upperLimit));
+  }, [currentPage]);
+
   return (
     <div className="paginatedView">
       <div ref={titleBarRef} className="titleBar">
-        {titleBarColumns.map((colName) => {
-          return <p>{colName}</p>;
+        {titleBarColumns.map((colName, index) => {
+          return <p key={index}>{colName}</p>;
         })}
       </div>
-      <div className="dataContent">
-        {dataSource.map((bookData, index) => {
+      {busy && (
+        <div className="loadingAnimation">
+          <img src={BookAnimation} />
+        </div>
+      )}
+      <div id="dataContentDiv" className="dataContent">
+        {pageSelection.map((bookData, index) => {
           return <RenderItem key={index} index={index + 1} data={bookData} flex={renderItemFlexLayout} />;
         })}
       </div>

@@ -22,12 +22,17 @@ import ChevronRight from "../../../assets/chevron-right-solid.svg";
 import useStorageInfo from "../../../reducers/useStorageInfo";
 import useGetBookGenres from "../../../hooks/useGetBookGenres";
 
+// Reducers
+import { updateBookDataThunk } from "../../../Reducers/updateBookDataReducer";
+
 const closeHeight = 40;
 const openHeight = 150;
 const charLimit = 2000;
 
 function BookUpdateRow({ index, data, flex }) {
+  const dispatch = useDispatch();
   const topRef = useRef();
+  const [rowHeight, setRowHeight] = useState(0);
   const [open, setOpen] = useState(false);
   const [pictureEditorOpenState, setPictureEditorOpenState] = useState(false);
   const [colorState, setColorState] = useState("");
@@ -62,6 +67,17 @@ function BookUpdateRow({ index, data, flex }) {
     }
   }, [open]);
 
+  //Get the height of the element
+  useEffect(() => {
+    let parent = document.getElementById("rowParent");
+    setRowHeight(parent.offsetHeight);
+  }, []);
+
+  //Set the charcount on load
+  useEffect(() => {
+    setCharCount(modifiedBookData.description.length);
+  }, []);
+
   const toggleMenu = () => {
     setOpen((prev) => !prev);
   };
@@ -89,6 +105,11 @@ function BookUpdateRow({ index, data, flex }) {
 
   const rowClick = () => {};
 
+  const updateBookData = () => {
+    console.log("Book update data called.");
+    dispatch(updateBookDataThunk({ ISBN: modifiedBookData.ISBN, modifiedBookData: modifiedBookData }));
+  };
+
   // HELPER FUNCTIONS
   const addStorageInfo = () => {
     appendStorageInfo({ serialNumber: length + 1, aisle: "", shelf: "" });
@@ -104,7 +125,7 @@ function BookUpdateRow({ index, data, flex }) {
   };
 
   return (
-    <div className={`mainBookUpdateRow ${open ? "open" : ""}`} onClick={rowClick}>
+    <div id="rowParent" className={`mainBookUpdateRow ${open ? "open" : ""}`} onClick={rowClick}>
       <div ref={topRef} className="top" onClick={toggleMenu}>
         <p name="topFields" className="topFields">
           {index}
@@ -158,10 +179,10 @@ function BookUpdateRow({ index, data, flex }) {
           <div className="column1">
             <div className="editableFields">
               <p id="fillerRow"></p>
-              <EditableField label={"Title"} initialValue={modifiedBookData.title} />
-              <EditableField label={"Author"} initialValue={modifiedBookData.author} />
+              <EditableField label={"Title"} initialValue={modifiedBookData.title} updateCb={(value) => console.log(value)} />
+              <EditableField label={"Author"} initialValue={modifiedBookData.author} updateCb={(value) => console.log(value)} />
               <div className="genreDiv">
-                <DropDown title={"Genre"} options={genres} />
+                <DropDown title={"Genre"} options={genres} preset={modifiedBookData.genre} />
               </div>
             </div>
             <div className="editPictures">
@@ -202,7 +223,7 @@ function BookUpdateRow({ index, data, flex }) {
           </div>
         </div>
         <div className="buttons">
-          <Button enable={false}>
+          <Button clickAction={updateBookData} enable={true}>
             <p>Apply</p>
           </Button>
         </div>

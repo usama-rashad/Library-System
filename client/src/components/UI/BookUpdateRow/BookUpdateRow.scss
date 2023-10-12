@@ -1,7 +1,7 @@
 @import "../../../colors.scss";
 
 $topHeight: 40px;
-$bottomHeight: 280px;
+$bottomHeight: 320px;
 
 .mainBookUpdateRow {
   height: $topHeight;
@@ -81,7 +81,7 @@ $bottomHeight: 280px;
 
   .bottom {
     width: 100%;
-    height: $bottomHeight;
+    // height: $bottomHeight;
     background-color: white;
     margin: 0;
     padding: 0;
@@ -89,8 +89,9 @@ $bottomHeight: 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     .imageRow {
+      flex: 1;
       margin-top: 5px;
       display: flex;
       flex-direction: row;
@@ -119,6 +120,7 @@ $bottomHeight: 280px;
       }
     }
     .content {
+      flex: 2;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -132,10 +134,11 @@ $bottomHeight: 280px;
       }
     }
     .datagrid {
+      flex: 10;
       background-color: white;
       background-image: linear-gradient(white, rgb(236, 236, 236));
       margin: 0 auto;
-      height: 100%;
+      height: min-content;
       padding: 5px;
       display: flex;
       flex-direction: row;
@@ -185,6 +188,7 @@ $bottomHeight: 280px;
         margin-right: 5px;
         overflow-y: scroll;
         height: 200px;
+
         .title {
           display: flex;
           flex-direction: row;
@@ -300,10 +304,9 @@ $bottomHeight: 280px;
       }
     }
     .buttons {
-      height: min-content;
+      height: 80px;
       width: 100%;
       background-color: rgb(236, 236, 236);
-      padding-bottom: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;

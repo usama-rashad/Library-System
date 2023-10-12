@@ -6,16 +6,19 @@ import ChevronRight from "../../../assets/chevron-right-solid.svg";
 
 let dropDownMaxDisplayChars = 15;
 
-function DropDown({ title, options }) {
+function DropDown({ title, options, preset }) {
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [optionName, setOptionName] = useState("");
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setSelectedOption(loadvalue);
-  //   }, 2000);
-  // }, []);
+  // On first load set the preset
+  useEffect(() => {
+    let result = options.find((value) => value === preset);
+    if (result) {
+      setSelectedOption(result);
+      setOptionName(result);
+    }
+  }, []);
 
   const makeSelection = (e) => {
     setSelectedOption(e);

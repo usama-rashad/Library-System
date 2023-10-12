@@ -17,7 +17,7 @@ export const bookData = [
     genre: "Crime",
     storageInfo: [
       {
-        serialNumber: 0,
+        serialNumber: 22,
         aisle: "A",
         shelf: 1,
       },
@@ -39,12 +39,17 @@ export const bookData = [
     genre: "IT",
     storageInfo: [
       {
-        serialNumber: 0,
+        serialNumber: 25,
         aisle: "B",
         shelf: 2,
       },
       {
         serialNumber: 1,
+        aisle: "C",
+        shelf: 2,
+      },
+      {
+        serialNumber: 5,
         aisle: "C",
         shelf: 2,
       },

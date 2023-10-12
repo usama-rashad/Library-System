@@ -14,12 +14,9 @@ import useUpdateBookState from "../../../../hooks/useUpdateBookState";
 import { useDispatch } from "react-redux";
 import { getGenresThunk } from "../../../../reducers/getGenreReducer";
 
-// Import dummy book data source
-import { bookData } from "../../../../contants";
-
 function UpdateBooks() {
   const dispatch = useDispatch();
-  const { books } = useUpdateBookState();
+  const { books, pending } = useUpdateBookState();
 
   useEffect(() => {
     dispatch(getGenresThunk());
@@ -32,7 +29,8 @@ function UpdateBooks() {
         <div className="content">
           <BookFilter />
           <PaginatedView
-            dataSource={bookData}
+            busy={pending}
+            dataSource={books}
             titleBarColumns={["S.No", "ISBN", "Title", "Author", "Genre", "Qty", ""]}
             RenderItem={BookUpdateRow}
             renderItemFlexLayout={[1, 2, 4, 3, 1, 1, 1]}

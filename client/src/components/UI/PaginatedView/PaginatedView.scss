@@ -1,7 +1,7 @@
 @import "../../../colors.scss";
 
 .paginatedView {
-  height: 60vh;
+  height: 65vh;
   width: 98%;
   border: 1px solid darkgrey;
   display: flex;
@@ -23,10 +23,22 @@
       text-align: center;
     }
   }
+  .loadingAnimation {
+    width: 80px;
+    height: 80px;
+    border: 2px solid $rootColor;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   .dataContent {
     flex: auto;
+    height: min-content;
     width: 100%;
-    overflow-y: scroll;
+    margin: 0;
+    overflow-y: visible;
     overflow-x: hidden;
     overflow: scroll;
   }

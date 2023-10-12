@@ -1,8 +1,8 @@
 @import "../../../colors.scss";
 
 .mainModalWindow {
-  height: 30px;
-  width: 30px;
+  height: 100%;
+  width: 100%;
   border: 2px solid $rootColor;
   background-color: white;
   box-shadow: 1px 1px 5px 5px rgb(207, 207, 207);

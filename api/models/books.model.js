@@ -5,6 +5,7 @@ const booksSchema = new mongoose.Schema({
   title: String,
   author: String,
   thumbnail: String,
+  genre: String,
   description: String,
   addDate: Date,
   additionalImages: [], // { String, String }
