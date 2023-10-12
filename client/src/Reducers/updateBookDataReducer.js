@@ -6,10 +6,10 @@ const initialState = { success: false, fail: false, pending: false, state: "", m
 
 const updateBookDataThunk = createAsyncThunk(
   "updateBookData",
-  async ({ ISBN, modifiedBookData }, { rejectWithValue, fulfillWithValue }) => {
+  async ({ username, ISBN, modifiedBookData }, { rejectWithValue, fulfillWithValue }) => {
     let url = `${backEndRoot}:${backEndPort}${BOOKS_API}/updateBookInfo`;
     try {
-      let response = await axios.post(url, { ISBN: ISBN, modifiedBookData: modifiedBookData });
+      let response = await axios.post(url, { username: username, ISBN: ISBN, modifiedBookData: modifiedBookData });
       return response.data;
     } catch (error) {
       let { message } = error.response.data;

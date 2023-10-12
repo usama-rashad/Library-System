@@ -21,6 +21,7 @@ import ChevronRight from "../../../assets/chevron-right-solid.svg";
 // Hooks
 import useStorageInfo from "../../../reducers/useStorageInfo";
 import useGetBookGenres from "../../../hooks/useGetBookGenres";
+import useLoginState from "../../../hooks/useLoginState";
 
 // Reducers
 import { updateBookDataThunk } from "../../../Reducers/updateBookDataReducer";
@@ -39,6 +40,7 @@ function BookUpdateRow({ index, data, flex }) {
   const [charCount, setCharCount] = useState(0);
   const [modifiedBookData, setModifiedBookData] = useState(data);
   const { genres } = useGetBookGenres();
+  const { username } = useLoginState();
 
   const { array: storageInfo, push: appendStorageInfo, remove: reduceStorageInfo, updateRow, length } = useStorageInfo(data.storageInfo);
 
@@ -95,6 +97,18 @@ function BookUpdateRow({ index, data, flex }) {
     }
   };
 
+  const updateTitle = (newTitle) => {
+    setModifiedBookData({ ...modifiedBookData, title: newTitle });
+  };
+
+  const updateAuthor = (newAuthor) => {
+    setModifiedBookData({ ...modifiedBookData, author: newAuthor });
+  };
+
+  const updateGenre = (newGenre) => {
+    setModifiedBookData({ ...modifiedBookData, genre: newGenre });
+  };
+
   const openPictureEditor = () => {
     setPictureEditorOpenState(true);
   };
@@ -106,8 +120,7 @@ function BookUpdateRow({ index, data, flex }) {
   const rowClick = () => {};
 
   const updateBookData = () => {
-    console.log("Book update data called.");
-    dispatch(updateBookDataThunk({ ISBN: modifiedBookData.ISBN, modifiedBookData: modifiedBookData }));
+    dispatch(updateBookDataThunk({ username: username, ISBN: modifiedBookData.ISBN, modifiedBookData: modifiedBookData }));
   };
 
   // HELPER FUNCTIONS
@@ -179,10 +192,18 @@ function BookUpdateRow({ index, data, flex }) {
           <div className="column1">
             <div className="editableFields">
               <p id="fillerRow"></p>
-              <EditableField label={"Title"} initialValue={modifiedBookData.title} updateCb={(value) => console.log(value)} />
-              <EditableField label={"Author"} initialValue={modifiedBookData.author} updateCb={(value) => console.log(value)} />
+              <EditableField label={"Title"} initialValue={modifiedBookData.title} updateCb={(value) => updateTitle(value)} />
+              <EditableField label={"Author"} initialValue={modifiedBookData.author} updateCb={(value) => updateAuthor(value)} />
               <div className="genreDiv">
-                <DropDown title={"Genre"} options={genres} preset={modifiedBookData.genre} />
+                <DropDown
+                  title={"Genre"}
+                  options={genres}
+                  preset={modifiedBookData.genre}
+                  updateCb={(value) => {
+                    console.log(value);
+                    updateGenre(value);
+                  }}
+                />
               </div>
             </div>
             <div className="editPictures">
@@ -210,7 +231,9 @@ function BookUpdateRow({ index, data, flex }) {
                     key={index}
                     initialValue={storageInfo}
                     index={index}
-                    onDataChange={(e) => {}}
+                    onDataChange={(e) => {
+                      console.log(e);
+                    }}
                     serialNumber={index + 1}
                   />
                 );

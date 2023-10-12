@@ -243,9 +243,9 @@ const addNewBookController = async (req, res, next) => {
 };
 
 const updateBookInfoController = async (req, res, next) => {
-  console.log("Called controller to update book data.");
-  let { title, author, ISBN, aisle, shelf, serialNumber, description } = req.body;
-  if (!title || !author || !ISBN || !aisle || !shelf || !serialNumber || !description) {
+  console.log(req.body);
+  let { title, author, ISBN, storageInfo, description, genre } = req.body.modifiedBookData;
+  if (!title || !author || !ISBN || !genre || !storageInfo || !description) {
     return res.status(404).json({ message: `Missing information. Book was not updated.` });
   }
   // Find a previous book and compare ISBNs
@@ -256,8 +256,9 @@ const updateBookInfoController = async (req, res, next) => {
   // No book found so add a new book
   existingBook.title = title;
   existingBook.author = author;
+  existingBook.genre = genre;
   existingBook.description = description;
-  existingBook.serialNumber = serialNumber;
+  existingBook.storageInfo = storageInfo;
   try {
     let saveResult = await existingBook.save();
     return res.status(200).json({ message: `Book data updated.` });

@@ -6,7 +6,7 @@ import ChevronRight from "../../../assets/chevron-right-solid.svg";
 
 let dropDownMaxDisplayChars = 15;
 
-function DropDown({ title, options, preset }) {
+function DropDown({ title, options, preset, updateCb }) {
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [optionName, setOptionName] = useState("");
@@ -29,6 +29,7 @@ function DropDown({ title, options, preset }) {
       return;
     }
     setOptionName(e);
+    updateCb(e);
   };
 
   const openMenu = () => {
